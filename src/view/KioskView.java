@@ -8,15 +8,15 @@ import java.util.concurrent.*;
 public class KioskView {
 
     private static Executor executor;
-    
+
     public KioskView(){
         JFrame frame = new JFrame("Kiosk Prototype");
 
-        frame.setUndecorated(true);
         //frame.setResizable(false);
         frame.getContentPane().setBackground(Color.black);
         frame.validate();
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true);
         frame.setVisible(true);
 
         executor = Executors.newSingleThreadExecutor();
