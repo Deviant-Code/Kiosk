@@ -13,7 +13,7 @@ public class KioskView {
         JFrame frame = new JFrame("Kiosk Prototype");
 
         frame.setUndecorated(true);
-        frame.setResizable(false);
+        //frame.setResizable(false);
         frame.getContentPane().setBackground(Color.black);
         frame.validate();
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
