@@ -9,5 +9,6 @@ public class KioskManager {
 
     public static void main(String[] args){       
         KioskView view = new KioskView();
+        AdminPortalListener listner = new AdminPortalListener();
     }
 }
