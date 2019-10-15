@@ -1,12 +1,18 @@
-# last updated: 6/1/2019
+# last updated: 10/14/2019
 
-all: KioskPrototype
+all: KioskManager Slideshow
 
-KioskPrototype: KioskView
-	javac KioskPrototype.java 
+KioskManager: KioskView Module
+	javac KioskManager.java 
 
 KioskView:
 	javac view/KioskView.java
+	
+Module: 
+	javac modules/Module.java
+
+Slideshow: 
+	javac modules/Slideshow.java
 
 clean:
 	find . -type f -name '*.class' -exec rm {} +
