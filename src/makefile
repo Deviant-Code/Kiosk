@@ -1,17 +1,17 @@
-# last updated: 10/14/2019
+# last updated: 10/17/2019
 
-all: KioskManager Slideshow Video Schedules Map 
+all: Main 
 
-KioskManager: KioskView Module AdminPortalListener
-	javac KioskManager.java 
+Main: KioskManager
+	javac Main.java 
+
+KioskManager: Module AdminPortalListener
+	javac manager/KioskManager.java
 
 AdminPortalListener: 
-	javac AdminPortalListener.java
-
-KioskView:
-	javac view/KioskView.java
+	javac manager/AdminPortalListener.java
 	
-Module: 
+Module: Slideshow Video Schedules Map 
 	javac modules/Module.java
 
 Slideshow: 

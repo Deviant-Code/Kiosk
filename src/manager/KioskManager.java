@@ -1,4 +1,5 @@
-import view.KioskView;
+package manager;
+
 import modules.Module;
 
 public class KioskManager {
@@ -8,7 +9,6 @@ public class KioskManager {
     //this between the two platforms
 
     public static void main(String[] args){       
-        KioskView view = new KioskView();
         AdminPortalListener listner = new AdminPortalListener();
     }
 }
