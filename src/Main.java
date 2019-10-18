@@ -17,7 +17,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setFullScreen(true);
         primaryStage.setTitle("Electra");
-        primaryStage.getIcons().add (new Image ("res/Icon.png"));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("res/icon.png")));
         primaryStage.setResizable(false); 
         primaryStage.show();
 

@@ -1,13 +1,13 @@
-# last updated: 10/17/2019
+# last updated: 10/18/2019
 PATH_TO_FX = "javafx-sdk-11.0.2/lib"
 
 all: Main 
 
 run:
-	java --module-path $(PATH_TO_FX) --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.base,javafx.media,javafx.swing,javafx.web Main 
+	java --module-path $(PATH_TO_FX) --add-modules javafx.controls,javafx.fxml,javafx.graphics Main 
 
 Main: KioskManager
-	javac --module-path $(PATH_TO_FX) --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.base,javafx.media,javafx.swing,javafx.web Main.java 
+	javac --module-path $(PATH_TO_FX) --add-modules javafx.controls,javafx.fxml,javafx.graphics Main.java 
 
 KioskManager: Module AdminPortalListener
 	javac manager/KioskManager.java
