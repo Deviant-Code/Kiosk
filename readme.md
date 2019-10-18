@@ -5,3 +5,4 @@ Discovery Kiosk is a software system and framework with an end goal of providing
 
 ## Compiling
 To build and run the source code use "make all" and "make run" (inside src folder)
+If on windows, be sure to change the makefile to use the windows JavaFX sdk instead of Linux
