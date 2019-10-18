@@ -5,10 +5,10 @@ PATH_TO_FX_WIN = "javafx-sdk-11.0.2_WIN/lib"
 all: Main 
 
 run:
-	java --module-path $(PATH_TO_FX_WIN) --add-modules javafx.controls,javafx.fxml,javafx.graphics Main 
+	java --module-path $(PATH_TO_FX_LINUX) --add-modules javafx.controls,javafx.fxml,javafx.graphics Main 
 
 Main: KioskManager
-	javac --module-path $(PATH_TO_FX_WIN) --add-modules javafx.controls,javafx.fxml,javafx.graphics Main.java 
+	javac --module-path $(PATH_TO_FX_LINUX) --add-modules javafx.controls,javafx.fxml,javafx.graphics Main.java 
 
 KioskManager: Module AdminPortalListener
 	javac manager/KioskManager.java
