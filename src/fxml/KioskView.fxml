@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="1080.0" prefWidth="1920.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+        <Label alignment="CENTER" layoutX="668.0" layoutY="486.0" style="&#10;" text="Innovative kiosk design with fxml" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+          <font>
+            <Font size="40.0" />
+          </font>
+        </Label>
+        <Button layoutX="810.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="301.0" text="Menu" AnchorPane.bottomAnchor="0.0">
+          <font>
+            <Font size="52.0" />
+          </font>
+        </Button>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
