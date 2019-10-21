@@ -9,6 +9,6 @@ public class KioskManager {
     //this between the two platforms
 
     public static void main(String[] args){       
-        AdminPortalListener listner = new AdminPortalListener();
+        AdminPortalListener listener = new AdminPortalListener();
     }
 }
