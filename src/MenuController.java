@@ -12,6 +12,7 @@ public class MenuController {
         scene.setRoot(root);
     }
 
+    //Transition back to main menu
     public void runMenu() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/kioskDisplay.fxml"));
         Scene scene = Main.getScene();
