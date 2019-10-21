@@ -8,7 +8,7 @@ run:
 	java --module-path $(PATH_TO_FX_LINUX) --add-modules javafx.controls,javafx.fxml,javafx.graphics Main 
 
 Main: KioskManager
-	javac --module-path $(PATH_TO_FX_LINUX) --add-modules javafx.controls,javafx.fxml,javafx.graphics Main.java 
+	javac --module-path $(PATH_TO_FX_LINUX) --add-modules javafx.controls,javafx.fxml,javafx.graphics Main.java MenuController.java
 
 KioskManager: Module AdminPortalListener
 	javac manager/KioskManager.java
