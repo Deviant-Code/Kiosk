@@ -1,7 +1,7 @@
 function updateJson() {
     var d = new Date();
     var n = d.getTime();
-    var text = "{text: it is"+ n+"}";
+    var text = "{text: it is" + n +"}";
     alert("Changing Text to " + n);
     var jsonString = JSON.stringify(text);
 
