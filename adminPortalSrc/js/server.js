@@ -43,7 +43,7 @@ var path = require('path');
 
 var http = require('http');
 var server = http.createServer(function (req, res) {
-
+    //FOR LOADING HTML PAGE
     res.writeHead(200, {'Content-Type': 'text/html'});//html so its not treated as text
     //HARD CODED IN DIRECTORY. CHANGE TO YOUR DIRECTORY FOR IT TO WORK.
     var myReadStream = fs.createReadStream('/home/ricenad/Desktop/492/kiosk/adminPortalSrc/index.html', 'utf8');
@@ -51,12 +51,31 @@ var server = http.createServer(function (req, res) {
     myReadStream.pipe(res);
     //res.end('Hello World\n');
     //res.end(objectString);
+
+
+
+    //FOR LOADING JSON OBJECT
+    //get relative path
+    /*
+    let rawdata = fs.readFileSync('../public/settings.json');
+    //parse using json
+    var object = JSON.parse(rawdata);
+    console.log(object);
+    var objectString = JSON.stringify(object);
+    //myReadStream.pipe(objectString);
+    res.writeHead(200, {'Content-Type': 'text/JSON'});//jsno for objects
+    res.end(objectString);
+    */
+
+
 });
 //listen on port and ip
 server.listen(3000, "127.0.0.1");
 
 console.log('Server running at http://127.0.0.1:3000/');
 //alert("server started");
+
+
 
 
 
