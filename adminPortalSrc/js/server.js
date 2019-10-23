@@ -5,6 +5,13 @@
 
 */
 
+/*
+NOTES ON POTENTIAL ISSUES:
+need to have all files in sources here? otherwise they cannot be found.
+send stuff to html from here only?
+
+*/
+
 
 
 //CODE FOR GETTING JSON BELOW!
@@ -26,6 +33,10 @@ var objectString = JSON.stringify(object);
 
 var http = require('http');
 var fs = require('fs');
+var express = require('express');
+var path = require('path');
+
+
 
 
 
@@ -46,5 +57,7 @@ server.listen(3000, "127.0.0.1");
 
 console.log('Server running at http://127.0.0.1:3000/');
 //alert("server started");
+
+
 
 
