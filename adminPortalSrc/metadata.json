@@ -1,0 +1,28 @@
+{
+  "projectName": "Information Kiosk",
+  "hostname": "WWUCS-Kiosk",
+  "facultyContact": "Aran Clauson",
+  "client": "CS Faculty",
+  "teamMembers": [
+    {
+      "username": "ricenad",
+      "name": "Dakota Rice-Narusch",
+      "email": "ricenad@wwu.edu"
+    },
+    {
+      "username": "chittic3",
+      "name": "Cole Chittim",
+      "email": "chittic3@wwu.edu"
+    },
+    {
+      "username": "hongm3",
+      "name": "Megan Hong",
+      "email": "hongm3@wwu.edu"
+    },
+    {
+      "username": "ericks80",
+      "name": "Jesse Ericksen",
+      "email": "ericks80@wwu.edu"
+    }
+  ]
+}
