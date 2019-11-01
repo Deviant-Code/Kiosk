@@ -1,0 +1,9 @@
+[
+    {
+        "map":{
+            "name": "map",
+            "resolution": "resolution",
+            "location": "/folder/location/name"
+        }
+    }
+]

@@ -1,0 +1,50 @@
+[
+    {
+        "faculty":{
+            "name": "facultyName",
+            "location": "roomNumber",
+            "info": "descriptionString",
+            "PictureLocation": "/folder/location/name"
+        }
+    },
+    {
+        "faculty":{
+            "name": "facultyName",
+            "location": "roomNumber",
+            "info": "descriptionString",
+            "PictureLocation": "/folder/location/name"
+        }
+    },
+    {
+        "faculty":{
+            "name": "facultyName",
+            "location": "roomNumber",
+            "info": "descriptionString",
+            "PictureLocation": "/folder/location/name"
+        }
+    },
+    {
+        "faculty":{
+            "name": "facultyName",
+            "location": "roomNumber",
+            "info": "descriptionString",
+            "PictureLocation": "/folder/location/name"
+        }
+    },
+    {
+        "faculty":{
+            "name": "facultyName",
+            "location": "roomNumber",
+            "info": "descriptionString",
+            "PictureLocation": "/folder/location/name"
+        }
+    },
+    {
+        "faculty":{
+            "name": "facultyName",
+            "location": "roomNumber",
+            "info": "descriptionString",
+            "PictureLocation": "/folder/location/name"
+        }
+    }
+]
