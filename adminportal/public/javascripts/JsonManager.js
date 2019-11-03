@@ -1,49 +1,44 @@
 'use strict';
 
+const fs = require('fs');
 
+//Call when wanting to delete a file and pass the file's path
+function deleteFile(path){
+    fs.unlink(path, (err) => {
+        if (err) 
+            console.log(err);
+      });
+}
 
-function updateJson() {
-    var d = new Date();
-    var n = d.getTime();
-    var text = "{text: it is" + n +"}";
-    //alert("Changing Text to " + n);
-    var jsonString = JSON.stringify(text);
+//Update Slideshow module's settings json
+function updateSlideshowJson(speed, transition, autoPlay, defaultModule) {
 
+    //Slideshow module settings
+    let slideshow = { 
+        transitionSpeed: speed, 
+        willTransition: transition,
+        autoPlayVideo: autoPlay,
+        default: defaultModule
+    };
 
-    //Write jsonString to file will require something like node.js
-    //But is very common and may already be installed in labs
-    //Here's vaguely what you'd use
+    let data = JSON.stringify(slideshow, null, 2);
 
-
-    
-    var fs = require("fs");
-    fs.writeFile("../public/settings.json", jsonString, (err) => {
+    fs.writeFile("../json/Slideshow.json", data, (err) => {
         if (err) {
             console.error(err);
             return;
         };
-        //console.log("File has been created");
-    });
-
-    alert("jsonupdate");
-    
-
-
-    
+    });     
 }
 
-function getJson(){
-    
-    //CODE FOR GETTING JSON BELOW!
-    //load fs module to app
-    const fs = require('fs');
+//Parse and return Slideshow module's settings json
+function getSlideshowJson(){
     //get relative path
-    let rawdata = fs.readFileSync('../public/settings.json');
+    let rawdata = fs.readFileSync('../json/Slideshow.json');
     //parse using json
     var object = JSON.parse(rawdata);
-    //console.log(object);
     var objectString = JSON.stringify(object);
 
-    alert("got object:" + objectString);
+    return objectString;
 }
 
