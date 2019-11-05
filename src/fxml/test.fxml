@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.Test">
+   <top>
+      <Pane prefHeight="200.0" prefWidth="1920.0" style="-fx-background-color: #0D4F8C;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="171.0" fitWidth="183.0" layoutX="1703.0" layoutY="14.0">
+               <image>
+                  <Image url="@../res/secondary_wwu_light.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D minX="100.0" minY="100.0" width="400.0" />
+               </viewport>
+            </ImageView>
+            <ImageView layoutX="24.0" layoutY="15.0" preserveRatio="true">
+               <image>
+                  <Image url="@../res/index.png" />
+               </image>
+            </ImageView>
+            <Text fill="#92afe4" layoutX="841.0" layoutY="136.0" strikethrough="true" strokeType="OUTSIDE" strokeWidth="0.0" text="KiOsK" underline="true">
+               <font>
+                  <Font name="Cantarell Thin" size="96.0" />
+               </font>
+            </Text>
+            <Text layoutX="1014.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Release: 0.2.2 || 10/22/19 " />
+         </children>
+      </Pane>
+   </top>
+   <bottom>
+      <GridPane prefHeight="860.0" prefWidth="1920.0" BorderPane.alignment="BOTTOM_CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button id="SlideShow" fx:id="SlideShow" alignment="BOTTOM_CENTER" contentDisplay="TOP" defaultButton="true" graphicTextGap="9.0" mnemonicParsing="false" onAction="#openSlideShow" prefHeight="430.0" prefWidth="640.0" text="Slideshow">
+               <font>
+                  <Font name="Noto Sans Khmer UI Thin" size="28.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+               <graphic>
+                  <ImageView cache="true" fitHeight="215.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../res/ss_icon.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="Maps" fx:id="Maps" alignment="BOTTOM_CENTER" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" prefHeight="430.0" prefWidth="640.0" text="Maps" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Noto Sans Khmer Light" size="28.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="215.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../res/maps_icon.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="ClassSchedules" fx:id="Class" alignment="BOTTOM_CENTER" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" prefHeight="430.0" prefWidth="640.0" text="Schedules" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Noto Sans Regular" size="28.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="245.0" pickOnBounds="true" preserveRatio="true">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fitHeight="215.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+            <Button id="Labs" fx:id="Labs" alignment="BOTTOM_CENTER" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" prefHeight="430.0" prefWidth="640.0" text="Lab Availability" GridPane.rowIndex="1">
+               <font>
+                  <Font size="28.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="217.0" pickOnBounds="true" preserveRatio="true">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fitHeight="215.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+            <Button id="Departments" fx:id="Department" alignment="BOTTOM_CENTER" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" prefHeight="430.0" prefWidth="640.0" text="Video" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="28.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="254.0" pickOnBounds="true" preserveRatio="true">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fitHeight="215.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+            <Button id="Faculty" fx:id="Faculty" alignment="BOTTOM_CENTER" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" prefHeight="430.0" prefWidth="640.0" text="Department Info" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="28.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="265.0" pickOnBounds="true" preserveRatio="true">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fitHeight="215.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </children>
+      </GridPane>
+   </bottom>
+</BorderPane>
