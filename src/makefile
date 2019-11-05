@@ -1,39 +1,55 @@
-# last updated: 10/18/2019
+# Last Updated 11-4-19
+
+# Dependencies Path
 PATH_TO_FX_LINUX = "dependencies/javafx-sdk-11.0.2_LINUX/lib"
 PATH_TO_FX_WIN = "dependencies/javafx-sdk-11.0.2_WIN/lib"
 PATH_TO_GSON = "dependencies/gson/gson-2.8.6.jar"
 
-all: Main 
+JC = javac
+MODULES = javafx.controls,javafx.fxml,javafx.graphics
+JFLAGS = --module-path $(PATH_TO_FX_LINUX) --add-modules $(MODULES)
+
+# Source Paths
+MODULES_PATH = modules
+MANAGER_PATH = manager
+
+dirs = $(SRC_PATH) $(MODULES_PATH) $(MANAGER_PATH)
+SOURCES := $(foreach dir, $(dirs),$(shell find $(SOURCEDIR) -name '*.j'))
+
+all: Main
 
 run:
-	java --module-path $(PATH_TO_FX_LINUX) --add-modules javafx.controls,javafx.fxml,javafx.graphics Main 
+	java $(JFLAGS) Main
 
 Main: KioskManager
-	javac --module-path $(PATH_TO_FX_LINUX) --add-modules javafx.controls,javafx.fxml,javafx.graphics Main.java MenuController.java
+	$(JC) $(JFLAGS) Main.java
 
-KioskManager: Module KioskSettings AdminPortalListener 
-	javac manager/KioskManager.java
+KioskManager: Module KioskSettings AdminPortalListener Controllers
+	$(JC) $(JFLAGS) $(MANAGER_PATH)/KioskManager.java
 
-AdminPortalListener: KioskSettings
-	javac -cp $(PATH_TO_GSON) manager/AdminPortalListener.java
+Controllers : 
+	$(JC) $(JFLAGS) MenuController.java SlideshowController.java
+
+AdminPortalListener:
+	$(JC) -cp $(PATH_TO_GSON) $(MANAGER_PATH)/AdminPortalListener.java
 
 KioskSettings:
-	javac manager/KioskSettings.java
-	
-Module: Slideshow Video Schedules Map 
-	javac modules/Module.java
+	$(JC) $(MANAGER_PATH)/KioskSettings.java
 
-Slideshow: 
-	javac modules/Slideshow.java
+Module: Slideshow Video Schedules Map
+	$(JC) $(MODULES_PATH)/Module.java 
 
-Video: 
-	javac modules/Video.java
+Slideshow:
+	$(JC) $(JFLAGS) $(MODULES_PATH)/Slideshow.java
 
-Schedules: 
-	javac modules/Schedules.java
+Video:
+	$(JC) $(JFLAGS) $(MODULES_PATH)/Video.java
 
-Map: 
-	javac modules/Map.java
+Schedules:
+	$(JC) $(JFLAGS) $(MODULES_PATH)/Schedules.java
+
+Map:
+	$(JC) $(JFLAGS) $(MODULES_PATH)/Map.java
 
 clean:
 	find . -type f -name '*.class' -exec rm {} +
