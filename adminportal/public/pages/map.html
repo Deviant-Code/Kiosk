@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+    <hr class="hr1"/>
+    <head>
+        <title>Electra Admin Portal</title>
+        <script type="text/javascript" src="../javascripts/JsonManager.js"></script>
+        <link rel= "stylesheet" href="../stylesheets/style.css">
+    </head>
+
+    <body>
+
+        <div class="banner">
+            <div class = "wwu">
+                <a href="../index.html"><img src="../images/index.png"/></a>
+            </div>
+        </div>
+        <hr class="hr2">
+
+        <!-- Settings -->
+        <div class="settings">
+            <img src="../images/settings.png" onclick="openNav()">
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="#">Default Module<input class='default' type='checkbox' value='Yes'></a>
+        </div>
+
+        <script>openNav(); closeNav();</script>
+
+
+        <!-- Modules -->
+        <div class="button_grp">
+            <a href="slideshow.html"><button type="button" class="slideshow">Slideshow</button></a>
+            <button type="button" class="map">Map</button>
+            <button type="button" class="sched">Schedule</button>
+            <button type="button" class="module">Module</button>
+        </div>
+
+        <!-- File upload -->
+        <div id="drop-area">
+            <form class="my-form" >
+                <p>Drag&amp;Drop files here</p>
+                <input type="file" id="fileElem" multiple accept="image/*,video/*" onchange="handleFiles(this.files)">
+                <label class="button" for="fileElem">Browse Files</label>
+            </form>
+            <div id="gallery" /></div>
+        </div>
+        <script src="../javascripts/uploadHandler.js" ></script>
+
+    </body>
+
+</html>

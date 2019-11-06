@@ -5,7 +5,7 @@ const fs = require('fs');
 //Call when wanting to delete a file and pass the file's path
 function deleteFile(path){
     fs.unlink(path, (err) => {
-        if (err) 
+        if (err)
             console.log(err);
       });
 }
@@ -14,8 +14,8 @@ function deleteFile(path){
 function updateSlideshowJson(speed, transition, autoPlay, defaultModule) {
 
     //Slideshow module settings
-    let slideshow = { 
-        transitionSpeed: speed, 
+    let slideshow = {
+        transitionSpeed: speed,
         willTransition: transition,
         autoPlayVideo: autoPlay,
         default: defaultModule
@@ -28,7 +28,7 @@ function updateSlideshowJson(speed, transition, autoPlay, defaultModule) {
             console.error(err);
             return;
         };
-    });     
+    });
 }
 
 //Parse and return Slideshow module's settings json
@@ -41,4 +41,3 @@ function getSlideshowJson(){
 
     return objectString;
 }
-
