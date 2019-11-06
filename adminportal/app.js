@@ -4,6 +4,7 @@ var multer = require('multer');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var serveIndex = require('serve-index');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -49,6 +50,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public/uploads', serveIndex(__dirname + '/public/uploads'));
+app.use('/public/json', serveIndex(__dirname + '/public/json'));
 
 // Post request for file upload
 app.post('/upload', (req, res) => {
