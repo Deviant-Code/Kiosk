@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-
 <html>
+    <hr class="hr1"/>
     <head>
-        <title>Admin Portal: Slideshow</title>
+        <title>Electra Admin Portal</title>
         <script type="text/javascript" src="../javascripts/JsonManager.js"></script>
         <link rel= "stylesheet" href="../stylesheets/style.css">
     </head>
@@ -12,16 +12,68 @@
 
         <div class="banner">
             <div class = "wwu">
-                <img src="../images/wwu_logo.png"/>
+                <a href="../index.html"><img src="../images/index.png"/></a>
             </div>
         </div>
+        <hr class="hr2">
 
-        <div class="upload">
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-                <input name="slideImage" type="file"/><br/>
+        <!-- Settings -->
+        <div class="settings">
+            <img src="../images/settings.png" onclick="openNav()">
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <button class="dropdown-btn">Speed<i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-container">
+                <form action="/upload">
+                    <input type="text" class="speed" placeholder="Seconds">
+                    <input type="submit" value="Ok">
+                </form>
+            </div>
+            <a href="#">Transition<input class='transition' type='checkbox' value='Yes'></a>
+            <a href="#">Auto play<input class='auto-play' type='checkbox' value='Yes'></a>
+            <a href="#">Default Module<input class='default' type='checkbox' value='Yes'></a>
+        </div>
+
+        <script type="text/javascript">
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+          dropdown[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+          } else {
+          dropdownContent.style.display = "block";
+          }
+          });
+        }
+        </script>
+        <script>openNav(); closeNav();</script>
+
+        <!-- Modules -->
+        <div class="button_grp">
+            <button type="button" class="slideshow" >Slideshow</button>
+            <a href="map.html"><button type="button" class="map">Map</button></a>
+            <button type="button" class="sched">Schedule</button>
+            <button type="button" class="module">Module</button>
+        </div>
+
+        <!-- File upload -->
+        <div id="drop-area">
+            <form action="/upload" method="POST" enctype="multipart/form-data" >
+                <p>Drag&amp;Drop files here</p>
+                <input name= "slideImage" type="file" id="fileElem" multiple accept="image/*,video/*" onchange="handleFiles(this.files)">
+                <label class="button" for="fileElem">Browse Files</label>
                 <button type="submit">Upload</button>
             </form>
+            <div id="gallery" /></div>
         </div>
-        <button onclick="window.location.href='../index.html'">Return Home</button>
+        <script src="../javascripts/uploadHandler.js" ></script>
+
     </body>
+
 </html>

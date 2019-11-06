@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 
-
 <html>
+    <hr class="hr1"/>
     <head>
-        <title>Admin Portal</title>
-        <script type="text/javascript" src="javascripts/JsonManager.js"></script>
+        <title>Electra Admin Portal</title>
+        <script type="text/javascript" src="js/JsonManager.js"></script>
         <link rel= "stylesheet" href="stylesheets/style.css">
     </head>
 
@@ -12,12 +12,21 @@
 
         <div class="banner">
             <div class = "wwu">
-                <img src="images/wwu_logo.png"/>
+                <a href="index.html"><img src="images/index.png"/></a>
             </div>
+        </div>
+        <hr class="hr2">
+
+        <!-- Modules -->
+        <div class="button_grp">
+            <a href="pages/slideshow.html"><button type="button" class="slideshow">Slideshow</button></a>
+            <a href="pages/map.html"><button type="button" class="map">Map</button></a>
+            <button type="button" class="sched">Schedule</button>
+            <button type="button" class="module">Module</button>
         </div>
 
 
-
-        <button onclick="window.location.href='pages/slideshow.html'">Slideshow Page</button>
     </body>
+
+    <script src="../js/server.js"></script>
 </html>
