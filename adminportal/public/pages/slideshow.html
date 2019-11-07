@@ -4,7 +4,6 @@
     <hr class="hr1"/>
     <head>
         <title>Electra Admin Portal</title>
-        <script type="text/javascript" src="../javascripts/JsonManager.js"></script>
         <link rel= "stylesheet" href="../stylesheets/style.css">
     </head>
 
@@ -24,16 +23,25 @@
 
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <button class="dropdown-btn">Speed<i class="fa fa-caret-down"></i></button>
-            <div class="dropdown-container">
-                <form action="/upload">
-                    <input type="text" class="speed" placeholder="Seconds">
-                    <input type="submit" value="Ok">
-                </form>
-            </div>
-            <a href="#">Transition<input class='transition' type='checkbox' value='Yes'></a>
-            <a href="#">Auto play<input class='auto-play' type='checkbox' value='Yes'></a>
-            <a href="#">Default Module<input class='default' type='checkbox' value='Yes'></a>
+            <form action="/updateSlideshowParams" method="post" >
+                    <!-- Hidden input values are sent if normal input not checked -->
+                    <a>Slide Transition Speed</a>
+                    <input type="number" id="speedValue" name="speedValue" class="speed" placeholder="Seconds">
+                    <a href="#">Transition Enabled
+                        <input type='hidden' id="transitionValueHidden" value='false' name='transitionValue'>
+                        <input class='transition' id="transitionValue" name="transitionValue" type='checkbox' value='true'>
+                    </a>
+                    <a href="#">Auto play Enabled
+                        <input type='hidden' id="autoValueHidden" value='false' name='autoValue'>
+                        <input class='auto-play' id="autoValue" name="autoValue" type='checkbox' value='true'>
+                    </a>
+                    <a href="#">Default Module
+                        <input type='hidden' id="defaultValueHidden" value='false' name='defaultValue'>
+                        <input class='default' id="defaultValue" name="defaultValue" type='checkbox' value='true'>
+                    </a>
+
+                    <input type="submit" value="Update" onclick="checkHiddenValues()">                    
+            </form>
         </div>
 
         <script type="text/javascript">
@@ -52,7 +60,6 @@
           });
         }
         </script>
-        <script>openNav(); closeNav();</script>
 
         <!-- Modules -->
         <div class="button_grp">
@@ -73,7 +80,6 @@
             <div id="gallery" /></div>
         </div>
         <script src="../javascripts/uploadHandler.js" ></script>
-
     </body>
 
 </html>
