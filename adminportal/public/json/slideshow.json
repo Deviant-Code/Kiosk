@@ -1,13 +1,7 @@
 {
-  "transitionSpeed": 5,
-  "images": [
-    {
-      "seqNum": 0,
-      "location": "public\\uploads\\slideImage-1573161275369.png",
-      "lastModified": 1573161275396
-    }
-  ],
-  "autoPlayVideo": false,
+  "transitionSpeed": 3,
   "willTransition": true,
-  "default": false
+  "autoPlayVideo": true,
+  "default": true,
+  "images": []
 }

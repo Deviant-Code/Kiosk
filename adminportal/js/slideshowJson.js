@@ -2,16 +2,15 @@ const fs = require('fs');
 
 module.exports = {
     //Parse and return Slideshow module's settings json
-    removeSlide: function removeSlideImageJson(file){
-        var object = getSlideshowJson();
-        var array = object['images'];
+    removeSlide: function removeImageJson(path){
+        var object = this.getJson();
 
-        array.forEach(function(object, index) {
-            if(object[location] === file.path) {
-            //Remove from array
-            array.splice(index, 1);
+        for(var i = 0; i < object.images.length; i++){
+            if(object.images[i].location == path) {
+                //Remove from array
+                object.images.splice(i, 1);
             }    
-        });
+        }
 
         let data = JSON.stringify(object, null, 2);
 

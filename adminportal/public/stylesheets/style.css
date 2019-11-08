@@ -202,6 +202,17 @@ p {
   margin-right: 10px;
   vertical-align: middle;
 }
+
+#uploadGallery {
+  margin-top: 10px;
+}
+#uploadGallery img {
+  width: 150px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
 .button {
   display: inline-block;
   padding: 8px 14px;

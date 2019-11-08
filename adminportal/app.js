@@ -17,9 +17,9 @@ var app = express();
 
 // storage engine setup
 const storage = multer.diskStorage({
-  destination: 'public/uploads/',
+  destination: 'public/Uploads/',
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    cb(null, file.fieldname + Date.now() + path.extname(file.originalname));
   }
 })
 
@@ -78,10 +78,13 @@ app.post('/upload', (req, res) => {
 
 //Call when wanting to delete a file and pass the file's path
 app.post('/deleteFile', function (req, res) {
-  fs.unlink(req.body.path, (err) => {
+  console.log(req.body.filePath);
+  slideshowJson.removeSlide(req.body.filePath);
+  fs.unlink(req.body.filePath, (err) => {
     if (err)
       console.log(err);
   });
+  res.redirect('back');
 });
 
 
@@ -109,9 +112,8 @@ app.post('/updateSlideshowParams', function (req, res) {
 //Get Slideshow module's settings json
 app.get('/getSlideshowParams', function (req, res) {
   var object = slideshowJson.getJson();
-  res.send(object);
+  res.json(object);
 });
-
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
