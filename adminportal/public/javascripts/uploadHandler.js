@@ -121,8 +121,7 @@ function loadSlideshowContent() {
       var images = [];
 
       for (var i = 0; i < res.images.length; i++) {
-        var path = res.images[i].location.replace('public\\', '');
-        path = path.replace('public/', '');
+        var path = res.images[i].location.replace('public/', '');
         images.push("../" + path);
       }
 

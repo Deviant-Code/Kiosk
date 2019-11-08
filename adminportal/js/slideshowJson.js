@@ -4,10 +4,11 @@ module.exports = {
     //Parse and return Slideshow module's settings json
     removeSlide: function removeImageJson(path) {
         var object = this.getJson();
+        console.log(path);
 
-        path = path.replace('public\\', '');
         path = path.replace('public/', '');
 
+        console.log(path);
         for (var i = 0; i < object.images.length; i++) {
             if (object.images[i].location == path) {
                 //Remove from array
@@ -29,7 +30,7 @@ module.exports = {
     addSlide: function addSlideImageJson(file) {
         var object = this.getJson();
 
-        var path = file.path.replace('public\\', '');
+        var path = file.path.replace(/\\/g, '/');
         path = path.replace('public/', '');
 
         object['images'].push({
