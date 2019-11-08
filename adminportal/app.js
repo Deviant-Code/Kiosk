@@ -103,6 +103,7 @@ app.post('/updateSlideshowParams', function (req, res) {
       return;
     };
   });
+  res.redirect('back');
 });
 
 //Get Slideshow module's settings json

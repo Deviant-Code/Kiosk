@@ -2,6 +2,6 @@
   "transitionSpeed": 2,
   "willTransition": true,
   "autoPlayVideo": true,
-  "default": true,
+  "default": false,
   "images": []
 }
