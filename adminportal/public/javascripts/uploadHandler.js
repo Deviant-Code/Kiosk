@@ -56,14 +56,13 @@ function previewFile(file) {
 
 // Navigation Menu
 function openNav() {
-  getSlideshowParams();
   document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
+  document.getElementById("main").style.marginRight = "250px";
 }
 
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
-  document.getElementById("main").style.marginLeft = "0";
+  document.getElementById("main").style.marginRight = "0";
 }
 
 function dropdown() {
@@ -96,22 +95,6 @@ function checkHiddenValues() {
   }
 }
 
-function getSlideshowParams() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      var res = JSON.parse(this.responseText);
-      console.log(res.willTransition);
-      document.getElementById("speedValue").value = res.transitionSpeed;
-      document.getElementById("transitionValue").checked = (res.willTransition == true);
-      document.getElementById("autoValue").checked = (res.autoPlayVideo == true);
-      document.getElementById("defaultValue").checked = (res.default == true);
-    }
-  };
-  xhttp.open("GET", "/getSlideshowParams", true);
-  xhttp.send();
-}
-
 function deleteUpload(filePath) {
   //Remove from html
   var element = document.getElementById(filePath);
@@ -119,7 +102,7 @@ function deleteUpload(filePath) {
 
   xhttp = new XMLHttpRequest();
   //Re-add the public\\uploads
-  filePath = 'public\\Uploads\\' + filePath;
+  filePath = 'public/Uploads/' + filePath;
   xhttp.open('POST', '/deleteFile');
   xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhttp.onload = function () {
@@ -130,7 +113,7 @@ function deleteUpload(filePath) {
   xhttp.send(encodeURI('filePath=' + filePath));
 }
 
-function loadImages() {
+function loadSlideshowContent() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -138,12 +121,21 @@ function loadImages() {
       var images = [];
 
       for (var i = 0; i < res.images.length; i++) {
-        images.push("../" + res.images[i].location.replace('public\\', ''));
+        var path = res.images[i].location.replace('public\\', '');
+        path = path.replace('public/', '');
+        images.push("../" + path);
       }
 
       for (var i = 0; i < images.length; i++) {
-        document.getElementById('uploadGallery').innerHTML += '<img src="' + images[i] + '" id="' + res.images[i].location.replace('Uploads\\', '') + '"alt="" onclick="deleteUpload(' + '\'' + res.images[i].location.replace('Uploads\\', '') + '\'' + ')"/>';
+        var path = res.images[i].location.replace('Uploads\\', '');
+        path = path.replace('Uploads/', '');
+        document.getElementById('uploadGallery').innerHTML += '<img src="' + images[i] + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
       }
+
+      document.getElementById("speedValue").value = res.transitionSpeed;
+      document.getElementById("transitionValue").checked = (res.willTransition == true);
+      document.getElementById("autoValue").checked = (res.autoPlayVideo == true);
+      document.getElementById("defaultValue").checked = (res.default == true);
     }
   };
   xhttp.open("GET", "/getSlideshowParams", true);

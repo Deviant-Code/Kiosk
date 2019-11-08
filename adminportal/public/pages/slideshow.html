@@ -7,7 +7,7 @@
         <link rel= "stylesheet" href="../stylesheets/style.css">
     </head>
 
-    <body onload="loadImages()">
+    <body onload="loadSlideshowContent()">
         <div class="banner">
             <div class = "wwu">
                 <a href="../index.html"><img src="../images/index.png"/></a>
@@ -59,28 +59,28 @@
           });
         }
         </script>
+        <div id="main">
+            <!-- Modules -->
+            <div class="button_grp">
+                <button type="button" class="slideshow" >Slideshow</button>
+                <a href="map.html"><button type="button" class="map">Map</button></a>
+                <button type="button" class="sched">Schedule</button>
+                <button type="button" class="module">Module</button>
+            </div>
 
-        <!-- Modules -->
-        <div class="button_grp">
-            <button type="button" class="slideshow" >Slideshow</button>
-            <a href="map.html"><button type="button" class="map">Map</button></a>
-            <button type="button" class="sched">Schedule</button>
-            <button type="button" class="module">Module</button>
+            <!-- File upload -->
+            <div id="drop-area">
+                <form action="/upload" method="POST" enctype="multipart/form-data" >
+                    <p>Drag&amp;Drop files here</p>
+                    <input name= "slideImage" type="file" id="fileElem" multiple accept="image/*,video/*" onchange="handleFiles(this.files)">
+                    <label class="button" for="fileElem">Browse Files</label>
+                    <button type="submit">Upload</button>
+                </form>
+                <div id="gallery" /></div>
+            </div>
+
+            <div id="uploadGallery" /></div>
         </div>
-
-        <!-- File upload -->
-        <div id="drop-area">
-            <form action="/upload" method="POST" enctype="multipart/form-data" >
-                <p>Drag&amp;Drop files here</p>
-                <input name= "slideImage" type="file" id="fileElem" multiple accept="image/*,video/*" onchange="handleFiles(this.files)">
-                <label class="button" for="fileElem">Browse Files</label>
-                <button type="submit">Upload</button>
-            </form>
-            <div id="gallery" /></div>
-        </div>
-
-        <div id="uploadGallery" /></div>
-
         <script src="../javascripts/uploadHandler.js" ></script>
     </body>
 
