@@ -98,7 +98,7 @@ function checkHiddenValues() {
 
 function getSlideshowParams() {
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
+  xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       var res = JSON.parse(this.responseText);
       console.log(res.willTransition);
@@ -111,7 +111,8 @@ function getSlideshowParams() {
   xhttp.open("GET", "/getSlideshowParams", true);
   xhttp.send();
 }
-function deleteUpload(filePath){
+
+function deleteUpload(filePath) {
   //Remove from html
   var element = document.getElementById(filePath);
   element.parentNode.removeChild(element);
@@ -121,27 +122,27 @@ function deleteUpload(filePath){
   filePath = 'public\\Uploads\\' + filePath;
   xhttp.open('POST', '/deleteFile');
   xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhttp.onload = function() {
-        if (xhttp.status !== 200) {
-            alert('Request failed.  Returned status of ' + xhttp.status);
-        }
-    };
+  xhttp.onload = function () {
+    if (xhttp.status !== 200) {
+      alert('Request failed.  Returned status of ' + xhttp.status);
+    }
+  };
   xhttp.send(encodeURI('filePath=' + filePath));
 }
 
 function loadImages() {
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
+  xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       var res = JSON.parse(this.responseText);
       var images = [];
 
       for (var i = 0; i < res.images.length; i++) {
-        images.push("../" + res.images[i].location.replace('public\\',''));
+        images.push("../" + res.images[i].location.replace('public\\', ''));
       }
 
-      for(var i=0; i < images.length; i++) {
-        document.getElementById('uploadGallery').innerHTML += '<img src="'+images[i]+'" id="'+ res.images[i].location.replace('Uploads\\','')+'"alt="" onclick="deleteUpload('+'\''+res.images[i].location.replace('Uploads\\','')+'\''+')"/>';
+      for (var i = 0; i < images.length; i++) {
+        document.getElementById('uploadGallery').innerHTML += '<img src="' + images[i] + '" id="' + res.images[i].location.replace('Uploads\\', '') + '"alt="" onclick="deleteUpload(' + '\'' + res.images[i].location.replace('Uploads\\', '') + '\'' + ')"/>';
       }
     }
   };

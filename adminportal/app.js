@@ -78,25 +78,22 @@ app.post('/upload', (req, res) => {
 
 //Call when wanting to delete a file and pass the file's path
 app.post('/deleteFile', function (req, res) {
-  console.log(req.body.filePath);
   slideshowJson.removeSlide(req.body.filePath);
   fs.unlink(req.body.filePath, (err) => {
     if (err)
       console.log(err);
   });
-  res.redirect('back');
 });
 
 
 //Update Slideshow module's settings json
 app.post('/updateSlideshowParams', function (req, res) {
   var object = slideshowJson.getJson();
-  console.log(req.body);
   object.transitionSpeed = parseInt(req.body.speedValue);
   object.willTransition = (req.body.transitionValue == 'true');
   object.autoPlayVideo = (req.body.autoValue == 'true');
   object.default = (req.body.defaultValue == 'true');
-//if this is true then open other jsons and make it false
+  //if this is true then open other jsons and make it false
 
   let data = JSON.stringify(object, null, 2);
 
@@ -106,7 +103,6 @@ app.post('/updateSlideshowParams', function (req, res) {
       return;
     };
   });
-  res.redirect('back');
 });
 
 //Get Slideshow module's settings json
