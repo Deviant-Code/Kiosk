@@ -6,7 +6,7 @@ module.exports = {
         var object = this.getJson();
 
         for(var i = 0; i < object.images.length; i++){
-            if(object.images[i].location == path) {
+            if(object.images[i].location == path.replace('public\\','')) {
                 //Remove from array
                 object.images.splice(i, 1);
             }    
@@ -25,7 +25,7 @@ module.exports = {
     //Parse and return Slideshow module's settings json
     addSlide: function addSlideImageJson(file){
         var object = this.getJson();
-        object['images'].push({seqNum: object['images'].length, location: file.path, lastModified: Date.now()});
+        object['images'].push({seqNum: object['images'].length, location: file.path.replace('public\\',''), lastModified: Date.now()});
 
         let data = JSON.stringify(object, null, 2);
 

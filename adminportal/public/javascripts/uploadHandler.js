@@ -141,7 +141,7 @@ function loadImages() {
       }
 
       for(var i=0; i < images.length; i++) {
-        document.getElementById('uploadGallery').innerHTML += '<img src="'+images[i]+'" id="'+ res.images[i].location.replace('public\\Uploads\\','')+'"alt="" onclick="deleteUpload('+'\''+res.images[i].location.replace('public\\Uploads\\','')+'\''+')"/>';
+        document.getElementById('uploadGallery').innerHTML += '<img src="'+images[i]+'" id="'+ res.images[i].location.replace('Uploads\\','')+'"alt="" onclick="deleteUpload('+'\''+res.images[i].location.replace('Uploads\\','')+'\''+')"/>';
       }
     }
   };
