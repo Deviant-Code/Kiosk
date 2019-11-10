@@ -1,4 +1,5 @@
 {
+  "moduleEnabled": true,
   "transitionSpeed": 3,
   "willTransition": true,
   "autoPlayVideo": true,

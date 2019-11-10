@@ -7,7 +7,7 @@
         <link rel= "stylesheet" href="../stylesheets/style.css">
     </head>
 
-    <body onload="loadSlideshowContent()">
+    <body onload="loadDepartmentContent()">
         <div class="banner">
             <div class = "wwu">
                 <a href="../index.html"><img src="../images/index.png"/></a>
@@ -22,21 +22,11 @@
 
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <form action="/updateSlideshowParams" method="post" >
-                    <!-- Hidden input values are sent if normal input not checked -->
+            <form action="/updateDepartmentParams" method="POST" >
+                    <!-- Hidden input values are sent if normal input not checked -->                    
                     <a href="#">Module Enabled
                         <input type='hidden' id="enabledValueHidden" value='false' name='enabledValue'>
                         <input class='enabled' id="enabledValue" name="enabledValue" type='checkbox' value='true'>
-                    </a>
-                    <a>Slide Transition Speed</a>
-                    <input type="number" id="speedValue" name="speedValue" class="speed" placeholder="Seconds">
-                    <a href="#">Transition Enabled
-                        <input type='hidden' id="transitionValueHidden" value='false' name='transitionValue'>
-                        <input class='transition' id="transitionValue" name="transitionValue" type='checkbox' value='true'>
-                    </a>
-                    <a href="#">Auto play Enabled
-                        <input type='hidden' id="autoValueHidden" value='false' name='autoValue'>
-                        <input class='auto-play' id="autoValue" name="autoValue" type='checkbox' value='true'>
                     </a>
                     <a href="#">Default Module
                         <input type='hidden' id="defaultValueHidden" value='false' name='defaultValue'>
@@ -66,28 +56,26 @@
         <div id="main">
             <!-- Modules -->
             <div class="button_grp">
-                <button type="button" class="slideshow">Slideshow</button>
+                <a href="slideshow.html"><button type="button" class="slideshow">Slideshow</button></a>
                 <a href="video.html"><button type="button" class="module">Video</button></a>
                 <button type="button" class="map">Maps</button>
-                <a href="department.html"><button type="button" class="sched">Department</button></a>
+                <button type="button" class="sched">Department</button>
                 <button type="button" class="sched">temp</button>
                 <button type="button" class="sched">temp</button>
             </div>
 
             <!-- File upload -->
-            <div id="drop-area">
-                <form action="/upload" method="POST" enctype="multipart/form-data" >
-                    <p>Drag&amp;Drop files here</p>
-                    <input name= "slideImage" type="file" id="fileElem" multiple accept="image/*,video/*" onchange="handleFiles(this.files)">
-                    <label class="button" for="fileElem">Browse Files</label>
+            <div id="content-input">
+                <form action="/updateDepartment" method="POST" >
+                    <p>Heading</p>
+                    <input type="text" id="info-heading" name="heading"><br>
+                    <p>Description</p>
+                    <textarea name="description" id="info-description" cols="40" rows="5"></textarea>
                     <button type="submit">Upload</button>
                 </form>
-                <div id="gallery" /></div>
             </div>
-
-            <div id="uploadGallery" /></div>
         </div>
-        <script src="../javascripts/uploadHandlerSlideshow.js" ></script>
+        <script src="../javascripts/uploadHandlerDepartment.js" ></script>
     </body>
 
 </html>

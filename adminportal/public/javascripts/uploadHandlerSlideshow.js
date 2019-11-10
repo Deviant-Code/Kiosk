@@ -84,6 +84,9 @@ function dropdown() {
 
 function checkHiddenValues() {
   //Hide hidden values if real is checked
+  if (document.getElementById("enabledValue").checked) {
+    document.getElementById('enabledValueHidden').disabled = true;
+  }
   if (document.getElementById("defaultValue").checked) {
     document.getElementById('defaultValueHidden').disabled = true;
   }
@@ -131,6 +134,7 @@ function loadSlideshowContent() {
         document.getElementById('uploadGallery').innerHTML += '<img src="' + images[i] + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
       }
 
+      document.getElementById("enabledValue").checked = (res.moduleEnabled == true);
       document.getElementById("speedValue").value = res.transitionSpeed;
       document.getElementById("transitionValue").checked = (res.willTransition == true);
       document.getElementById("autoValue").checked = (res.autoPlayVideo == true);

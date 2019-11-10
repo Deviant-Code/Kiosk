@@ -26,7 +26,7 @@
                     <!-- Hidden input values are sent if normal input not checked -->
                     <a href="#">Module Enabled
                         <input type='hidden' id="enabledValueHidden" value='false' name='enabledValue'>
-                        <input class='enabled' id="enabledValue" name="enabledValue" type='checkbox' value='true'>
+                        <input class='transition' id="enabledValue" name="enabledValue" type='checkbox' value='true'>
                     </a>
                     <a>Slide Transition Speed</a>
                     <input type="number" id="speedValue" name="speedValue" class="speed" placeholder="Seconds">
@@ -66,10 +66,10 @@
         <div id="main">
             <!-- Modules -->
             <div class="button_grp">
-                <button type="button" class="slideshow">Slideshow</button>
-                <a href="video.html"><button type="button" class="module">Video</button></a>
+                <a href="video.html"><button type="button" class="slideshow">Slideshow</button></a>
+                <button type="button" class="module">Video</button>
                 <button type="button" class="map">Maps</button>
-                <a href="department.html"><button type="button" class="sched">Department</button></a>
+                <a href="department.html"><button type="button" class="sched">Depatment</button></a>
                 <button type="button" class="sched">temp</button>
                 <button type="button" class="sched">temp</button>
             </div>
@@ -78,7 +78,7 @@
             <div id="drop-area">
                 <form action="/upload" method="POST" enctype="multipart/form-data" >
                     <p>Drag&amp;Drop files here</p>
-                    <input name= "slideImage" type="file" id="fileElem" multiple accept="image/*,video/*" onchange="handleFiles(this.files)">
+                    <input name= "slideImage" type="file" id="fileElem" multiple accept="video/*" onchange="handleFiles(this.files)">
                     <label class="button" for="fileElem">Browse Files</label>
                     <button type="submit">Upload</button>
                 </form>

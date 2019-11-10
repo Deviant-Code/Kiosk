@@ -10,6 +10,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var slideshowJson = require('./js/slideshowJson');
+var departmentJson = require('./js/departmentJson');
+
 var fs = require('fs');
 
 var app = express();
@@ -89,6 +91,7 @@ app.post('/deleteFile', function (req, res) {
 //Update Slideshow module's settings json
 app.post('/updateSlideshowParams', function (req, res) {
   var object = slideshowJson.getJson();
+  object.moduleEnabled = (req.body.enabledValue == 'true');
   object.transitionSpeed = parseInt(req.body.speedValue);
   object.willTransition = (req.body.transitionValue == 'true');
   object.autoPlayVideo = (req.body.autoValue == 'true');
@@ -109,6 +112,47 @@ app.post('/updateSlideshowParams', function (req, res) {
 //Get Slideshow module's settings json
 app.get('/getSlideshowParams', function (req, res) {
   var object = slideshowJson.getJson();
+  res.json(object);
+});
+
+//Update Department module's settings json
+app.post('/updateDepartmentParams', function (req, res) {
+  var object = departmentJson.getJson();
+  object.moduleEnabled = (req.body.enabledValue == 'true');
+  object.default = (req.body.defaultValue == 'true');
+  //if this is true then open other jsons and make it false
+
+  let data = JSON.stringify(object, null, 2);
+
+  fs.writeFileSync("public/json/department.json", data, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    };
+  });
+  res.redirect('back');
+});
+
+//Update Department module's settings json with new content
+app.post('/updateDepartment', function (req, res) {
+  var object = departmentJson.getJson();
+  object.heading = req.body.heading;
+  object.description = req.body.description;
+
+  let data = JSON.stringify(object, null, 2);
+
+  fs.writeFileSync("public/json/department.json", data, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    };
+  });
+  res.redirect('back');
+});
+
+//Get Department module's settings json
+app.get('/getDepartmentParams', function (req, res) {
+  var object = departmentJson.getJson();
   res.json(object);
 });
 

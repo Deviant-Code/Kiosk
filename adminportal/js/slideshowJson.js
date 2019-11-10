@@ -66,6 +66,7 @@ module.exports = {
         } catch {
             //Slideshow default module settings
             let slideshow = {
+                moduleEnabled: true,
                 transitionSpeed: 3,
                 willTransition: true,
                 autoPlayVideo: true,
