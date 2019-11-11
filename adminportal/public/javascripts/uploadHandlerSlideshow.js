@@ -40,7 +40,6 @@ function handleDrop(e) {
 
 function handleFiles(files) {
   files = [...files]
-  files.forEach(uploadFile)
   files.forEach(previewFile)
 }
 
@@ -49,9 +48,42 @@ function previewFile(file) {
   reader.readAsDataURL(file)
   reader.onloadend = function () {
     let img = document.createElement('img')
-    img.src = reader.result
+
+    if(isVideo(file.name)){
+      //Set video to default thumbnail
+      img.src = null 
+    }else{
+      img.src = reader.result
+    }
     document.getElementById('gallery').appendChild(img)
   }
+}
+
+function isVideo(filename) {
+  var ext = (filename + '').split('.').pop();
+  switch (ext.toLowerCase()) {
+  case 'm4v':
+  case 'avi':
+  case 'mpg':
+  case 'mp4':
+  case 'mov':
+      return true;
+  }
+  return false;
+}
+
+function getVideoThumnail(videoSrc, path){
+  var video = document.createElement('video');
+  video.src = videoSrc;
+
+  var canvas = document.createElement('canvas');
+  var context = canvas.getContext('2d');
+
+  video.addEventListener('loadeddata', function() {
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      var URI = canvas.toDataURL('image/jpeg');
+      document.getElementById('uploadGallery').innerHTML += '<img src="' + URI + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
+  });
 }
 
 // Navigation Menu
@@ -131,7 +163,11 @@ function loadSlideshowContent() {
       for (var i = 0; i < images.length; i++) {
         var path = res.images[i].location.replace('Uploads\\', '');
         path = path.replace('Uploads/', '');
-        document.getElementById('uploadGallery').innerHTML += '<img src="' + images[i] + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
+        if(isVideo(path)){
+          getVideoThumnail(images[i], path);
+        }else{
+          document.getElementById('uploadGallery').innerHTML += '<img src="' + images[i] + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
+        }
       }
 
       document.getElementById("enabledValue").checked = (res.moduleEnabled == true);

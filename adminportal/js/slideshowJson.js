@@ -27,16 +27,18 @@ module.exports = {
     },
 
     //Parse and return Slideshow module's settings json
-    addSlide: function addSlideImageJson(file) {
+    addSlide: function addSlideImageJson(files) {
         var object = this.getJson();
+        
+        files.forEach(file => {           
+            var path = file.path.replace(/\\/g, '/');
+            path = path.replace('public/', '');
 
-        var path = file.path.replace(/\\/g, '/');
-        path = path.replace('public/', '');
-
-        object['images'].push({
-            seqNum: object['images'].length,
-            location: path,
-            lastModified: Date.now()
+            object['images'].push({
+                seqNum: object['images'].length,
+                location: path,
+                lastModified: Date.now()
+            });
         });
 
         let data = JSON.stringify(object, null, 2);

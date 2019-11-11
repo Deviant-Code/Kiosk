@@ -32,18 +32,18 @@ const upload = multer({
   fileFilter: function (req, file, cb) {
     checkFileType(file, cb);
   }
-}).single('slideImage');
+}).any();
 
 // Check file type
 function checkFileType(file, cb) {
-  const filetypes = /jpeg|jpg|png/;
+  const filetypes = /jpeg|jpg|png|mov|mp4|avi|wmv|m4v|mpg/;
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = filetypes.test(file.mimetype);
 
   if (mimetype && extname) {
     return cb(null, true);
   } else {
-    cb('Error: Only jpeg,jpg, or png filetypes supported');
+    cb('Error: Only jpeg,jpg,png,mov,mp4,avi,wmv,m4v,mpg filetypes supported');
   }
 }
 
@@ -66,13 +66,13 @@ app.post('/upload', (req, res) => {
       res.send(err + " - Use the arrow buttons to return to the previous page");
       console.log(err);
     } else {
-      if (req.file == undefined) {
+      if (req.files == undefined) {
         res.send("No file selected - Use the arrow buttons to return to the previous page");
         console.log("No file selected");
       } else {
         res.redirect('back');
         console.log("Slideshow Image Uploaded!");
-        slideshowJson.addSlide(req.file);
+        slideshowJson.addSlide(req.files);
       }
     }
   });
