@@ -29,7 +29,7 @@
                         <input class='enabled' id="enabledValue" name="enabledValue" type='checkbox' value='true'>
                     </a>
                     <a>Slide Transition Speed</a>
-                    <input type="number" id="speedValue" name="speedValue" class="speed" placeholder="Seconds">
+                        <input type="number" id="speedValue" name="speedValue" class="speed" placeholder="Seconds">
                     <a href="#">Transition Enabled
                         <input type='hidden' id="transitionValueHidden" value='false' name='transitionValue'>
                         <input class='transition' id="transitionValue" name="transitionValue" type='checkbox' value='true'>
@@ -43,7 +43,7 @@
                         <input class='default' id="defaultValue" name="defaultValue" type='checkbox' value='true'>
                     </a>
 
-                    <input type="submit" value="Update" onclick="checkHiddenValues()">                    
+                    <input type="submit" class="setting-update" value="Update" onclick="checkHiddenValues()">
             </form>
         </div>
 
@@ -67,6 +67,7 @@
             <!-- Modules -->
             <div class="button_grp">
                 <button type="button" class="slideshow">Slideshow</button>
+                <a href="video.html"><button type="button" class="module">Video</button></a>
                 <button type="button" class="map">Maps</button>
                 <a href="department.html"><button type="button" class="sched">Department</button></a>
                 <button type="button" class="sched">temp</button>
@@ -75,16 +76,14 @@
 
             <!-- File upload -->
             <div id="drop-area">
-                <form action="/upload" method="POST" enctype="multipart/form-data" >
+                <form action="/upload" method="POST" enctype="multipart/form-data" id="upload-form">
                     <p>Drag&amp;Drop files here</p>
-                    <input name= "slide" type="file" id="fileElem" multiple accept="image/*,video/*" onchange="handleFiles(this.files)">
+                    <input name= "slideImage" type="file" id="fileElem" multiple accept="image/*,video/*" onchange="this.form.submit()" >
                     <label class="button" for="fileElem">Browse Files</label>
-                    <button type="submit">Upload</button>
                 </form>
-                <div id="gallery" /></div>
+                <div id="uploadGallery" /></div>
             </div>
 
-            <div id="uploadGallery" /></div>
         </div>
         <script src="../javascripts/uploadHandlerSlideshow.js" ></script>
     </body>
