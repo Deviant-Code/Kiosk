@@ -1,0 +1,9 @@
+{
+  "moduleEnabled": true,
+  "default": false,
+  "pollQuestion": "*insert poll question*",
+  "pollResp1": "*insert poll response 1*",
+  "pollResp2": "*insert poll response 2*",
+  "pollResp1Val": 0,
+  "pollResp2Val": 0
+}

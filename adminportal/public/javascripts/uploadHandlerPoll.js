@@ -26,6 +26,16 @@ function dropdown() {
   }
 }
 
+function checkHiddenValues() {
+  //Hide hidden values if real is checked
+  if (document.getElementById("enabledValue").checked) {
+    document.getElementById('enabledValueHidden').disabled = true;
+  }
+  if (document.getElementById("defaultValue").checked) {
+    document.getElementById('defaultValueHidden').disabled = true;
+  }
+}
+
 function loadPollContent() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -36,13 +46,13 @@ function loadPollContent() {
       document.getElementById("poll2").value = res.pollResp2;
       document.getElementById("pollQuestion").value = res.pollQuestion;
       document.getElementById("CurrentResponse").innerHTML = 
-      "Response 1 total votes = " + res.pollResp2Val +
-      "<br>Response 2 total votes = " + res.pollResp1Val;
+      "Response 1 total votes = " + res.pollResp1Val +
+      "<br>Response 2 total votes = " + res.pollResp2Val;
       document.getElementById("enabledValue").checked = (res.moduleEnabled == true);
       document.getElementById("defaultValue").checked = (res.default == true);
     }
   };
-  xhttp.open("GET", "/getSlideshowParams", true);
+  xhttp.open("GET", "/getPollParams", true);
   xhttp.send();
 }
 
@@ -57,6 +67,6 @@ function loadPollContentKiosk() {
       document.getElementById("pollQuestion").innerHTML = res.pollQuestion;
     }
   };
-  xhttp.open("GET", "/getSlideshowParams", true);
+  xhttp.open("GET", "/getPollParams", true);
   xhttp.send();
 }
