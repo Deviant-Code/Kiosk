@@ -1,218 +1,185 @@
 
 /* WWU Banner */
 body {
-    font-family: sans-serif;
-    margin: 0;
-    background-color: white;
+  font-family: sans-serif;
+  margin: 0;
+  background-color: white;
 }
 div.banner {
-    width: 100%;
-    height: 40px;
-    background-color: #FFFF;
+  width: 100%;
+  height: 40px;
+  background-color: #FFFF;
 }
 div.wwu {
-  width: auto;
-  display: inline-block;
+width: auto;
+display: inline-block;
 }
 div.wwu img {
-    margin-left: 5px;
-    margin-top: -5px;
-    width: 20%;
-    height: auto;
+  margin-left: 5px;
+  margin-top: -5px;
+  width: 20%;
+  height: auto;
 }
 div.upload {
-    margin: 10px;
+  margin: 10px;
 }
 hr.hr1 {
-    border-top: 4px solid #0096D6;
-    padding: 0;
-    margin-top: 0;
+  border-top: 4px solid #0096D6;
+  padding: 0;
+  margin-top: 0;
 }
 hr.hr2 {
-    border-top: 1px solid #ccc;
+  border-top: 1px solid #ccc;
 }
 
 
 /* Settings */
 div.settings {
-    position: absolute;
-    right: 10px;
+  position: absolute;
+  right: 10px;
 }
 div.settings img {
-    width: 30px;
-    height: auto;
-    filter: brightness(150%);
+  width: 30px;
+  height: auto;
+  filter: brightness(150%);
 }
 .settings img:hover {
-    filter: brightness(100%);
+  filter: brightness(100%);
 }
 .sidenav {
-    background-color: #F9F9FA;
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    margin-top: 4px;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-    border-radius: 5px;
-    -webkit-box-shadow: -2px 5px 8px 3px rgba(189,189,189,0.60);
-    -moz-box-shadow: -2px 5px 8px 3px rgba(189,189,189,0.60);
-    box-shadow: -2px 5px 8px 3px rgba(189,189,189,0.60);
+  background-color: #F9F9FA;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  margin-top: 4px;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  border-radius: 5px;
+  -webkit-box-shadow: -2px 5px 8px 3px rgba(189,189,189,0.60);
+  -moz-box-shadow: -2px 5px 8px 3px rgba(189,189,189,0.60);
+  box-shadow: -2px 5px 8px 3px rgba(189,189,189,0.60);
 }
 .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 15px;
-    color: black;
-    display: block;
-    transition: 0.3s;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 15px;
+  color: black;
+  display: block;
+  transition: 0.3s;
 }
 #speedValue {
-    margin-left: 30px;
+  margin-left: 30px;
 }
 .setting-update {
-    margin-left: 30px;
+  margin-left: 30px;
 }
 .dropdown-btn {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 15px;
-    color: black;
-    border: none;
-    display: block;
-    background: none;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-    outline: none;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 15px;
+  color: black;
+  border: none;
+  display: block;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
 }
 .sidenav a:hover, .dropdown-btn:hover {
-    background-color: #30a1ff;
-    color: white;
-}
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-.sidenav .closebtn:hover {
-    background-color: #F9F9FA;
-    color: #ccc;
-}
-.active {
   background-color: #30a1ff;
   color: white;
 }
-.dropdown-container {
-  display: none;
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+.sidenav .closebtn:hover {
   background-color: #F9F9FA;
-  padding-left: 8px;
+  color: #ccc;
+}
+.active {
+background-color: #30a1ff;
+color: white;
+}
+.dropdown-container {
+display: none;
+background-color: #F9F9FA;
+padding-left: 8px;
 }
 
 
 /* Module Buttons */
 .button_grp {
-  margin: 10px auto;
-  text-align: center;
-  margin-bottom: 0;
-}
-.slideshow {
-    display: inline-block;
-    width: 140px;
-    height: 140px;
-    font-size: 20px;
-    text-align: center;
-    border-radius: 4px;
-    margin: 20px;
-    border: none;
-    background-color: #F5F5F5;
-}
-.map {
-    display: inline-block;
-    width: 140px;
-    height: 140px;
-    font-size: 20px;
-    text-align: center;
-    border-radius: 4px;
-    margin: 20px;
-    border: none;
-    background-color: #F5F5F5;
-}
-.sched {
-    display: inline-block;
-    width: 140px;
-    height: 140px;
-    font-size: 20px;
-    text-align: center;
-    margin: 20px;
-    border-radius: 4px;
-    border: none;
-    background-color: #F5F5F5;
+margin: 10px auto;
+text-align: center;
+margin-bottom: 0;
 }
 .module {
-    display: inline-block;
-    width: 140px;
-    height: 140px;
-    font-size: 20px;
-    text-align: center;
-    margin: 25px;
-    border-radius: 4px;
-    border: none;
-    background-color: #F5F5F5;
-    /*
-    -webkit-box-shadow: -1px 5px 21px -4px rgba(173,166,173,0.50);
-    -moz-box-shadow: -1px 5px 21px -4px rgba(173,166,173,0.50);
-    box-shadow: -1px 5px 21px -4px rgba(173,166,173,0.50);
-    */
+  display: inline-block;
+  width: 140px;
+  height: 140px;
+  font-size: 20px;
+  text-align: center;
+  margin: 25px;
+  border-radius: 4px;
+  border: none;
+  background-color: #F5F5F5;
+  /*
+  -webkit-box-shadow: -1px 5px 21px -4px rgba(173,166,173,0.50);
+  -moz-box-shadow: -1px 5px 21px -4px rgba(173,166,173,0.50);
+  box-shadow: -1px 5px 21px -4px rgba(173,166,173,0.50);
+  */
 }
 
 
 /* Upload */
 #drop-area {
-  border: 2px dashed #ccc;
-  width: 70%;
-  margin: 15px auto;
-  padding-top: 20px;
-  text-align: center;
-  border-radius: 4px;
-  overflow: auto;
+border: 2px dashed #ccc;
+width: 70%;
+margin: 15px auto;
+padding-top: 20px;
+text-align: center;
+border-radius: 4px;
+overflow: auto;
 }
 #drop-area.highlight {
-  background-color: #F9F9FA;
+background-color: #F9F9FA;
 }
 p {
-    color: #8d9496;
-    align-self: center;
-    font-weight: bold;
+  color: #8d9496;
+  align-self: center;
+  font-weight: bold;
 }
 .button {
-  display: inline-block;
-  padding: 8px 14px;
-  color: #30a1ff;
-  cursor: pointer;
-  border-radius: 3px;
-  border: 1px solid #30a1ff;
-  margin-bottom: 10px;
+display: inline-block;
+padding: 8px 14px;
+color: #30a1ff;
+cursor: pointer;
+border-radius: 3px;
+border: 1px solid #30a1ff;
+margin-bottom: 10px;
 }
 .button:hover {
-  background: #30a1ff;
-  color: white;
+background: #30a1ff;
+color: white;
 }
 #uploadGallery {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 #uploadGallery img {
-  width: 150px;
-  margin-bottom: 10px;
-  margin-right: 10px;
-  vertical-align: middle;
+width: 150px;
+margin-bottom: 10px;
+margin-right: 10px;
+vertical-align: middle;
 }
 #fileElem {
-  display: none;
+display: none;
 }

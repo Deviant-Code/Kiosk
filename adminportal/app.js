@@ -87,6 +87,10 @@ app.post('/deleteFile', function (req, res) {
   });
 });
 
+//Update Slideshow module's settings json
+app.post('/updateSlideThumbnail', function (req, res) {
+  slideshowJson.addThumbnail(req.body.path, req.body.thumbnail);
+});
 
 //Update Slideshow module's settings json
 app.post('/updateSlideshowParams', function (req, res) {
