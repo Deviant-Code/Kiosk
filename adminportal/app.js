@@ -227,6 +227,9 @@ app.get('/getPollParams', function (req, res) {
   res.json(object);
 });
 
+//Catch favicon requests since we don't have right now
+app.get('/favicon.ico', (req, res) => res.status(204));
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
