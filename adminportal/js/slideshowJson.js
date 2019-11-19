@@ -18,6 +18,10 @@ module.exports = {
                 }
                 //Remove from array
                 object.images.splice(i, 1);
+
+                //Update the seqnum of next slide if there is one after
+                if(object.images[i])
+                    object.images[i].seqnum = object.images[i].seqnum - 1;
             }
         }
 
@@ -40,6 +44,7 @@ module.exports = {
             path = path.replace('public/', '');
 
             object['images'].push({
+                seqnum: object['images'].length,
                 location: path,
                 lastModified: Date.now(),
                 thumbnail: ""
