@@ -1,5 +1,6 @@
 
 import javafx.application.Application;
+import javafx.scene.input.KeyCombination;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,6 +23,8 @@ public class Main extends Application {
         primaryStage.setTitle("Project Electra: V0.1.2");
         primaryStage.setResizable(true);
         primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        primaryStage.setFullScreenExitHint("Kiosk");
 
         //Generate loader for module menu
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("fxml/kioskDisplay.fxml"));
