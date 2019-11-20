@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+    <hr class="hr1"/>
+    <head>
+        <title>Electra Admin Portal</title>
+        <link rel= "stylesheet" href="../stylesheets/style.css">
+    </head>
+
+    <body onload="loadDepartmentContent()">
+        <div class="banner">
+            <div class = "wwu">
+                <a href="../index.html"><img src="../images/index.png"/></a>
+            </div>
+        </div>
+        <hr class="hr2">
+
+        <!-- Settings -->
+        <div class="settings">
+            <img src="../images/settings.png" onclick="openNav()">
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <form action="/updateDepartmentParams" method="POST" >
+                    <!-- Hidden input values are sent if normal input not checked -->                    
+                    <a href="#">Module Enabled
+                        <input type='hidden' id="enabledValueHidden" value='false' name='enabledValue'>
+                        <input class='enabled' id="enabledValue" name="enabledValue" type='checkbox' value='true'>
+                    </a>
+                    <a href="#">Default Module
+                        <input type='hidden' id="defaultValueHidden" value='false' name='defaultValue'>
+                        <input class='default' id="defaultValue" name="defaultValue" type='checkbox' value='true'>
+                    </a>
+
+                    <input type="submit" value="Update" onclick="checkHiddenValues()">                    
+            </form>
+        </div>
+
+        <script type="text/javascript">
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+          dropdown[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+          } else {
+          dropdownContent.style.display = "block";
+          }
+          });
+        }
+        </script>
+        <div id="main">
+            <!-- Modules -->
+            <div class="button_grp">
+                <a href="slideshow.html"><button type="button" class="slideshow">Slideshow</button></a>
+                <button type="button" class="map">Maps</button>
+                <button type="button" class="sched">Department</button>
+                <button type="button" class="sched">temp</button>
+                <button type="button" class="sched">temp</button>
+            </div>
+
+            <!-- File upload -->
+            <div id="content-input">
+                <form action="/updateDepartment" method="POST" >
+                    <p>Heading</p>
+                    <input type="text" id="info-heading" name="heading"><br>
+                    <p>Description</p>
+                    <textarea name="description" id="info-description" cols="40" rows="5"></textarea>
+                    <button type="submit">Upload</button>
+                </form>
+            </div>
+        </div>
+        <script src="../javascripts/uploadHandlerDepartment.js" ></script>
+    </body>
+
+</html>

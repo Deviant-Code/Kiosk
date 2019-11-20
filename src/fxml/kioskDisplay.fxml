@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2160.0" prefWidth="3840.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuController">
+    <children>
+      <VBox id="vbox" layoutX="-0.5" prefHeight="2160.0" prefWidth="3840.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+              <AnchorPane id="menu_banner" prefHeight="200.0" prefWidth="3840.0" style="-fx-background-color: #0D4F8C;">
+                  <children>
+                      <ImageView id="viking" fitHeight="170.0" fitWidth="183.0" layoutX="1678.0" layoutY="25.0" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="25.0">
+                          <image>
+                              <Image url="@../res/secondary_wwu_light.png" />
+                          </image>
+                      </ImageView>
+                      <ImageView id="logo" layoutX="51.0" layoutY="25.0" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="25.0">
+                          <image>
+                              <Image url="@../res/index.png" />
+                          </image>
+                      </ImageView>
+                  <VBox alignment="CENTER" layoutX="800.0" layoutY="52.0" prefHeight="200.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                            <Text accessibleRole="IMAGE_VIEW" boundsType="VISUAL" cache="true" fill="#92afe4" strikethrough="true" strokeType="OUTSIDE" strokeWidth="0.0" text="KiOsK" textOrigin="CENTER" underline="true" wrappingWidth="278.9440002441406" VBox.vgrow="ALWAYS">
+                                <font>
+                                    <Font name="Cantarell Thin" size="96.0" />
+                                </font>
+                            </Text>
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Release: 0.2.2 || 10/22/19 " />
+                     </children>
+                  </VBox>
+                  </children>
+            </AnchorPane>
+              <GridPane alignment="CENTER" cacheShape="false" centerShape="false" gridLinesVisible="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="1960.0" prefWidth="3840.0" snapToPixel="false">
+                  <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <children>
+                      <Button id="SlideShow" fx:id="SlideShow" alignment="BOTTOM_CENTER" contentDisplay="TOP" defaultButton="true" graphicTextGap="9.0" mnemonicParsing="false" onAction="#openSlideShow" onTouchPressed="#openSlideShow" prefHeight="1214.0" prefWidth="1280.0" text="Slideshow" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                          <font>
+                              <Font name="Noto Sans Khmer UI Thin" size="28.0" />
+                          </font>
+                          <cursor>
+                              <Cursor fx:constant="NONE" />
+                          </cursor>
+                  </Button>
+                      <Button id="Maps" fx:id="Maps" alignment="BOTTOM_CENTER" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" prefHeight="1214.0" prefWidth="1280.0" text="Maps" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                          <font>
+                              <Font name="Noto Sans Khmer Light" size="28.0" />
+                          </font>
+                          <cursor>
+                              <Cursor fx:constant="NONE" />
+                          </cursor>
+                  </Button>
+                      <Button id="ClassSchedules" fx:id="Class" alignment="BOTTOM_CENTER" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" prefHeight="1214.0" prefWidth="1280.0" text="Schedules" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                          <font>
+                              <Font name="Noto Sans Regular" size="28.0" />
+                          </font>
+                          <cursor>
+                              <Cursor fx:constant="NONE" />
+                          </cursor>
+                  </Button>
+                      <Button id="Labs" fx:id="Labs" alignment="BOTTOM_CENTER" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" prefHeight="1214.0" prefWidth="1280.0" text="Lab Availability" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                          <font>
+                              <Font size="28.0" />
+                          </font>
+                          <cursor>
+                              <Cursor fx:constant="NONE" />
+                          </cursor>
+                  </Button>
+                      <Button id="Departments" fx:id="Department" alignment="BOTTOM_CENTER" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" prefHeight="1214.0" prefWidth="1280.0" text="Video" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                          <font>
+                              <Font size="28.0" />
+                          </font>
+                          <cursor>
+                              <Cursor fx:constant="NONE" />
+                          </cursor>
+                  </Button>
+                      <Button id="Faculty" fx:id="Faculty" alignment="BOTTOM_CENTER" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" prefHeight="1214.0" prefWidth="1280.0" text="Department Info" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                          <font>
+                              <Font size="28.0" />
+                          </font>
+                          <cursor>
+                              <Cursor fx:constant="NONE" />
+                          </cursor>
+                  </Button>
+                  </children>
+              </GridPane>
+         </children>
+         <cursor>
+            <Cursor fx:constant="NW_RESIZE" />
+         </cursor>
+      </VBox>
+    </children>
+</AnchorPane>
