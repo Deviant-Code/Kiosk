@@ -11,6 +11,9 @@ var usersRouter = require('./routes/users');
 
 var slideshowJson = require('./js/slideshowJson');
 var departmentJson = require('./js/departmentJson');
+var pollJson = require('./js/pollJson');
+var schedulesJson = require('./js/schedulesJson');
+var defaultHandler = require('./js/defaultModuleHandler');
 
 var fs = require('fs');
 
@@ -87,6 +90,10 @@ app.post('/deleteFile', function (req, res) {
   });
 });
 
+//Update Slideshow module's settings json
+app.post('/updateSlideThumbnail', function (req, res) {
+  slideshowJson.addThumbnail(req.body.path, req.body.thumbnail);
+});
 
 //Update Slideshow module's settings json
 app.post('/updateSlideshowParams', function (req, res) {
@@ -97,6 +104,8 @@ app.post('/updateSlideshowParams', function (req, res) {
   object.autoPlayVideo = (req.body.autoValue == 'true');
   object.default = (req.body.defaultValue == 'true');
   //if this is true then open other jsons and make it false
+  if(object.default)
+    defaultHandler.setDefault("slideshow");
 
   let data = JSON.stringify(object, null, 2);
 
@@ -121,6 +130,8 @@ app.post('/updateDepartmentParams', function (req, res) {
   object.moduleEnabled = (req.body.enabledValue == 'true');
   object.default = (req.body.defaultValue == 'true');
   //if this is true then open other jsons and make it false
+  if(object.default)
+    defaultHandler.setDefault("department");
 
   let data = JSON.stringify(object, null, 2);
 
@@ -155,6 +166,117 @@ app.get('/getDepartmentParams', function (req, res) {
   var object = departmentJson.getJson();
   res.json(object);
 });
+
+//Update Poll module's settings json
+app.post('/updatePollParams', function (req, res) {
+  var object = pollJson.getJson();
+  object.moduleEnabled = (req.body.enabledValue == 'true');
+  object.default = (req.body.defaultValue == 'true');
+  //if this is true then open other jsons and make it false
+  if(object.default)
+    defaultHandler.setDefault("poll");
+
+  let data = JSON.stringify(object, null, 2);
+
+  fs.writeFileSync("public/json/poll.json", data, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    };
+  });
+  res.redirect('back');
+});
+
+//Update Poll module's json with new content
+app.post('/updatePoll', function (req, res) {
+  var object = pollJson.getJson();
+  object.pollQuestion = req.body.pollQuestion;
+  object.pollResp1 = req.body.pollResp1;
+  object.pollResp2 = req.body.pollResp2;
+
+  let data = JSON.stringify(object, null, 2);
+
+  fs.writeFileSync("public/json/poll.json", data, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    };
+  });
+  res.redirect('back');
+});
+
+//Rest Poll module's json stats
+app.post('/resetPollStats', function (req, res) {
+  var object = pollJson.getJson();
+  object.pollResp1Val = 0;
+  object.pollResp2Val = 0;
+
+  let data = JSON.stringify(object, null, 2);
+
+  fs.writeFileSync("public/json/poll.json", data, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    };
+  });
+  res.redirect('back');
+});
+
+//Get Poll module's settings json
+app.get('/getPollParams', function (req, res) {
+  var object = pollJson.getJson();
+  res.json(object);
+});
+
+//Update Schedules module's settings json
+app.post('/updateSchedulesParams', function (req, res) {
+  var object = schedulesJson.getJson();
+  object.moduleEnabled = (req.body.enabledValue == 'true');
+  object.default = (req.body.defaultValue == 'true');
+  //if this is true then open other jsons and make it false
+  if(object.default)
+    defaultHandler.setDefault("schedules");
+
+  let data = JSON.stringify(object, null, 2);
+
+  fs.writeFileSync("public/json/schedules.json", data, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    };
+  });
+  res.redirect('back');
+});
+
+//Update Schedule module's settings json with new content
+app.post('/updateSchedules', function (req, res) {
+  var object = schedulesJson.getJson();
+
+  let data = JSON.stringify(object, null, 2);
+
+  fs.writeFileSync("public/json/schedules.json", data, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    };
+  });
+  res.redirect('back');
+});
+
+//Get Department module's settings json
+app.get('/getSchedulesParams', function (req, res) {
+  var object = schedulesJson.getJson();
+  res.json(object);
+});
+
+//Catch favicon requests since we don't have right now
+app.get('/favicon.ico', (req, res) => res.status(204));
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404));
+});
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

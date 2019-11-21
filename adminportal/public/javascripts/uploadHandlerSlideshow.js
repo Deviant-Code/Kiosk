@@ -72,18 +72,39 @@ function isVideo(filename) {
   return false;
 }
 
-function getVideoThumnail(videoSrc, path){
-  var video = document.createElement('video');
-  video.src = videoSrc;
+function getVideoThumnail(image, path){
+  //If thumbnail exists, use it, if not, generate it and upload it
+  if(image.thumbnail != ""){
+    document.getElementById('uploadGallery').innerHTML += '<img src="' + "../" + image.thumbnail + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
+  }else{
+    var video = document.createElement('video');
+    var loc = image.location;
 
-  var canvas = document.createElement('canvas');
-  var context = canvas.getContext('2d');
+    video.src = "../" + image.location;
+  
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+  
+    video.addEventListener('loadeddata', function() {
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        var URI = canvas.toDataURL('image/jpeg');
+        document.getElementById('uploadGallery').innerHTML += '<img src="' + URI + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
+        updateSlideThumbnail(loc, URI);
+    });
+  }
+}
 
-  video.addEventListener('loadeddata', function() {
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      var URI = canvas.toDataURL('image/jpeg');
-      document.getElementById('uploadGallery').innerHTML += '<img src="' + URI + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
-  });
+//Sends the thumbnail in base64 and the associated slide location
+function updateSlideThumbnail(filePath, thumbnail) {
+  xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '/updateSlideThumbnail');
+  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhttp.onload = function () {
+    if (xhttp.status !== 200) {
+      alert('Request failed.  Returned status of ' + xhttp.status);
+    }
+  };
+  xhttp.send(encodeURI('path=' + filePath + '&thumbnail='+ thumbnail));
 }
 
 // Navigation Menu
@@ -136,7 +157,7 @@ function deleteUpload(filePath) {
   element.parentNode.removeChild(element);
 
   xhttp = new XMLHttpRequest();
-  //Re-add the public\\uploads
+  //Re-add the public/uploads
   filePath = 'public/Uploads/' + filePath;
   xhttp.open('POST', '/deleteFile');
   xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -164,7 +185,7 @@ function loadSlideshowContent() {
         var path = res.images[i].location.replace('Uploads\\', '');
         path = path.replace('Uploads/', '');
         if(isVideo(path)){
-          getVideoThumnail(images[i], path);
+          getVideoThumnail(res.images[i], path);
         }else{
           document.getElementById('uploadGallery').innerHTML += '<img src="' + images[i] + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
         }

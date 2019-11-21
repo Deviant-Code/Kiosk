@@ -7,7 +7,7 @@
         <link rel= "stylesheet" href="../stylesheets/style.css">
     </head>
 
-    <body onload="loadDepartmentContent()">
+    <body onload="loadSchedulesContent()">
         <div class="banner">
             <div class = "wwu">
                 <a href="../index.html"><img src="../images/index.png"/></a>
@@ -22,7 +22,7 @@
 
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <form action="/updateDepartmentParams" method="POST" >
+            <form action="/updateSchedulesParams" method="POST" >
                     <!-- Hidden input values are sent if normal input not checked -->                    
                     <a href="#">Module Enabled
                         <input type='hidden' id="enabledValueHidden" value='false' name='enabledValue'>
@@ -58,22 +58,19 @@
             <div class="button_grp">
                 <a href="slideshow.html"><button type="button" class="module">Slideshow</button></a>
                 <a href="poll.html"><button type="button" class="module">Poll</button></a>
-                <button type="button" class="module">Department</button>
-                <a href="schedules.html"><button type="button" class="module">Schedules</button></a>
+                <a href="department.html"><button type="button" class="module">Department</button></a>
+                <button type="button" class="module">Schedules</button>
             </div>
 
             <!-- File upload -->
             <div id="content-input">
-                <form action="/updateDepartment" method="POST" >
-                    <p>Heading</p>
-                    <input type="text" id="info-heading" name="heading"><br>
-                    <p>Description</p>
-                    <textarea name="description" id="info-description" cols="40" rows="5"></textarea>
+                <form action="/updateSchedules" method="POST" >
+                    
                     <button type="submit">Upload</button>
                 </form>
             </div>
         </div>
-        <script src="../javascripts/uploadHandlerDepartment.js" ></script>
+        <script src="../javascripts/uploadHandlerSchedules.js" ></script>
     </body>
 
 </html>
