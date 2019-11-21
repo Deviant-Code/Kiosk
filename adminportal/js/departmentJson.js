@@ -7,7 +7,7 @@ module.exports = {
         let rawdata;
         try {
             rawdata = fs.readFileSync('public/json/department.json');
-        } catch {
+        } catch (error) {
             //Department default module settings
             let department = {
                 moduleEnabled: true,

@@ -7,7 +7,7 @@ module.exports = {
         let rawdata;
         try {
             rawdata = fs.readFileSync('public/json/poll.json');
-        } catch {
+        } catch (error) {
             //Poll default module settings
             let department = {
                 moduleEnabled: true,

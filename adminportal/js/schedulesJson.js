@@ -7,7 +7,7 @@ module.exports = {
         let rawdata;
         try {
             rawdata = fs.readFileSync('public/json/schedules.json');
-        } catch {
+        } catch (error) {
             //Schedule default module settings
             let department = {
                 moduleEnabled: true,

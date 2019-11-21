@@ -107,7 +107,7 @@ module.exports = {
         let rawdata;
         try {
             rawdata = fs.readFileSync('public/json/slideshow.json');
-        } catch {
+        } catch (error) {
             //Slideshow default module settings
             let slideshow = {
                 moduleEnabled: true,
@@ -115,7 +115,7 @@ module.exports = {
                 willTransition: true,
                 autoPlayVideo: true,
                 default: true,
-                images: []
+                slides: []
             };
 
             rawdata = JSON.stringify(slideshow, null, 2);
