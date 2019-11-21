@@ -7,7 +7,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
 import manager.KioskManager;
+import javafx.scene.Parent;
 import modules.Slideshow;
 
 import java.io.IOException;
@@ -18,15 +20,16 @@ public class SlideshowController {
     private Stage primaryStage;
     private Slideshow ss;
 
+
     public void setMenuScene(Scene menuScene) {
         this.menuScene = menuScene;
     }
 
     public void openMenuScene(Event actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(menuScene);
         //Weird JavaFX bug requires toggle on full screen after swapping scenes
-        primaryStage.setFullScreen(false);
+        //primaryStage.setFullScreen(false);
+        primaryStage.setScene(menuScene);
         primaryStage.setFullScreen(true);
     }
 
