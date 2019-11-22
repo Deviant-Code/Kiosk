@@ -24,7 +24,7 @@ run:
 Main: KioskManager
 	$(JC) $(JFLAGS) Main.java
 
-KioskManager: Module KioskSettings AdminPortalListener Controllers PortalRunner
+KioskManager: Module KioskSettings AdminPortalListener Controllers 
 	$(JC) $(JFLAGS) $(MANAGER_PATH)/KioskManager.java
 
 Controllers : 
@@ -32,9 +32,6 @@ Controllers :
 
 AdminPortalListener: 
 	$(JC) -cp $(PATH_TO_GSON) $(MANAGER_PATH)/AdminPortalListener.java
-
-PortalRunner: AdminPortalListener
-	$(JC) $(MANAGER_PATH)/portalRunner.java
 
 KioskSettings:
 	$(JC) $(MANAGER_PATH)/KioskSettings.java

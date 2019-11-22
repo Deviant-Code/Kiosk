@@ -20,7 +20,6 @@ public class SlideshowController {
     private Stage primaryStage;
     private Slideshow ss;
 
-
     public void setMenuScene(Scene menuScene) {
         this.menuScene = menuScene;
     }

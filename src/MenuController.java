@@ -14,6 +14,7 @@ import java.io.IOException;
 public class MenuController {
 
     private Scene ssScene;
+    private SlideshowController ssController;
 
     public void setSlideshowScene(Scene ssScene) {
         this.ssScene = ssScene;
@@ -23,6 +24,8 @@ public class MenuController {
     public void openSlideShow(Event actionEvent) throws IOException {
 
         Slideshow ss = KioskManager.getSS();
+        ss.updateSlides();
+        ssController.setSlideshow(ss);
 
         ImageView imageView = (ImageView) ssScene.lookup("#ss_image_view");
         Image image = new Image(ss.getImage("CURRENT"));
@@ -39,5 +42,10 @@ public class MenuController {
         ss.setTimer();
 
     }
+
+    public void setSlideshowController(SlideshowController controller) {
+        this.ssController = controller;
+    }
+
 
 }
