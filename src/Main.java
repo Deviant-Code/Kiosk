@@ -1,4 +1,5 @@
-
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -6,13 +7,16 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import manager.KioskManager;
+import manager.portalRunner;
 import modules.Slideshow;
+import java.io.*;
 
 public class Main extends Application {
 
     private static Slideshow slideshow;
     @Override
     public void start(Stage primaryStage) throws Exception{
+
 
         //TODO: Use below bounds to adjust for varying screen resolutions
         int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
@@ -52,11 +56,51 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args){
-        launch(args);
-    }
+    // //running the kiosk
+    // static Runnable r1 = new Runnable() {
+    //     public void run() {
+    //       try {
+            
+    //       } catch (InterruptedException iex) {}
+    //     }
+    //   };
+    //   //running the portalListener
+    //   static Runnable r2 = new Runnable() {
+    //     public void run() {
+    //       try {
+    //         while(true){
+    //             //sleep for 10 sec
+    //             Thread.sleep(1000 * 10);
+    //             portalListener.Listener();
+    //         }
+    //       } catch (InterruptedException iex) {}
+    //     }
+    //   };
 
-    public static Slideshow getSlideshow() {
+
+    // public static launchKiosk(String[] args){
+    //     launch(args);
+    // }
+
+    public static Slideshow getSlideshow() throws Exception {
         return slideshow;
     }
+
+    public static void main(String[] args){
+
+        Runtime rt = Runtime.getRuntime();
+        try{
+            Process pr = rt.exec("java -cp dependencies/gson/gson-2.8.6.jar manager/AdminPortalListener.java");
+        }
+        catch(IOException E){
+            System.exit(0);
+        }
+
+
+        launch(args);
+
+    }
+
+    
+    
 }

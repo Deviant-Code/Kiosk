@@ -1,0 +1,24 @@
+{
+  "moduleEnabled": true,
+  "transitionSpeed": 3,
+  "willTransition": true,
+  "autoPlayVideo": true,
+  "default": true,
+  "images": [
+    {
+      "seqNum": 0,
+      "location": "Uploads/slideImage1574216156164.png",
+      "lastModified": 1574216156172
+    },
+    {
+      "seqNum": 1,
+      "location": "Uploads/slideImage1574379142226.jpg",
+      "lastModified": 1574379142247
+    },
+    {
+      "seqNum": 2,
+      "location": "Uploads/slideImage1574379258458.jpg",
+      "lastModified": 1574379258461
+    }
+  ]
+}
