@@ -18,20 +18,23 @@ SOURCES := $(foreach dir, $(dirs),$(shell find $(SOURCEDIR) -name '*.j'))
 
 all: Main
 
-run:
-	java $(JFLAGS) Main
+run: 
+	java $(JFLAGS) Main 
 
 Main: KioskManager
 	$(JC) $(JFLAGS) Main.java
 
-KioskManager: Module KioskSettings AdminPortalListener Controllers
+KioskManager: Module KioskSettings AdminPortalListener Controllers PortalRunner
 	$(JC) $(JFLAGS) $(MANAGER_PATH)/KioskManager.java
 
 Controllers : 
 	$(JC) $(JFLAGS) MenuController.java SlideshowController.java
 
-AdminPortalListener:
+AdminPortalListener: 
 	$(JC) -cp $(PATH_TO_GSON) $(MANAGER_PATH)/AdminPortalListener.java
+
+PortalRunner: AdminPortalListener
+	$(JC) $(MANAGER_PATH)/portalRunner.java
 
 KioskSettings:
 	$(JC) $(MANAGER_PATH)/KioskSettings.java

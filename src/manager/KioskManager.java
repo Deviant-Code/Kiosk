@@ -9,7 +9,6 @@ public class KioskManager {
     static Slideshow slideshow;
 
     public static void main(){
-        AdminPortalListener listener = new AdminPortalListener();
     }
 
 
