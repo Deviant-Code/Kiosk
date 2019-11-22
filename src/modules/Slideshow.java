@@ -96,4 +96,24 @@ public class Slideshow extends Module{
         this.scene = ssScene;
     }
 
+    public void updateSlides(){
+        //Stupid IDE issue temp fix
+        File folder = new File(imageFolder);
+        if(!folder.exists()){
+            folder = new File("src/" + imageFolder);
+        }
+
+        list.clear();
+        File[] listOfFiles = folder.listFiles();
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
+                list.add(imageFolder + file.getName());
+            }
+        }
+
+        this.imageIndex = 0;
+        this.imageCount = list.size();
+
+    }
+
 }

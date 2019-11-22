@@ -6,10 +6,11 @@ import java.util.concurrent.TimeUnit.*;
 import java.util.Timer; 
 import java.util.TimerTask; 
 import java.io.*;
+import java.nio.channels.FileChannel;
 
 public class AdminPortalListener{
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         //try simpler method, lol
         try{
             while(true){
@@ -24,7 +25,7 @@ public class AdminPortalListener{
     }
 
     //in here, we call other methods every minute.
-    public static void Listener(){
+    public static void Listener() throws IOException{
 
         //call download all ness JSON files
         //not testing right now, gitlab is down.
@@ -80,7 +81,7 @@ public class AdminPortalListener{
     //checks all JSON using checkJSON.
     //if any check returns true, call further methods for updating
     //JSON. Otherwise, don't do anything. the file does not need updating.
-    private static void checkAllJSON(){
+    private static void checkAllJSON() throws IOException{
 
         if(checkJson("slideshow.json", "tempslideshow.json")){
             System.out.println("slideshow needs to be updated.");
@@ -147,8 +148,8 @@ public class AdminPortalListener{
                         fos.write(response);
                         fos.close();
                     }
-                    catch(IOException E){
-                        System.out.println("file read error!");
+                    catch(IOException e){
+                        System.out.println("file read error!" + e);
                         System.exit(1);
                     }
 
@@ -190,12 +191,28 @@ public class AdminPortalListener{
     //this method replaces the local json with the one downloaded from server.
     //Only one file will remain on replace, so no need to worry about 
     //too many files.
-    private static void replaceJSON(String oldFile, String newFile){
+    private static void replaceJSON(String oldFile, String newFile) throws IOException{
         File old = new File(oldFile);
         File replacement = new File(newFile);
 
-        if(replacement.renameTo(old)){
-            System.out.println("file renamed successfully!");
+        FileChannel source = null;
+        FileChannel destination = null;
+
+        try{
+            source = new FileInputStream(replacement).getChannel();
+            destination = new FileOutputStream(old).getChannel();
+            destination.transferFrom(source, 0, source.size());
+        } catch(IOException e){
+           System.out.println("File cannot be copied\n" + e);
+        }finally {
+            if(source != null) {
+                source.close();
+            }
+            if(destination != null) {
+                destination.close();
+            }
+            
+            System.out.println("file copied successfully!");
         }
 
     }
@@ -203,7 +220,7 @@ public class AdminPortalListener{
     //compare two files modify times.
     //if file2 has a newer modify time, return true to update
     //else, return false.
-    private static Boolean checkJson(String file1, String file2){
+    private static Boolean checkJson(String file1, String file2) {
 
         long modTime1 = new File(file1).lastModified();
         long modTime2 = new File(file2).lastModified();

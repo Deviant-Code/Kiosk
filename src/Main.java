@@ -8,13 +8,13 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import manager.KioskManager;
-import manager.portalRunner;
 import modules.Slideshow;
 import java.io.*;
 
 public class Main extends Application {
 
     private static Slideshow slideshow;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -51,6 +51,7 @@ public class Main extends Application {
         SlideshowController ssController = slideshowLoader.getController();
         ssController.setMenuScene(menuScene);
         ssController.setSlideshow(ss);
+        menuController.setSlideshowController(ssController);
 
         KioskManager.setSS(ss);
 
@@ -94,16 +95,11 @@ public class Main extends Application {
         Runtime rt = Runtime.getRuntime();
         try{
             Process pr = rt.exec("java -cp dependencies/gson/gson-2.8.6.jar manager/AdminPortalListener.java");
+            launch(args);
+            pr.destroy();
         }
         catch(IOException E){
             System.exit(0);
         }
-
-
-        launch(args);
-
-    }
-
-    
-    
+    }    
 }
