@@ -4,16 +4,25 @@
     <head>
         <title>Kiosk Poll</title>
         <link rel= "stylesheet" href="../stylesheets/pollstyle.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
     </head>
 
     <body onload="loadPollContentKiosk()">    
         <div id="main">        
-            <div id="poll-input">
+            <div class="poll-input">
                 <form method="POST" >
-                    <p id="pollQuestion">Question</p>
-                    <button id="poll1" type="submit" formaction="/votePollOne"></button>
-                    <button id="poll2" type="submit" formaction="/votePollTwo"></button>
+                    <p class="question" id="pollQuestion">Question</p>
+                    <button class="button" id="poll1" type="submit" formaction="/votePollOne" onclick="transitionScreen()"></button>
+                    <button class="button" id="poll2" type="submit" formaction="/votePollTwo" onclick="transitionScreen()"></button>
                 </form>
+            </div>
+            <div class="poll-response" id="CurrentResponse">
+                <p id="CurrentResponse1">
+                    Response 1<br>total votes
+                </p>
+                <p id="CurrentResponse2">
+                    Response 2<br>total votes
+                </p>
             </div>
         </div>
         <script src="../javascripts/uploadHandlerPoll.js" ></script>

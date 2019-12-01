@@ -62,11 +62,40 @@ function loadPollContentKiosk() {
     if (this.readyState == 4 && this.status == 200) {
       var res = JSON.parse(this.responseText);
 
-      document.getElementById("poll1").value = res.pollResp1;
-      document.getElementById("poll2").value = res.pollResp2;
+      document.getElementById("poll1").innerHTML = res.pollResp1;
+      document.getElementById("poll2").innerHTML = res.pollResp2;
       document.getElementById("pollQuestion").innerHTML = res.pollQuestion;
+
+      document.getElementById("CurrentResponse1").innerHTML = 
+      res.pollResp1 + "<br>" + res.pollResp1Val;
+
+      document.getElementById("CurrentResponse2").innerHTML = 
+      res.pollResp2 + "<br>" + res.pollResp2Val;
     }
   };
   xhttp.open("GET", "/getPollParams", true);
   xhttp.send();
+}
+
+function transitionScreen(){
+  //Move old elements
+  document.getElementById("poll1").style.transitionDuration  = "5s";
+  document.getElementById("poll1").style.transform = "translate(-5000px, 0px)";
+  document.getElementById("poll2").style.transitionDuration  = "5s";
+  document.getElementById("poll2").style.transform = "translate(5000px, 0px)";
+  document.getElementById("pollQuestion").style.transitionDuration  = "5s";
+  document.getElementById("pollQuestion").style.transform = "translate(0px, -5000px)";
+
+  setTimeout(function(){
+    document.getElementById("poll1").remove();
+    document.getElementById("poll2").remove();
+    document.getElementById("pollQuestion").remove();
+
+    //Move new elements
+    document.getElementById("CurrentResponse").style.transform = "scale(0)";
+    document.getElementById("CurrentResponse").style.visibility = "visible";
+    document.getElementById("CurrentResponse").style.transitionDuration  = ".2s";
+    document.getElementById("CurrentResponse").style.transform = "scale(4)";
+  }, 1500);
+
 }
