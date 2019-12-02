@@ -17,12 +17,28 @@
                 </form>
             </div>
             <div class="poll-response" id="CurrentResponse">
-                <p id="CurrentResponse1">
-                    Response 1<br>total votes
-                </p>
-                <p id="CurrentResponse2">
-                    Response 2<br>total votes
-                </p>
+                <div class="responseText" id="responseText">
+                    <p id="CurrentResponse1">
+                        Response 1<br>total votes
+                    </p>
+                    <p id="CurrentResponse2">
+                        Response 2<br>total votes
+                    </p>
+                </div>
+                <div id="barWrapper">
+                    <div class="responseBar" id="response1Bar">
+                        <svg width="100%" height="600">
+                            <rect width="100%" height="600" rx="15" style="fill:#226CE0;stroke-width:0;" />
+                            Sorry, your browser does not support inline SVG.  
+                        </svg>
+                    </div>
+                    <div class="responseBar" id="response2Bar">
+                        <svg width="100%" height="600">
+                            <rect width="100%" height="600" rx="15" style="fill:#226CE0;stroke-width:0;" />
+                            Sorry, your browser does not support inline SVG.  
+                        </svg>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="../javascripts/uploadHandlerPoll.js" ></script>

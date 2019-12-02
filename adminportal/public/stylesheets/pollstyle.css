@@ -1,18 +1,44 @@
 /* WWU Banner */
 body {
   font-family: 'Roboto Slab', serif;
-  margin: 0 auto;
+  margin: 0; 
+  height: 100%; 
+  overflow: hidden;
   background-color: #2364AA;
   text-align: center;
 }
 
 .poll-response {
-  margin: 300px 0px;
   font-family: 'Roboto Slab', serif;
   text-align: center;
   visibility: hidden;
   color: white;
+}
+.responseText{
+  margin: 130px 20px;
+  font-size: 55px;
+  width: 45%;
   display: inline-block;
+}
+#CurrentResponse1{
+  float: left;
+}
+#CurrentResponse2{
+  float: right;
+}
+.responseBar{
+  text-align: center;
+}
+#response1Bar{
+  float: left;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#response2Bar{
+  float: right;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.barWrapper{
+  float: center;
 }
 
 .poll-input {
@@ -38,6 +64,7 @@ body {
   font-size: 75px;
   margin: 4px 2px;
   border-radius: 12px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -webkit-transition-duration: 0.4s;
   /* Safari */
   transition-duration: 0.4s;
