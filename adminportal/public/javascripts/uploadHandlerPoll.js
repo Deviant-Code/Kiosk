@@ -114,10 +114,12 @@ function transitionScreen() {
 
     //Scale bars
     document.getElementById("response1Bar").style.transitionDuration = "1s";
-    document.getElementById("response1Bar").style.transform = "scale(1," + (resp1 / (resp1 + resp2))*2 + ")";
+    document.getElementById("response1Bar").style.transformOrigin = "bottom";
+    document.getElementById("response1Bar").style.transform = "scale(1," + (resp1 / (resp1 + resp2)) *1.4 + ")";
 
     document.getElementById("response2Bar").style.transitionDuration = "1s";
-    document.getElementById("response2Bar").style.transform = "scale(1," + (resp2 / (resp1 + resp2))*2 + ")";
+    document.getElementById("response2Bar").style.transformOrigin = "bottom";
+    document.getElementById("response2Bar").style.transform = "scale(1," + (resp2 / (resp1 + resp2)) *1.4  + ")";
   }, 1650);
 
 }
