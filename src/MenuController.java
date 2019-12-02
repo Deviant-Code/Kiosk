@@ -9,6 +9,8 @@ import manager.KioskManager;
 import javafx.scene.Parent;
 
 import modules.Slideshow;
+import modules.Video;
+
 import java.io.IOException;
 
 public class MenuController {
@@ -40,6 +42,12 @@ public class MenuController {
         primaryStage.setFullScreen(true);
 
         ss.setTimer();
+
+    }
+
+    public void openVideo(Event actionEvent) throws IOException {
+
+        Video video = KioskManager.getVideo();
 
     }
 

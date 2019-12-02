@@ -3,13 +3,20 @@ package modules;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.Dragboard;
 import javafx.stage.Stage;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.DataFormatException;
 
 public class Slideshow extends Module{
 
@@ -22,7 +29,7 @@ public class Slideshow extends Module{
     private Timer timer;
     private Scene scene;
 
-    public Slideshow(){
+    public Slideshow() throws IOException {
 
         //Stupid IDE issue temp fix
         File folder = new File(imageFolder);
@@ -30,9 +37,18 @@ public class Slideshow extends Module{
             folder = new File("src/" + imageFolder);
         }
 
+        DataFormat mimeAudio = new DataFormat("audio/*");
+        DataFormat mimeVideo = new DataFormat("video/*");
+        DataFormat mimeImage = new DataFormat("image/*");
+
         File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
             if (file.isFile()) {
+                //Check file type: Photo? Video?
+                if(Files.probeContentType(Paths.get(file.getPath())).equals(mimeImage)){
+                    System.out.println("YP");
+                }
+
                 list.add(imageFolder + file.getName());
             }
         }

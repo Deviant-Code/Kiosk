@@ -9,6 +9,8 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import manager.KioskManager;
 import modules.Slideshow;
+import modules.Video;
+
 import java.io.*;
 
 public class Main extends Application {
@@ -54,6 +56,9 @@ public class Main extends Application {
         menuController.setSlideshowController(ssController);
 
         KioskManager.setSS(ss);
+
+        Video video = new Video();
+        KioskManager.setVideo(video);
 
         //Set Scene and Show Stage
         primaryStage.setScene(menuScene);
