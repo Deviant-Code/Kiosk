@@ -205,6 +205,41 @@ app.post('/updatePoll', function (req, res) {
   res.redirect('back');
 });
 
+//Update Poll response one count
+app.post('/votePollOne', function (req, res) {
+  var object = pollJson.getJson();
+  object.pollResp1Val += 1;
+
+  let data = JSON.stringify(object, null, 2);
+
+  fs.writeFileSync("public/json/poll.json", data, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    };
+  });
+  var object = pollJson.getJson();
+  res.status(200);
+});
+
+
+//Update Poll response two count
+app.post('/votePollTwo', function (req, res) {
+  var object = pollJson.getJson();
+  object.pollResp2Val += 1;
+
+  let data = JSON.stringify(object, null, 2);
+
+  fs.writeFileSync("public/json/poll.json", data, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    };
+  });
+  var object = pollJson.getJson();
+  res.status(200);
+});
+
 //Rest Poll module's json stats
 app.post('/resetPollStats', function (req, res) {
   var object = pollJson.getJson();
