@@ -65,9 +65,11 @@
             <!-- File upload -->
             <div id="content-input">
                 <form action="/updateSchedules" method="POST" >
-                    
-                    <button type="submit">Upload</button>
+                    <p>New Schedule Type</p>
+                    <input type="text" id="new-schedule-field" name="newScheduleType">
+                    <button type="submit">Add</button>
                 </form>
+                <hr>
             </div>
         </div>
         <script src="../javascripts/uploadHandlerSchedules.js" ></script>
