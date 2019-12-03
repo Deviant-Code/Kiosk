@@ -7,7 +7,6 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import manager.KioskManager;
 import javafx.scene.Parent;
-
 import modules.Slideshow;
 import modules.Video;
 
@@ -17,6 +16,7 @@ public class MenuController {
 
     private Scene ssScene;
     private SlideshowController ssController;
+    private Scene webScene;
 
     public void setSlideshowScene(Scene ssScene) {
         this.ssScene = ssScene;
@@ -51,9 +51,18 @@ public class MenuController {
 
     }
 
+
     public void setSlideshowController(SlideshowController controller) {
         this.ssController = controller;
     }
 
+    public void openWebView(Event actionEvent) throws IOException {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setScene(webScene);
+        primaryStage.setFullScreen(true);
+    }
 
+    public void setWebScene(Scene webScene) {
+        this.webScene = webScene;
+    }
 }

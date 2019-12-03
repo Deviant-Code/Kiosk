@@ -17,7 +17,7 @@
             </BorderPane>
          </children>
       </AnchorPane>
-      <BorderPane>
+      <BorderPane visible="false">
          <right>
             <Pane onMouseClicked="#nextPhoto" opacity="0.55" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER_RIGHT" />
          </right>

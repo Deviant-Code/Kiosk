@@ -6,7 +6,7 @@ PATH_TO_FX_WIN = "dependencies/javafx-sdk-11.0.2_WIN/lib"
 PATH_TO_GSON = "dependencies/gson/gson-2.8.6.jar"
 
 JC = javac
-MODULES = javafx.controls,javafx.fxml,javafx.graphics
+MODULES = ALL-MODULE-PATH
 JFLAGS = --module-path $(PATH_TO_FX_LINUX) --add-modules $(MODULES)
 
 # Source Paths

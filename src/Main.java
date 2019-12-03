@@ -42,10 +42,17 @@ public class Main extends Application {
         Parent slideshow = slideshowLoader.load();
         Scene ssScene = new Scene(slideshow);
 
+        //Generate loader for webview
+        FXMLLoader webViewLoader = new FXMLLoader(getClass().getResource("fxml/webview.fxml"));
+        Parent webView = webViewLoader.load();
+        Scene webScene = new Scene(webView);
+        WebController webController = webViewLoader.getController();
+        webController.setMenuScene(menuScene);
+
         //Initiate Controller for Menu and pass reference to module scenes
         MenuController menuController = menuLoader.getController();
         menuController.setSlideshowScene(ssScene);
-
+        menuController.setWebScene(webScene);
         Slideshow ss = new Slideshow();
         ss.setScene(ssScene);
 

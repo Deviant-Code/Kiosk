@@ -85,7 +85,7 @@
                         <Insets bottom="300.0" left="150.0" right="150.0" top="300.0" />
                      </GridPane.margin>
                   </Button>
-                      <Button id="ClassSchedules" fx:id="Class" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="TOP" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="368.0" prefWidth="380.0" text="Schedules" textAlignment="CENTER" textFill="#fffff3" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                      <Button id="Polls" fx:id="Class" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="TOP" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openWebView" prefHeight="368.0" prefWidth="380.0" text="Polls" textAlignment="CENTER" textFill="#fffff3" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                           <font>
                               <Font name="Samyak Devanagari" size="36.0" />
                           </font>
