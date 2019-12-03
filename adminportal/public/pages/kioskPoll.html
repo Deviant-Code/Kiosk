@@ -4,16 +4,41 @@
     <head>
         <title>Kiosk Poll</title>
         <link rel= "stylesheet" href="../stylesheets/pollstyle.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
     </head>
 
     <body onload="loadPollContentKiosk()">    
         <div id="main">        
-            <div id="poll-input">
+            <div class="poll-input">
                 <form method="POST" >
-                    <p id="pollQuestion">Question</p>
-                    <button id="poll1" type="submit" formaction="/votePollOne"></button>
-                    <button id="poll2" type="submit" formaction="/votePollTwo"></button>
+                    <p class="question" id="pollQuestion">Question</p>
+                    <button class="button" id="poll1" type="submit" formaction="/votePollOne" onclick="transitionScreen()"></button>
+                    <button class="button" id="poll2" type="submit" formaction="/votePollTwo" onclick="transitionScreen()"></button>
                 </form>
+            </div>
+            <div class="poll-response" id="CurrentResponse">
+                <div class="responseText" id="responseText">
+                    <p id="CurrentResponse1">
+                        Response 1<br>total votes
+                    </p>
+                    <p id="CurrentResponse2">
+                        Response 2<br>total votes
+                    </p>
+                </div>
+                <div id="barWrapper">
+                    <div class="responseBar" id="response1Bar">
+                        <svg width="100%" height="600">
+                            <rect width="100%" height="600" rx="15" style="fill:#226CE0;stroke-width:0;" />
+                            Sorry, your browser does not support inline SVG.  
+                        </svg>
+                    </div>
+                    <div class="responseBar" id="response2Bar">
+                        <svg width="100%" height="600">
+                            <rect width="100%" height="600" rx="15" style="fill:#226CE0;stroke-width:0;" />
+                            Sorry, your browser does not support inline SVG.  
+                        </svg>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="../javascripts/uploadHandlerPoll.js" ></script>
