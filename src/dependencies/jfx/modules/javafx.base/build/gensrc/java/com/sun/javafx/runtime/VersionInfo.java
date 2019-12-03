@@ -89,7 +89,7 @@ public class VersionInfo {
     /**
      * Build Timestamp.
      */
-    private static final String BUILD_TIMESTAMP = "2019-12-02-235032";
+    private static final String BUILD_TIMESTAMP = "2019-12-03-040827";
 
     /**
      * Hudson Job Name.

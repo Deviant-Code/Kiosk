@@ -62,6 +62,7 @@ endif
 
 INCLUDES = -I$(BASE_DIR)/plugins                          \
 	   -I$(SRCBASE_DIR)/projects/build/linux/common   \
+       -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -lglib-2.0 \
            -I$(SRCBASE_DIR)/gstreamer                     \
            -I$(SRCBASE_DIR)/gstreamer/libs                \
            -I$(SRCBASE_DIR)/gstreamer/gst/parse           \

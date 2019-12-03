@@ -11,7 +11,7 @@
 /media/devj/9a84a09e-80e9-44bd-9a53-342e3d48334c/home/devj/code/senior_pers/kiosk/src/dependencies/jfx/modules/javafx.fxml/build/generated/sources/annotationProcessor/java/main
 -XDuseUnsharedTable=true
 -classpath
-/media/devj/9a84a09e-80e9-44bd-9a53-342e3d48334c/home/devj/code/senior_pers/kiosk/src/dependencies/jfx/modules/javafx.graphics/build/libs/graphics-14-internal+0-2019-12-02-235419.jar:/media/devj/9a84a09e-80e9-44bd-9a53-342e3d48334c/home/devj/code/senior_pers/kiosk/src/dependencies/jfx/modules/javafx.base/build/libs/base-14-internal+0-2019-12-02-235419.jar
+/media/devj/9a84a09e-80e9-44bd-9a53-342e3d48334c/home/devj/code/senior_pers/kiosk/src/dependencies/jfx/modules/javafx.graphics/build/libs/graphics-14-internal+0-2019-12-03-040827.jar:/media/devj/9a84a09e-80e9-44bd-9a53-342e3d48334c/home/devj/code/senior_pers/kiosk/src/dependencies/jfx/modules/javafx.base/build/libs/base-14-internal+0-2019-12-03-040827.jar
 -XDignore.symbol.file
 -encoding
 UTF-8
