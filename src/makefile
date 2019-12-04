@@ -28,7 +28,7 @@ KioskManager: Module KioskSettings AdminPortalListener Controllers
 	$(JC) $(JFLAGS) $(MANAGER_PATH)/KioskManager.java
 
 Controllers : 
-	$(JC) $(JFLAGS) MenuController.java SlideshowController.java
+	$(JC) $(JFLAGS) MenuController.java SlideshowController.java PollController.java WebController.java
 
 AdminPortalListener: 
 	$(JC) -cp $(PATH_TO_GSON) $(MANAGER_PATH)/AdminPortalListener.java
