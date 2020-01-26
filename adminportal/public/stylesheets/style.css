@@ -168,10 +168,31 @@ p {
 #uploadGallery {
   margin-top: 10px;
 }
+
+#uploadedImage {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+#top-left {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+/* Top right text */
+#top-right {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  cursor: pointer;
+}
+
 #uploadGallery img {
     width: 150px;
-    margin-bottom: 10px;
-    margin-right: 10px;
     vertical-align: middle;
 }
 #uploadGallery img:hover {

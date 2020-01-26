@@ -62,12 +62,36 @@
                 <button type="button" class="module">Schedules</button>
             </div>
 
-            <!-- File upload -->
+            <!-- New Schedule Type -->
             <div id="content-input">
                 <form action="/updateSchedules" method="POST" >
                     <p>New Schedule Type</p>
                     <input type="text" id="new-schedule-field" name="newScheduleType">
                     <button type="submit">Add</button>
+                </form>
+                <hr>
+            </div>
+
+            <!-- New Schedule -->
+            <div id="content-input">
+                <form action="/updateSchedules" method="POST" >
+                    <p>Add New Schedule</p>
+
+                    Schedule Type
+                    <select>
+                        <option value="test">Test</option>                       
+                    </select><br>
+
+                    Schedule Title
+                    <input type="text" id="new-schedule-field" name="newScheduleTitle"><br>
+
+                    Schedule Description
+                    <input type="text" id="new-schedule-field" name="newScheduleDescription"><br>
+
+                    Start Time<input type="time" id="new-schedule-time" name="newScheduleStart">
+                    End Time<input type="time" id="new-schedule-time" name="newScheduleEnd"><br>
+
+                    <button type="submit">Add Schedule</button>
                 </form>
                 <hr>
             </div>

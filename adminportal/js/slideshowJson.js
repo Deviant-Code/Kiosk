@@ -19,9 +19,12 @@ module.exports = {
                 //Remove from array
                 object.images.splice(i, 1);
 
-                //Update the seqnum of next slide if there is one after
-                if(object.images[i])
-                    object.images[i].seqnum = object.images[i].seqnum - 1;
+                //Update the seqnum of next slides if there is one or more after the removed
+                for(var j = i; j < object.images.length; j++ ){
+                    if(object.images[j])
+                        object.images[j].seqnum = object.images[j].seqnum - 1;
+                }
+                break;
             }
         }
 

@@ -88,6 +88,7 @@ app.post('/deleteFile', function (req, res) {
     if (err)
       console.log(err);
   });
+  res.redirect('back');
 });
 
 //Update Slideshow module's settings json

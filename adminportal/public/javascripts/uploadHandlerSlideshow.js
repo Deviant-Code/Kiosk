@@ -153,7 +153,7 @@ function checkHiddenValues() {
 
 function deleteUpload(filePath) {
   //Remove from html
-  var element = document.getElementById(filePath);
+  var element = document.getElementById(filePath).parentNode;
   element.parentNode.removeChild(element);
 
   xhttp = new XMLHttpRequest();
@@ -187,7 +187,11 @@ function loadSlideshowContent() {
         if(isVideo(path)){
           getVideoThumnail(res.images[i], path);
         }else{
-          document.getElementById('uploadGallery').innerHTML += '<img src="' + images[i] + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
+          document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="' 
+                                                                  + images[i] + '" id="' + path + '"alt="image' + i + '"/>'
+                                                                  + '<div id="top-left">'+ (i + 1) + '</div>'
+                                                                  + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>' +
+                                                                  '</div>';
         }
       }
 
@@ -200,4 +204,22 @@ function loadSlideshowContent() {
   };
   xhttp.open("GET", "/getSlideshowParams", true);
   xhttp.send();
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  //ev.target.appendChild(document.getElementById(data));
+
+  /*TODO*/
+  //GET THE TWO ELEMENTS AND SWAP THEM IN JSON AND UPDATE SEQNUM
+  //Submit change to json and reload page
 }
