@@ -216,10 +216,17 @@ function drag(ev) {
 
 function drop(ev) {
   ev.preventDefault();
-  var data = ev.dataTransfer.getData("text");
-  //ev.target.appendChild(document.getElementById(data));
+  var movingImage = 'public/Uploads/' + ev.dataTransfer.getData("text");
+  var targetImage = 'public/Uploads/' + ev.target.id;
 
-  /*TODO*/
-  //GET THE TWO ELEMENTS AND SWAP THEM IN JSON AND UPDATE SEQNUM
-  //Submit change to json and reload page
+  xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '/updateSlideOrder');
+  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhttp.onload = function () {
+    if (xhttp.status !== 200) {
+      alert('Request failed.  Returned status of ' + xhttp.status);
+    }
+  };
+  xhttp.send(encodeURI('movingPath=' + movingImage + '&targetPath='+ targetImage));
+  window.location.reload(false); 
 }
