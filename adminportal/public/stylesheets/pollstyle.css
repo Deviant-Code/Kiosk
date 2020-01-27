@@ -15,30 +15,37 @@ body {
   color: white;
 }
 .responseText{
-  margin: 130px 20px;
+  margin: 5% 0px;
   font-size: 55px;
-  width: 45%;
-  display: inline-block;
 }
 #CurrentResponse1{
-  float: left;
+  position: fixed;
+  left: 16%;
 }
 #CurrentResponse2{
-  float: right;
+  position: fixed;
+  right: 11%;
 }
 .responseBar{
+  width: 15%;
   text-align: center;
+  border-radius: 5%;
 }
 #response1Bar{
-  float: left;
+  position: absolute;
+  bottom: 0px;
+  left:15%;
+  margin: 0 auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #response2Bar{
-  float: right;
+  position: absolute;
+  bottom: 0px;
+  right: 15%;
+  margin: 0 auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .barWrapper{
-  float: center;
 }
 
 .poll-input {
