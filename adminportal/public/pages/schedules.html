@@ -64,12 +64,11 @@
 
             <!-- New Schedule Type -->
             <div id="content-input">
-                <form action="/updateSchedules" method="POST" >
+                <form action="/updateScheduleTypes" method="POST" >
                     <p>New Schedule Type</p>
-                    <input type="text" id="new-schedule-field" name="newScheduleType">
+                    <input type="text" id="newScheduleTypeField" name="newScheduleType">
                     <button type="submit">Add</button>
                 </form>
-                <hr>
             </div>
 
             <!-- New Schedule -->
@@ -78,22 +77,25 @@
                     <p>Add New Schedule</p>
 
                     Schedule Type
-                    <select>
-                        <option value="test">Test</option>                       
+                    <select id="scheduleTypeSelect" name="scheduleType">
                     </select><br>
 
                     Schedule Title
-                    <input type="text" id="new-schedule-field" name="newScheduleTitle"><br>
+                    <input type="text" id="newScheduleField" name="newScheduleTitle"><br>
 
                     Schedule Description
-                    <input type="text" id="new-schedule-field" name="newScheduleDescription"><br>
+                    <input type="text" id="newScheduleField" name="newScheduleDescription"><br>
 
-                    Start Time<input type="time" id="new-schedule-time" name="newScheduleStart">
-                    End Time<input type="time" id="new-schedule-time" name="newScheduleEnd"><br>
+                    Start Time<input type="time" id="newScheduleTime" name="newScheduleStart">
+                    End Time<input type="time" id="newScheduleTime" name="newScheduleEnd"><br>
 
                     <button type="submit">Add Schedule</button>
                 </form>
-                <hr>
+            </div>
+
+            <!-- Schedule Manager -->
+            <div id="scheduleManager">
+                
             </div>
         </div>
         <script src="../javascripts/uploadHandlerSchedules.js" ></script>
