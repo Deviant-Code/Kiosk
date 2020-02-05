@@ -5,28 +5,31 @@ module.exports = {
     addSchedule: function addSchedule(scheduleType, title, description, startTime, endTime) {
         var object = this.getJson();
 
-        //Find the schedule type in our list
-        for (var i = 0; i < object['scheduleTypes'].length; i++) {
-            if (object.scheduleTypes[i].name == scheduleType){
-                object.scheduleTypes[i]['schedules'].push({
-                    title: title,
-                    description: description,
-                    startTime: startTime,
-                    endTime: endTime
-                });
+        if(title != ""){
+            //Find the schedule type in our list
+            for (var i = 0; i < object['scheduleTypes'].length; i++) {
+                if (object.scheduleTypes[i].name == scheduleType){
+                    object.scheduleTypes[i]['schedules'].push({
+                        title: title,
+                        description: description,
+                        startTime: startTime,
+                        endTime: endTime
+                    });
 
-                let data = JSON.stringify(object, null, 2);
+                    let data = JSON.stringify(object, null, 2);
 
-                fs.writeFileSync("public/json/schedules.json", data, (err) => {
-                    if (err) {
-                        console.error(err);
-                        return;
-                    };
-                });
+                    fs.writeFileSync("public/json/schedules.json", data, (err) => {
+                        if (err) {
+                            console.error(err);
+                            return;
+                        };
+                    });
 
-                break;
-            }     
+                    break;
+                }     
+            }
         }
+        
     },
 
     //Delete a Schedule from Json

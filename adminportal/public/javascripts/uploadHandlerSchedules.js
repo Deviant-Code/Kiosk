@@ -54,6 +54,7 @@ function loadSchedulesContent() {
         //Populate options for form
         var option = document.createElement("option");
         option.text = res.scheduleTypes[i].name;
+        option.className = "scheduleTypeContent"
         scheduleTypeSelect.add(option);
 
         //Populate schedules manager
@@ -65,6 +66,7 @@ function loadSchedulesContent() {
         for (var j = 0; j < res.scheduleTypes[i].schedules.length; j++) {
           var scheduleDiv = document.createElement("div");
           scheduleDiv.id = res.scheduleTypes[i].name + res.scheduleTypes[i].schedules[j].title;
+          scheduleDiv.className = "content-input"
           document.getElementById("scheduleManager").appendChild(scheduleDiv);
 
           var button = document.createElement('button');
@@ -80,8 +82,8 @@ function loadSchedulesContent() {
           scheduleDiv.appendChild(scheduleTitle);
 
           var scheduleP = document.createElement("p");
-          scheduleP.innerHTML = res.scheduleTypes[i].schedules[j].description + "\n" + 
-                                res.scheduleTypes[i].schedules[j].startTime + " " + res.scheduleTypes[i].schedules[j].startTime; 
+          scheduleP.innerHTML = res.scheduleTypes[i].schedules[j].description + "<br> Start: " + 
+                                res.scheduleTypes[i].schedules[j].startTime + " End: " + res.scheduleTypes[i].schedules[j].startTime; 
           scheduleDiv.appendChild(scheduleP);
         }
       }
