@@ -12,10 +12,8 @@
   width: 30%;
 
   transition: font-size 0.4s ease-in-out;
-  transition: width 0.2s ease-in-out;
 }
 #scheduleTypeSelect:hover{
-  width: 40%;
   font-size: large;
 }
 
@@ -44,7 +42,7 @@
 
 .newScheduleForm{
   border: none;
-  background-color: #f1f1f1;
+  background-color: #dddddd;
   border-radius: 4px;
   padding: 5px;
   margin: 2% 5%;

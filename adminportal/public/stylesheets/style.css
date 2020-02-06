@@ -182,8 +182,8 @@ p {
     top: 5px;
     left: 5px;
     font-size: 35px;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
-    -webkit-text-fill-color: #f1f1f1;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+    -webkit-text-fill-color: #dddddd;
   }
 
   /* Top right text */
@@ -193,8 +193,8 @@ p {
     right: 5px;
     cursor: pointer;
     font-size: 20px;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.55);
-    -webkit-text-fill-color: #f1f1f1;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+    -webkit-text-fill-color: #dddddd;
   }
 }
 #uploadGallery img {
