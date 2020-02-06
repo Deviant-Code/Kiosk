@@ -5,6 +5,7 @@
     <head>
         <title>Electra Admin Portal</title>
         <link rel= "stylesheet" href="../stylesheets/style.css">
+        <link rel= "stylesheet" href="../stylesheets/schedules.css">
     </head>
 
     <body onload="loadSchedulesContent()">
@@ -62,12 +63,40 @@
                 <button type="button" class="module">Schedules</button>
             </div>
 
-            <!-- File upload -->
-            <div id="content-input">
-                <form action="/updateSchedules" method="POST" >
-                    
-                    <button type="submit">Upload</button>
+            <!-- New Schedule Type -->
+            <div class="content-input">
+                <form action="/updateScheduleTypes" method="POST" >
+                    <h2>New Schedule Type</h2>
+                    <input type="text" class="newScheduleForm" id="newScheduleField" name="newScheduleType">
+                    <button type="submit" class="submitButton">Add Schedule Type</button>
                 </form>
+            </div>
+
+            <!-- New Schedule -->
+            <div class="content-input">
+                <form action="/updateSchedules" method="POST" >
+                    <h2>Add New Schedule</h2>
+
+                    Schedule Type
+                    <select class="newScheduleForm" id="scheduleTypeSelect" name="scheduleType">
+                    </select><br>
+
+                    Schedule Title
+                    <input type="text" class="newScheduleForm" id="newScheduleField" name="newScheduleTitle"><br>
+
+                    Schedule Description<br>
+                    <textarea class="newScheduleForm" id="newScheduleField" name="newScheduleDescription" rows="5" cols="33" placeholder="Enter Schedule Description..."></textarea><br>
+
+                    Start Time<input type="time" class="newScheduleForm" id="newScheduleTime" name="newScheduleStart">
+                    End Time<input type="time" class="newScheduleForm" id="newScheduleTime" name="newScheduleEnd"><br>
+
+                    <button type="submit" class="submitButton">Add Schedule</button>
+                </form>
+            </div>
+
+            <!-- Schedule Manager -->
+            <div class="content-input" id="scheduleManager">
+                
             </div>
         </div>
         <script src="../javascripts/uploadHandlerSchedules.js" ></script>

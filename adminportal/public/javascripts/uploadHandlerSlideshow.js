@@ -153,7 +153,7 @@ function checkHiddenValues() {
 
 function deleteUpload(filePath) {
   //Remove from html
-  var element = document.getElementById(filePath);
+  var element = document.getElementById(filePath).parentNode;
   element.parentNode.removeChild(element);
 
   xhttp = new XMLHttpRequest();
@@ -187,7 +187,11 @@ function loadSlideshowContent() {
         if(isVideo(path)){
           getVideoThumnail(res.images[i], path);
         }else{
-          document.getElementById('uploadGallery').innerHTML += '<img src="' + images[i] + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
+          document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="' 
+                                                                  + images[i] + '" id="' + path + '"alt="image' + i + '"/>'
+                                                                  + '<div id="top-left">'+ (i + 1) + '</div>'
+                                                                  + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>' +
+                                                                  '</div>';
         }
       }
 
@@ -200,4 +204,29 @@ function loadSlideshowContent() {
   };
   xhttp.open("GET", "/getSlideshowParams", true);
   xhttp.send();
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var movingImage = 'public/Uploads/' + ev.dataTransfer.getData("text");
+  var targetImage = 'public/Uploads/' + ev.target.id;
+
+  xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '/updateSlideOrder');
+  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhttp.onload = function () {
+    if (xhttp.status !== 200) {
+      alert('Request failed.  Returned status of ' + xhttp.status);
+    }
+  };
+  xhttp.send(encodeURI('movingPath=' + movingImage + '&targetPath='+ targetImage));
+  window.location.reload(false); 
 }

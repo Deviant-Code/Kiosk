@@ -88,6 +88,13 @@ app.post('/deleteFile', function (req, res) {
     if (err)
       console.log(err);
   });
+  res.redirect('back');
+});
+
+//Update Slideshow module's image order in json file and reload page
+app.post('/updateSlideOrder', function (req, res) {
+  slideshowJson.reorderSlides(req.body.movingPath, req.body.targetPath);
+  res.redirect('back');
 });
 
 //Update Slideshow module's settings json
@@ -283,18 +290,26 @@ app.post('/updateSchedulesParams', function (req, res) {
   res.redirect('back');
 });
 
-//Update Schedule module's settings json with new content
+//Update Schedule module's with a new schedule
+app.post('/deleteSchedule', function (req, res) {
+  schedulesJson.deleteSchedule(req.body.scheduleType, 
+                              req.body.scheduleTitle);
+  res.redirect('back');
+});
+
+//Update Schedule module's with a new schedule
 app.post('/updateSchedules', function (req, res) {
-  var object = schedulesJson.getJson();
+  schedulesJson.addSchedule(req.body.scheduleType, 
+                            req.body.newScheduleTitle,
+                            req.body.newScheduleDescription,
+                            req.body.newScheduleStart,
+                            req.body.newScheduleEnd);
+  res.redirect('back');
+});
 
-  let data = JSON.stringify(object, null, 2);
-
-  fs.writeFileSync("public/json/schedules.json", data, (err) => {
-    if (err) {
-      console.error(err);
-      return;
-    };
-  });
+//Update Schedule module's types with new type
+app.post('/updateScheduleTypes', function (req, res) {
+  schedulesJson.addScheduleType(req.body.newScheduleType);
   res.redirect('back');
 });
 
