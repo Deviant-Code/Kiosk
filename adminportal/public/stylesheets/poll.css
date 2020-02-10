@@ -1,12 +1,3 @@
-.content-input{
-  width: 40%;
-  text-align: left;
-  padding: 10px;
-  margin: 2% 2%;
-  border-radius: 5px;
-  box-shadow: 4px 4px 10px rgb(196, 196, 196);
-}
-
 .pollForm{
   border: none;
   background-color: #dddddd;
