@@ -49,8 +49,9 @@ public class AdminPortalListener{
             //download more...
         }
         catch(IOException e){
-            e.printStackTrace();
-            System.exit(1);
+            //e.printStackTrace();
+            //System.exit(1);
+            System.out.println("The Website is unreachable right now.");
         }
     }
 
