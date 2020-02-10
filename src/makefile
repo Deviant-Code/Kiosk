@@ -1,7 +1,7 @@
 # Last Updated 11-4-19
 
 # Dependencies Path
-PATH_TO_FX_LINUX = "dependencies/javafx-13-sdk/lib"
+PATH_TO_FX_LINUX = "dependencies/javafx-13-sdk_new/lib"
 PATH_TO_FX_WIN = "dependencies/javafx-sdk-11.0.2_WIN/lib"
 PATH_TO_GSON = "dependencies/gson/gson-2.8.6.jar"
 
