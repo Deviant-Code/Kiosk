@@ -61,6 +61,29 @@ module.exports = {
         }
     },
 
+    //Delete a Schedule Type from Json
+    deleteScheduleType: function deleteSchedule(scheduleType) {
+        var object = this.getJson();
+
+        //Find the schedule type in our list and splice it
+        for (var i = 0; i < object['scheduleTypes'].length; i++) {
+            if (object.scheduleTypes[i].name == scheduleType){
+
+                object.scheduleTypes.splice(i, 1);
+
+                let data = JSON.stringify(object, null, 2);
+
+                fs.writeFileSync("public/json/schedules.json", data, (err) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    };
+                });
+                break;
+            }     
+        }
+    },
+
     //Add New Schedule Type to Json
     addScheduleType: function addScheduleType(name) {
         var object = this.getJson();
