@@ -48,8 +48,8 @@ function loadPollContent() {
       document.getElementById("poll2").value = res.pollResp2;
       document.getElementById("pollQuestion").value = res.pollQuestion;
       document.getElementById("CurrentResponse").innerHTML =
-        "Response 1 total votes = " + res.pollResp1Val +
-        "<br>Response 2 total votes = " + res.pollResp2Val;
+        "Response 1 (" + res.pollResp1 +")<br>total votes = " + res.pollResp1Val +
+        "<br><br>Response 2 (" + res.pollResp2 + ")<br>total votes = " + res.pollResp2Val ;
       document.getElementById("enabledValue").checked = (res.moduleEnabled == true);
       document.getElementById("defaultValue").checked = (res.default == true);
     }

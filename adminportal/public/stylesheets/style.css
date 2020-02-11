@@ -4,7 +4,21 @@ body {
   font-family: sans-serif;
   margin: 0;
   background-color: white;
+  animation: fadeInAnimation ease 1s;
+  animation-iteration-count: 1; 
+  animation-fill-mode: forwards; 
 }
+@keyframes fadeInAnimation { 
+  0% { 
+      opacity: 0; 
+      transform:  translate(0px,-1000px);
+  } 
+  100% { 
+      opacity: 1; 
+      transform:  translate(0px,0px)  ;
+   } 
+} 
+
 div.banner {
   width: 100%;
   height: 40px;
@@ -121,19 +135,31 @@ div.settings img {
     margin-bottom: 0;
 }
 .module {
+  cursor: pointer;
   display: inline-block;
   width: 140px;
   height: 140px;
   font-size: 20px;
   text-align: center;
   margin: 25px;
-  border-radius: 4px;
+  border-radius: 15px;
   border: none;
-  background-color: #F5F5F5;
+  color:#FFFFFF;
+  background-color: #30a1ff;
+  text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+  text-align:center;
+  box-shadow: 0px 0px 0px rgb(196, 196, 196);
+  transition: all 0.4s;
+}
+.module:hover{
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.404);
+  padding: 15px 12px;
+  font-size: 21px;
 }
 
 /* General UI to be used */ 
 .submitButton {
+  cursor: pointer;
   display:inline-block;
   padding: 12px 10px;
   border: none;
