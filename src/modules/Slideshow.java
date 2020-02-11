@@ -4,9 +4,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DataFormat;
-import javafx.scene.input.Dragboard;
-import javafx.stage.Stage;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.DataFormatException;
 
 public class Slideshow extends Module{
 
@@ -81,7 +77,6 @@ public class Slideshow extends Module{
     void resume(){
 
     }
-
 
     public String getImage(String MOVE) {
         switch(MOVE){

@@ -1,0 +1,9 @@
+{
+  "moduleEnabled": true,
+  "default": false,
+  "pollQuestion": "What do you think of this poll?",
+  "pollResp1": "It's alright.",
+  "pollResp2": "More than alright.",
+  "pollResp1Val": 45,
+  "pollResp2Val": 111
+}
