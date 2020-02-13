@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+    <hr class="hr1"/>
+    <head>
+        <title>Electra Admin Portal</title>
+        <link rel= "stylesheet" href="../stylesheets/style.css">
+    </head>
+
+    <body onload="loadSlideshowContent()">
+        <div class="banner">
+            <div class = "wwu">
+                <a href="home.html"><img src="../images/index.png"/></a>
+            </div>
+        </div>
+        <hr class="hr2">
+
+        <!-- Settings -->
+        <div class="settings">
+            <img src="../images/settings.png" onclick="openNav()">
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <form action="/updateSlideshowParams" method="post" >
+                    <!-- Hidden input values are sent if normal input not checked -->
+                    <a href="#">Module Enabled
+                        <input type='hidden' id="enabledValueHidden" value='false' name='enabledValue'>
+                        <input class='enabled' id="enabledValue" name="enabledValue" type='checkbox' value='true'>
+                    </a>
+                    <a>Slide Transition Speed</a>
+                    <input type="number" id="speedValue" name="speedValue" class="speed" placeholder="Seconds">
+                    <a href="#">Transition Enabled
+                        <input type='hidden' id="transitionValueHidden" value='false' name='transitionValue'>
+                        <input class='transition' id="transitionValue" name="transitionValue" type='checkbox' value='true'>
+                    </a>
+                    <a href="#">Auto play Enabled
+                        <input type='hidden' id="autoValueHidden" value='false' name='autoValue'>
+                        <input class='auto-play' id="autoValue" name="autoValue" type='checkbox' value='true'>
+                    </a>
+                    <a href="#">Default Module
+                        <input type='hidden' id="defaultValueHidden" value='false' name='defaultValue'>
+                        <input class='default' id="defaultValue" name="defaultValue" type='checkbox' value='true'>
+                    </a>
+
+                    <input type="submit" class="setting-update" value="Update" onclick="checkHiddenValues()">
+            </form>
+        </div>
+
+        <script type="text/javascript">
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+          dropdown[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+          } else {
+          dropdownContent.style.display = "block";
+          }
+          });
+        }
+        </script>
+        <div id="main">
+            <!-- Modules -->
+            <div class="button_grp">
+                <button type="button" class="module">Slideshow</button>
+                <a href="poll.html"><button type="button" class="module">Poll</button></a>
+                <a href="department.html"><button type="button" class="module">Department</button></a>
+                <a href="schedules.html"><button type="button" class="module">Schedules</button></a>
+            </div>
+
+            <!-- File upload -->
+            <div id="drop-area">
+                <form action="/upload" method="POST" enctype="multipart/form-data" id="upload-form">
+                    <p>Drag&amp;Drop files here</p>
+                    <input name= "slideImage" type="file" id="fileElem" multiple accept="image/*,video/*" onchange="this.form.submit()" >
+                    <label class="submitButton" for="fileElem">Browse Files</label>
+                </form>
+                <div id="uploadGallery"></div>
+            </div>
+
+        </div>
+        <script src="../javascripts/uploadHandlerSlideshow.js" ></script>
+    </body>
+
+</html>

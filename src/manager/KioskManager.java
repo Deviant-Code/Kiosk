@@ -2,13 +2,11 @@ package manager;
 
 import modules.Module;
 import modules.Slideshow;
-import modules.Video;
 
 public class KioskManager {
 
     static Module activeModule;
     static Slideshow slideshow;
-    static Video video;
 
     public static void main(){
     }
@@ -16,10 +14,6 @@ public class KioskManager {
 
     public static void setSS(Slideshow ss){
         slideshow = ss;
-    }
-
-    public static Video getVideo(){
-        return video;
     }
 
     public static Slideshow getSS(){
@@ -33,9 +27,5 @@ public class KioskManager {
         } else {
             activeModule = null;
         }
-    }
-
-    public static void setVideo(Video vid) {
-        video = vid;
     }
 }

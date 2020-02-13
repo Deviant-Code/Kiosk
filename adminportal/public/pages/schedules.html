@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+    <hr class="hr1"/>
+    <head>
+        <title>Electra Admin Portal</title>
+        <link rel= "stylesheet" href="../stylesheets/style.css">
+        <link rel= "stylesheet" href="../stylesheets/schedules.css">
+    </head>
+
+    <body onload="loadSchedulesContent()">
+        <div class="banner">
+            <div class = "wwu">
+                <a href="home.html"><img src="../images/index.png"/></a>
+            </div>
+        </div>
+        <hr class="hr2">
+
+        <!-- Settings -->
+        <div class="settings">
+            <img src="../images/settings.png" onclick="openNav()">
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <form action="/updateSchedulesParams" method="POST" >
+                    <!-- Hidden input values are sent if normal input not checked -->                    
+                    <a href="#">Module Enabled
+                        <input type='hidden' id="enabledValueHidden" value='false' name='enabledValue'>
+                        <input class='enabled' id="enabledValue" name="enabledValue" type='checkbox' value='true'>
+                    </a>
+                    <a href="#">Default Module
+                        <input type='hidden' id="defaultValueHidden" value='false' name='defaultValue'>
+                        <input class='default' id="defaultValue" name="defaultValue" type='checkbox' value='true'>
+                    </a>
+
+                    <input type="submit" value="Update" onclick="checkHiddenValues()">                    
+            </form>
+        </div>
+
+        <script type="text/javascript">
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+          dropdown[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+          } else {
+          dropdownContent.style.display = "block";
+          }
+          });
+        }
+        </script>
+        <div id="main">
+            <!-- Modules -->
+            <div class="button_grp">
+                <a href="slideshow.html"><button type="button" class="module">Slideshow</button></a>
+                <a href="poll.html"><button type="button" class="module">Poll</button></a>
+                <a href="department.html"><button type="button" class="module">Department</button></a>
+                <button type="button" class="module">Schedules</button>
+            </div>
+
+            <!-- New Schedule Type -->
+            <div class="content-input">
+                <form action="/updateScheduleTypes" method="POST" >
+                    <h2>New Schedule Type</h2>
+                    <input type="text" class="newFormInput" id="newScheduleField" name="newScheduleType">
+                    <button type="submit" class="submitButton">Add Schedule Type</button>
+                </form>
+            </div>
+
+            <!-- New Schedule -->
+            <div class="content-input">
+                <form action="/updateSchedules" method="POST" >
+                    <h2>Add New Schedule</h2>
+
+                    Schedule Type
+                    <select class="newFormInput" id="scheduleTypeSelect" name="scheduleType">
+                    </select><br>
+
+                    Schedule Title
+                    <input type="text" class="newFormInput" id="newScheduleField" name="newScheduleTitle"><br>
+
+                    Schedule Description<br>
+                    <textarea class="newFormInput" id="newScheduleField" name="newScheduleDescription" rows="5" cols="33" placeholder="Enter Schedule Description..."></textarea><br>
+
+                    Start Time<input type="time" class="newFormInput" id="newScheduleTime" name="newScheduleStart">
+                    End Time<input type="time" class="newFormInput" id="newScheduleTime" name="newScheduleEnd"><br>
+
+                    <button type="submit" class="submitButton">Add Schedule</button>
+                </form>
+            </div>
+
+            <!-- Schedule Manager -->
+            <div class="content-input" id="scheduleManager">
+                
+            </div>
+        </div>
+        <script src="../javascripts/uploadHandlerSchedules.js" ></script>
+    </body>
+
+</html>

@@ -1,0 +1,10 @@
+{
+  "moduleEnabled": true,
+  "default": false,
+  "scheduleTypes": [
+    {
+      "name": "Labs",
+      "schedules": []
+    }
+  ]
+}
