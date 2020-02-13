@@ -1,8 +1,0 @@
-#get-user-agent-stylesheet-test {
-    -fx-opacity: .7
-}
-
-#get-user-agent-stylesheet-test-with-skin {
-    -fx-opacity: .85;
-    -fx-skin: "javafx.scene.control.SkinStub";
-}

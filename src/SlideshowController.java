@@ -1,9 +1,13 @@
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
 import manager.KioskManager;
 import javafx.scene.Parent;
 import modules.Slideshow;
@@ -12,29 +16,38 @@ import java.io.IOException;
 
 public class SlideshowController {
 
-    private Scene scene;
+    private Scene menuScene;
+    private Stage primaryStage;
     private Slideshow ss;
-    private Parent menuRoot;
+
+    public void setMenuScene(Scene menuScene) {
+        this.menuScene = menuScene;
+    }
 
     public void openMenuScene(Event actionEvent) {
-        scene.setRoot(menuRoot);
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        //Weird JavaFX bug requires toggle on full screen after swapping scenes
+        //primaryStage.setFullScreen(false);
+        primaryStage.setScene(menuScene);
+        primaryStage.setFullScreen(true);
     }
 
     public void setImage(Event event, String filename) {
-        ImageView imageView = (ImageView) scene.lookup("#ss_image_view");
+        primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        ImageView imageView = (ImageView) primaryStage.getScene().lookup("#ss_image_view");
         Image image = new Image(filename);
         imageView.setImage(image);
     }
 
     //Transition slideshow active_image to previous photo
     public void previousPhoto(Event event) throws IOException {
-        setImage(event, ss.getImage("BACKWARD"));
+        setImage(event, KioskManager.getSS().getImage("BACKWARD"));
         ss.setTimer();
     }
 
     //Transition slideshow active_image to next photo
     public void nextPhoto(Event event) throws IOException {
-        setImage(event, ss.getImage("FORWARD"));
+        setImage(event, KioskManager.getSS().getImage("FORWARD"));
         ss.setTimer();
     }
 
@@ -55,15 +68,17 @@ public class SlideshowController {
         }
     }
 
-    public void setSS(Slideshow ss){
+    //TODO: Figure out the best implementation for a photo gallery view
+    //          Option 1. Have thumbnails pop up in bottom bar on swipe up
+    //          Option 2. Have a full photo gallery that can be opened up.
+
+    public void leftThumbnails(ActionEvent event){
+    }
+
+    public void rightThumbnails(ActionEvent event){
+    }
+
+    public void setSlideshow(Slideshow ss) {
         this.ss = ss;
-    }
-
-    public void setMenuRoot(Parent menu) {
-        this.menuRoot = menu;
-    }
-
-    public void setScene(Scene scene) {
-        this.scene = scene;
     }
 }

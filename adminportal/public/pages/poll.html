@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+    <hr class="hr1"/>
+    <head>
+        <title>Electra Admin Portal</title>
+        <link rel= "stylesheet" href="../stylesheets/style.css">
+        <link rel= "stylesheet" href="../stylesheets/poll.css">
+    </head>
+
+    <body onload="loadPollContent()">
+        <div class="banner">
+            <div class = "wwu">
+                <a href="home.html"><img src="../images/index.png"/></a>
+            </div>
+        </div>
+        <hr class="hr2">
+
+        <!-- Settings -->
+        <div class="settings">
+            <img src="../images/settings.png" onclick="openNav()">
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <form action="/updatePollParams" method="POST" >
+                    <!-- Hidden input values are sent if normal input not checked -->                    
+                    <a href="#">Module Enabled
+                        <input type='hidden' id="enabledValueHidden" value='false' name='enabledValue'>
+                        <input class='enabled' id="enabledValue" name="enabledValue" type='checkbox' value='true'>
+                    </a>
+                    <a href="#">Default Module
+                        <input type='hidden' id="defaultValueHidden" value='false' name='defaultValue'>
+                        <input class='default' id="defaultValue" name="defaultValue" type='checkbox' value='true'>
+                    </a>
+
+                    <input type="submit" value="Update" onclick="checkHiddenValues()">                    
+            </form>
+        </div>
+
+        <div id="main">
+            <!-- Modules -->
+            <div class="button_grp">
+                <a href="slideshow.html"><button type="button" class="module">Slideshow</button></a>
+                <button type="button" class="module">Poll</button>
+                <a href="department.html"><button type="button" class="module">Department</button></a>
+                <a href="schedules.html"><button type="button" class="module">Schedules</button></a>
+            </div>
+
+            <!-- Poll Info -->
+            <div class="content-input">
+                <form action="/updatePoll" method="POST" >
+                    <p>Poll Question</p>
+                    <input type="text" class="pollForm" id="pollQuestion" name="pollQuestion"><br>
+                    <p>Poll Response 1</p>
+                    <input type="text" class="pollForm" id="poll1" name="pollResp1"><br>
+                    <p>Poll Response 2</p>
+                    <input type="text" class="pollForm" id="poll2" name="pollResp2"><br>
+                    <button type="submit" class="submitButton">Update Poll</button>
+                </form>
+            </div>
+            <div class="content-input">
+                <h1>Poll responses</h1>
+                <p id="CurrentResponse">
+                Response 1 total votes = *<br>
+                Response 2 total votes = *
+                </p>
+                <form action="/resetPollStats" method="POST" >
+                    <button type="submit" class="submitButton">Reset Poll</button>
+                    <p>(Click here to reset current poll response statistics)</p>
+                </form>
+            </div>
+        </div>
+        <script src="../javascripts/uploadHandlerPoll.js" ></script>
+    </body>
+
+</html>
