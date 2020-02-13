@@ -1,0 +1,32 @@
+#scheduleTypeSelect {
+  font-size: medium;
+  width: 30%;
+
+  transition: font-size 0.4s ease-in-out;
+}
+#scheduleTypeSelect:hover{
+  font-size: large;
+}
+
+#newScheduleField{
+  resize: none;
+  width: 30%;
+  height: auto;
+
+  transition: width 0.4s ease-in-out;
+
+}
+#newScheduleField:focus{
+  width: 50%;
+}
+
+#newScheduleTime{
+  font-size: medium;
+  transition: padding 0.4s ease-in-out;
+  transition: font-size 0.4s ease-in-out;
+
+}
+#newScheduleTime:focus{
+  padding: 10px;
+  font-size: large;
+}

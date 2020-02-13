@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var session = require('express-session');
 var multer = require('multer');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -55,12 +56,69 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+//Add our public directory to be served
+var statics = express.static(path.join(__dirname, 'public'));
+//Declare all hidden content until logged in
+var hiddenContent = ['/pages/slideshow.html', '/pages/home.html', '/pages/poll.html', '/pages/schedules.html', '/pages/department.html'
+                     ,'/javascripts/uploadHandlerSlideshow.js', '/javascripts/uploadHandlerSchedules.js', '/javascripts/uploadHandlerPoll.js', '/javascripts/uploadHandlerDepartment.js'];
+
+function hidePages(pathsToHide = []) {
+  return function (req, res, next) {
+    //If we are already logged in then skip the login page
+    if((req.path == "/index.html" || req.path == "/") && req.session.loggedin){
+      res.redirect('/pages/home.html');
+      return statics(req, res, next);
+    }
+
+    //If we have no hidden content or we are logged in then serve
+    if (pathsToHide.length === 0 || req.session.loggedin) {
+      return statics(req, res, next); // Do not secure, forward to static route
+    }
+    
+    //If is included in hidden content then return with error
+    else if (pathsToHide.indexOf(req.path) > -1) {
+      return res.status(403).send('<h1>403 Forbidden</h1><h2>Login to gain access</h2>' +
+                                  '<a href="../index.html"><button type="button" class="module">Return to Login</button></a>'); // Stop request
+    }
+
+    return statics(req, res, next); // forward to static route
+  };
+}
+
+// serve everything but hidden pages
+app.use(hidePages(hiddenContent));
+
+// Post request for loging into portal
+app.post('/login', (req, res) => {
+  var username = req.body.username;
+  var password = req.body.password;
+	if (username && password) {
+		if (username == "admin" && password == "password") {
+      //No longer hide pages
+			req.session.loggedin = true;
+			res.redirect('/pages/home.html');
+		} else {
+			res.send('<h2>Incorrect Username and/or Password!</h2>' +
+               '<a href="index.html"><button type="button" class="module">Return to Login</button></a>');
+		}			
+		res.end();
+	} else {
+		res.send('<h2>Please enter Username and Password!</h2>' +
+              '<a href="index.html"><button type="button" class="module">Return to Login</button></a>');
+		res.end();
+	}
+});
 
 // Post request for file upload
 app.post('/upload', (req, res) => {
@@ -88,6 +146,13 @@ app.post('/deleteFile', function (req, res) {
     if (err)
       console.log(err);
   });
+  res.redirect('back');
+});
+
+//Update Slideshow module's image order in json file and reload page
+app.post('/updateSlideOrder', function (req, res) {
+  slideshowJson.reorderSlides(req.body.movingPath, req.body.targetPath);
+  res.redirect('back');
 });
 
 //Update Slideshow module's settings json
@@ -283,18 +348,26 @@ app.post('/updateSchedulesParams', function (req, res) {
   res.redirect('back');
 });
 
-//Update Schedule module's settings json with new content
+//Update Schedule module's with a new schedule
+app.post('/deleteSchedule', function (req, res) {
+  schedulesJson.deleteSchedule(req.body.scheduleType, 
+                              req.body.scheduleTitle);
+  res.redirect('back');
+});
+
+//Update Schedule module's with a new schedule
 app.post('/updateSchedules', function (req, res) {
-  var object = schedulesJson.getJson();
+  schedulesJson.addSchedule(req.body.scheduleType, 
+                            req.body.newScheduleTitle,
+                            req.body.newScheduleDescription,
+                            req.body.newScheduleStart,
+                            req.body.newScheduleEnd);
+  res.redirect('back');
+});
 
-  let data = JSON.stringify(object, null, 2);
-
-  fs.writeFileSync("public/json/schedules.json", data, (err) => {
-    if (err) {
-      console.error(err);
-      return;
-    };
-  });
+//Update Schedule module's types with new type
+app.post('/updateScheduleTypes', function (req, res) {
+  schedulesJson.addScheduleType(req.body.newScheduleType);
   res.redirect('back');
 });
 
