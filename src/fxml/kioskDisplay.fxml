@@ -4,24 +4,23 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.effect.Blend?>
-<?import javafx.scene.effect.Glow?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
-<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.88" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuController">
     <children>
       <VBox id="vbox" layoutX="-0.5" prefHeight="2160.0" prefWidth="3840.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <GridPane alignment="CENTER" blendMode="OVERLAY" cache="true" cacheHint="SPEED" cacheShape="false" depthTest="DISABLE" nodeOrientation="LEFT_TO_RIGHT" opacity="0.6" prefHeight="173.0" prefWidth="1920.0" snapToPixel="false" styleClass="pane">
+            <GridPane alignment="CENTER" cache="true" cacheHint="QUALITY" depthTest="DISABLE" focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" opacity="0.38" prefHeight="173.0" prefWidth="1920.0" snapToPixel="false" styleClass="pane">
                <columnConstraints>
                   <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="267.0" />
                   <ColumnConstraints fillWidth="false" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="1494.0" />
@@ -33,22 +32,15 @@
                <children>
                       <ImageView id="logo" blendMode="HARD_LIGHT" cache="true" fitHeight="126.0" fitWidth="219.0" nodeOrientation="INHERIT" preserveRatio="true" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                           <image>
-                              <Image url="@../res/index.png" />
+                              <Image url="@../res/logo.png" />
                           </image>
                      <GridPane.margin>
                         <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
                      </GridPane.margin>
-                     <effect>
-                        <Blend mode="DARKEN" opacity="0.23">
-                           <topInput>
-                              <Glow />
-                           </topInput>
-                        </Blend>
-                     </effect>
                       </ImageView>
                   <ImageView id="ss_icon" blendMode="HARD_LIGHT" fitHeight="126.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <image>
-                        <Image url="@../res/secondary_wwu_light.png" />
+                        <Image url="@../res/viking.png" />
                      </image>
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="30.0" top="10.0" />
@@ -56,17 +48,10 @@
                   </ImageView>
                </children>
                <effect>
-                  <Lighting>
-                     <bumpInput>
-                        <Shadow />
-                     </bumpInput>
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
+                  <Reflection bottomOpacity="0.02" fraction="0.89" topOpacity="0.28" />
                </effect>
             </GridPane>
-              <GridPane alignment="CENTER" cacheShape="false" centerShape="false" gridLinesVisible="true" nodeOrientation="LEFT_TO_RIGHT" opacity="0.61" prefHeight="983.0" prefWidth="1920.0" snapToPixel="false" VBox.vgrow="NEVER">
+              <GridPane alignment="CENTER" cache="true" cacheShape="false" centerShape="false" nodeOrientation="LEFT_TO_RIGHT" opacity="0.61" prefHeight="983.0" prefWidth="1920.0" snapToPixel="false" VBox.vgrow="NEVER">
                   <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -76,45 +61,64 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                      <Button id="SlideShow" fx:id="SlideShow" alignment="CENTER" centerShape="false" contentDisplay="TOP" defaultButton="true" focusTraversable="false" graphicTextGap="9.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openSlideShow" onTouchPressed="#openSlideShow" prefHeight="368.0" prefWidth="380.0" styleClass="button1" text="Slideshow" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER">
+                      <Button id="SlideShow" fx:id="SlideShow" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="TOP" defaultButton="true" graphicTextGap="9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openSlideShow" onTouchPressed="#openSlideShow" prefHeight="350.0" prefWidth="350.0" styleClass="button1" text="Slideshow" textAlignment="CENTER" textFill="#fffff3" textOverrun="WORD_ELLIPSIS" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                           <font>
-                              <Font name="Noto Sans Bold" size="28.0" />
+                              <Font name="Samyak Devanagari" size="36.0" />
                           </font>
                           <cursor>
                               <Cursor fx:constant="NONE" />
                           </cursor>
-                     <GridPane.margin>
-                        <Insets bottom="300.0" left="150.0" right="150.0" top="300.0" />
-                     </GridPane.margin>
                   </Button>
-                      <Button id="Maps" fx:id="Maps" alignment="CENTER" contentDisplay="TOP" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="368.0" prefWidth="380.0" text="Videos" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                      <Button id="Maps" fx:id="Maps" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="TOP" defaultButton="true" graphicTextGap="8.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openPolls" onTouchPressed="#openPolls" prefHeight="350.0" prefWidth="350.0" text="Polls" textAlignment="CENTER" textFill="#fffff3" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                           <font>
-                              <Font name="Noto Sans Bold" size="28.0" />
+                              <Font name="Samyak Devanagari" size="36.0" />
                           </font>
                           <cursor>
                               <Cursor fx:constant="NONE" />
                           </cursor>
-                     <GridPane.margin>
-                        <Insets bottom="300.0" left="150.0" right="150.0" top="300.0" />
-                     </GridPane.margin>
                   </Button>
-                      <Button id="ClassSchedules" fx:id="Class" alignment="CENTER" contentDisplay="TOP" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="368.0" prefWidth="380.0" text="Schedules" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                      <Button id="Polls" fx:id="Class" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="TOP" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openDepartment" onTouchPressed="#openDepartment" prefHeight="350.0" prefWidth="350.0" text="Department" textAlignment="CENTER" textFill="#fffff3" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+
                           <font>
-                              <Font name="Noto Sans Regular" size="28.0" />
+                              <Font name="Samyak Devanagari" size="36.0" />
                           </font>
                           <cursor>
                               <Cursor fx:constant="NONE" />
                           </cursor>
-                     <GridPane.margin>
-                        <Insets bottom="300.0" left="150.0" right="150.0" top="300.0" />
-                     </GridPane.margin>
                   </Button>
                   </children>
+               <effect>
+                  <Blend mode="MULTIPLY" opacity="0.39" />
+               </effect>
               </GridPane>
+            <HBox alignment="CENTER" prefHeight="300.0" prefWidth="1920.0">
+               <children>
+                  <Button mnemonicParsing="false" opacity="0.61" prefHeight="100.0" prefWidth="300.0" text="Return to Slideshow" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font name="KacstTitle" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="100.0" />
+               </VBox.margin>
+            </HBox>
          </children>
          <cursor>
             <Cursor fx:constant="NW_RESIZE" />
          </cursor>
+         <effect>
+            <Blend mode="ADD" opacity="0.81" />
+         </effect>
       </VBox>
     </children>
+   <effect>
+      <InnerShadow height="42.25" radius="20.625" width="42.25" />
+   </effect>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
 </AnchorPane>
