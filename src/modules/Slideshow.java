@@ -1,36 +1,87 @@
 package modules;
 
-import javafx.scene.Scene;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DataFormat;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Slideshow extends Module{
 
-    private int imageCount;
     private int imageIndex;
     private int secondsPerImage = 5;
-    private List<String> list = new ArrayList<>();
+    private static String slideshowDirectory = "slideshow/";
+    private List<String> list;
     private Image activeImage;
-    private String imageFolder = "slideshow/";
-    private Timer timer;
-    private Scene scene;
+    private File folder;
+    private ImageView imageView;
+    private Timer t;
 
-    public Slideshow() throws IOException {
+    public class WatchRunnable implements Runnable {
+        @Override
+        public void run() {
+            WatchService watchService = null;
+            try {
+                watchService = FileSystems.getDefault().newWatchService();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        //Stupid IDE issue temp fix
-        File folder = new File(imageFolder);
+            Path directory = Paths.get(slideshowDirectory);
+
+            WatchKey watchKey = null;
+            try {
+                watchKey = directory.register(watchService,
+                        StandardWatchEventKinds.ENTRY_CREATE,
+                        StandardWatchEventKinds.ENTRY_DELETE,
+                        StandardWatchEventKinds.ENTRY_MODIFY);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            while(true) {
+                for(WatchEvent<?> event : watchKey.pollEvents()){
+                    if(event.kind().equals(StandardWatchEventKinds.ENTRY_CREATE)){
+                        try {
+                            Update();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    if(event.kind().equals(StandardWatchEventKinds.ENTRY_DELETE)){
+                        try {
+                            Update();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public Slideshow(ImageView imageView) throws Exception {
+
+        this.imageView = imageView; //Links imageview from scene to slideshow module
+        list = new ArrayList<>();
+        init();
+
+        Thread watchThread = new Thread(new WatchRunnable());
+        watchThread.start();
+    }
+
+    //Initializes the pictures in slideshow
+    private void init() throws Exception {
+        folder = new File( slideshowDirectory);
         if(!folder.exists()){
-            folder = new File("src/" + imageFolder);
+            throw new Exception("Slideshow src directory not found!");
         }
 
         DataFormat mimeAudio = new DataFormat("audio/*");
@@ -38,93 +89,101 @@ public class Slideshow extends Module{
         DataFormat mimeImage = new DataFormat("image/*");
 
         File[] listOfFiles = folder.listFiles();
-        for (File file : listOfFiles) {
-            if (file.isFile()) {
-                //Check file type: Photo? Video?
-                if(Files.probeContentType(Paths.get(file.getPath())).equals(mimeImage)){
-                    System.out.println("YP");
-                }
 
-                list.add(imageFolder + file.getName());
+        if(listOfFiles.length == 0){
+            //No pictures in slideshow. Return to main menu... Print error
+            list.add("/fxml/back.jpg");
+        } else {
+            for (File file : listOfFiles) {
+                if (file.isFile()) {
+                    //Check file type: Photo? Video?
+                    if(Files.probeContentType(Paths.get(file.getPath())).equals(mimeImage)){
+                    }
+
+                    list.add(slideshowDirectory + file.getName());
+                }
             }
         }
 
         this.imageIndex = 0;
-        this.imageCount = list.size();
-
-        //Image image = new Image(list.)
         activeImage = new Image(list.get(imageIndex));
-
-        ActionListener timerInterrupt = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                ImageView imageView = (ImageView) scene.lookup("#ss_image_view");
-                Image image = new Image(getImage("FORWARD"));
-                imageView.setImage(image);
-            }
-        };
-
-        this.timer = new Timer(secondsPerImage*1000,timerInterrupt);
-
-    }
-    
-    public void PlaySlideshow(){}
-    public void PauseSlideshow(){}
-    
-    void Update(){
     }
 
-    void resume(){
 
-    }
-
-    public String getImage(String MOVE) {
-        switch(MOVE){
-            case "FORWARD":
-                if(imageIndex == imageCount-1){
-                    imageIndex = 0;
-                } else {
-                    imageIndex++;
-                }
-                break;
-            case "BACKWARD":
-                if(imageIndex == 0){
-                    imageIndex = list.size()-1;
-                } else {
-                    imageIndex--;
-                }
-                break;
+    // Restarts the slideshow timer
+    public void resume(){
+        if(t != null){
+            t.cancel();
+            t.purge();
         }
+        t = new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                nextImage();
+                setImage();
+            }
+        },(secondsPerImage*1000),(secondsPerImage*1000));
+    }
+
+    //Pause timer for slideshow
+    public void pause(){
+        t.cancel();
+        t.purge();
+    }
+
+    public void setImage() {
+        try {
+            Image image = new Image(getImage());
+            imageView.setImage(image);
+        } catch(IllegalArgumentException E){
+            System.out.println("ERR" + " : " + getImage());
+        }
+    }
+
+    public void playSlideshow(){}
+
+
+    public String getImage() {
         return list.get(imageIndex);
     }
 
-    public void setTimer() {
-        this.timer.restart();
-
-    }
-
-    public void setScene(Scene ssScene) {
-        this.scene = ssScene;
-    }
-
-    public void updateSlides(){
-        //Stupid IDE issue temp fix
-        File folder = new File(imageFolder);
-        if(!folder.exists()){
-            folder = new File("src/" + imageFolder);
+    public void nextImage() {
+        if(imageIndex >= list.size()-1){
+            imageIndex = 0;
+        } else {
+            imageIndex++;
         }
+    }
+
+    public void previousImage() {
+        if(imageIndex==0){
+            imageIndex = list.size()-1;
+        } else {
+            imageIndex--;
+        }
+    }
+
+    @Override
+    void Update() throws Exception {
+        pause();
 
         list.clear();
+
+        folder = new File( slideshowDirectory);
+        if(!folder.exists()){
+            throw new Exception("Slideshow src directory not found!");
+        }
+
         File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
             if (file.isFile()) {
-                list.add(imageFolder + file.getName());
+                list.add(slideshowDirectory + file.getName());
             }
         }
 
         this.imageIndex = 0;
-        this.imageCount = list.size();
-
+        resume();
     }
 
 }

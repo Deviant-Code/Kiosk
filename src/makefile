@@ -24,11 +24,11 @@ run:
 Main: KioskManager
 	$(JC) $(JFLAGS) Main.java
 
-KioskManager: Module KioskSettings AdminPortalListener Controllers 
+KioskManager: Module KioskSettings AdminPortalListener controllers
 	$(JC) $(JFLAGS) $(MANAGER_PATH)/KioskManager.java
 
-Controllers : 
-	$(JC) $(JFLAGS) MenuController.java SlideshowController.java PollController.java WebController.java
+controllers :
+	$(JC) $(JFLAGS) controllers.MenuController.java controllers.SlideshowController.java controllers.PollController.java controllers.WebController.java
 
 AdminPortalListener: 
 	$(JC) -cp $(PATH_TO_GSON) $(MANAGER_PATH)/AdminPortalListener.java

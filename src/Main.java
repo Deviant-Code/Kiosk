@@ -1,18 +1,16 @@
-import java.util.Timer;
-import java.util.TimerTask;
+import controllers.MenuController;
+import controllers.PollController;
+import controllers.SlideshowController;
+import controllers.WebController;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import manager.KioskManager;
 import modules.Slideshow;
-import modules.Video;
 
 import java.io.*;
 
@@ -44,11 +42,12 @@ public class Main extends Application {
         //Generate Roots for each loader
         Parent menuRoot = menuLoader.load();
         Parent slideshowRoot = slideshowLoader.load();
-        Parent webViewRoot = webViewLoader.load();
+        Parent deptRoot = webViewLoader.load();
         Parent pollViewRoot = pollViewLoader.load();
 
         //Build Scene and pass in main menu as original root
-        Scene scene = new Scene(menuRoot);
+        //Scene scene = new Scene(menuRoot);
+
 
         //Build Controllers for each view
         MenuController menuController = menuLoader.getController();
@@ -56,38 +55,18 @@ public class Main extends Application {
         WebController webController = webViewLoader.getController();
         PollController pollController = pollViewLoader.getController();
 
-        //Pass in content roots to each controller that needs access to other modules
-        menuController.setSlideshowRoot(slideshowRoot);
-        menuController.setPollRoot(pollViewRoot);
-        menuController.setWebRoot(webViewRoot);
-        ssController.setMenuRoot(menuRoot);
-        webController.setMenuRoot(menuRoot);
-        pollController.setMenuRoot(menuRoot);
+        //set scene, root, and controllers to kiosk manager
+        KioskManager kioskManager = KioskManager.getInstance();;
+        kioskManager.setRoots(slideshowRoot,pollViewRoot,deptRoot,menuRoot);
+        kioskManager.setControllers(menuController, ssController, webController, pollController);
+        kioskManager.setScene();
 
-        //Pass reference to scene to each controller
-        menuController.setScene(scene);
-        ssController.setScene(scene);
-        webController.setScene(scene);
-        pollController.setScene(scene);
-
-        //Give menuController reference to ss controller
-
-        //Initialize slideshow
-        Slideshow ss = new Slideshow();
-        ssController.setSS(ss);
-        KioskManager.setSS(ss);
-        ss.updateSlides();
-        ImageView imgView = (ImageView) slideshowRoot.lookup("#ss_image_view");
-        imgView.setPreserveRatio(true);
-        imgView.fitWidthProperty().bind(scene.widthProperty());
-        imgView.fitHeightProperty().bind(scene.heightProperty());
-
-        //Initialize video module
-        Video video = new Video();
-        KioskManager.setVideo(video);
+        //Initialize modules
+        kioskManager.videoInit();
+        kioskManager.slideShowInit();
 
         //Set Scene and Show Stage
-        primaryStage.setScene(scene);
+        primaryStage.setScene(kioskManager.getScene());
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.setFullScreenExitHint("Kiosk");
@@ -119,10 +98,6 @@ public class Main extends Application {
     // public static launchKiosk(String[] args){
     //     launch(args);
     // }
-
-    public static Slideshow getSlideshow() throws Exception {
-        return slideshow;
-    }
 
     public static void main(String[] args){
 

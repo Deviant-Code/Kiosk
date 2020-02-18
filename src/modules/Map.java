@@ -10,7 +10,7 @@ TODO:
     Implement map module class below.
     Build fxml file for map module */
 
-class Map extends Module{
+public class Map extends Module{
     //Map data refrence
     //Map view refrence
 

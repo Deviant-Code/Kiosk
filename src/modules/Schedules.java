@@ -1,6 +1,6 @@
 package modules;
 
-class Schedules extends Module{
+public class Schedules extends Module{
     //Schedules data
     //Schedules view refrence
 
