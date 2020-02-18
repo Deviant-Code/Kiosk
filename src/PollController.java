@@ -17,7 +17,7 @@ public class PollController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final WebEngine web = viewweb.getEngine();
-        String urlweb = "http://127.0.0.1:3000/pages/kioskPoll.html";
+        String urlweb = "https://127.0.0.1:3000/pages/kioskPoll";
         web.load(urlweb);
     }
 

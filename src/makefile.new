@@ -1,0 +1,55 @@
+# Last Updated 2-16-2020
+
+# Dependencies Path
+PATH_TO_FX_LINUX = "dependencies/javafx-13-sdk_new/lib"
+PATH_TO_FX_WIN = "dependencies/javafx-sdk-11.0.2_WIN/lib"
+PATH_TO_GSON = "dependencies/gson/gson-2.8.6.jar"
+
+JC = javac
+
+# Source Pathss
+MODULES_PATH = modules
+MANAGER_PATH = manager
+
+dirs = $(SRC_PATH) $(MODULES_PATH) $(MANAGER_PATH)
+SOURCES := $(foreach dir, $(dirs),$(shell find $(SOURCEDIR) -name '*.j'))
+
+all: Main
+
+run: 
+	java Main 
+
+Main: KioskManager AdminPortalListener
+	$(JC) Main.java
+
+KioskManager: Modules KioskSettings Controllers 
+	$(JC)  $(MANAGER_PATH)/KioskManager.java
+
+Controllers : 
+	$(JC) MenuController.java SlideshowController.java PollController.java WebController.java
+
+AdminPortalListener: 
+	$(JC) -cp $(PATH_TO_GSON) $(MANAGER_PATH)/AdminPortalListener.java
+
+KioskSettings:
+	$(JC) $(MANAGER_PATH)/KioskSettings.java
+
+#Kiosk Modules
+
+Modules: 
+	$(JC) $(MODULES_PATH)/*.java
+
+Slideshow:
+	$(JC) $(MODULES_PATH)/Slideshow.java
+
+Video:
+	$(JC) $(MODULES_PATH)/Video.java
+
+Schedules: 
+	$(JC) $(MODULES_PATH)/Schedules.java
+
+Map:
+	$(JC) $(MODULES_PATH)/Map.java
+
+clean:
+	find . -type f -name '*.class' -exec rm {} +
