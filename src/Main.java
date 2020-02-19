@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import manager.KioskManager;
 import modules.Slideshow;
 
+import java.awt.event.ActionEvent;
 import java.io.*;
 
 public class Main extends Application {
@@ -110,5 +111,5 @@ public class Main extends Application {
         catch(IOException E){
             System.exit(0);
         }
-    }    
+    }
 }

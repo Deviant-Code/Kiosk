@@ -9,10 +9,10 @@ public class Video extends Module{
 
     }
     //We need to figure out how to implement media player
-    public void Play(){}
-    public void Pause(){}
+    public void play(){}
+    public void pause(){}
     
-    void Update(){
+    public void update(){
     }
 
 }

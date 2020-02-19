@@ -18,9 +18,9 @@ public class Map extends Module{
         //Displays Map module view and controller
     }
     
-    public void Search(){}
+    public void search(){}
     
-    void Update(){
+    public void update(){
     }
 
 }

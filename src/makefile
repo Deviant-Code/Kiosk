@@ -12,6 +12,7 @@ JFLAGS = --module-path $(PATH_TO_FX_LINUX) --add-modules $(MODULES)
 # Source Pathss
 MODULES_PATH = modules
 MANAGER_PATH = manager
+CONTROLLERS_PATH = controllers
 
 dirs = $(SRC_PATH) $(MODULES_PATH) $(MANAGER_PATH)
 SOURCES := $(foreach dir, $(dirs),$(shell find $(SOURCEDIR) -name '*.j'))
@@ -24,11 +25,11 @@ run:
 Main: KioskManager
 	$(JC) $(JFLAGS) Main.java
 
-KioskManager: Module KioskSettings AdminPortalListener controllers
+KioskManager: Module KioskSettings AdminPortalListener Controllers
 	$(JC) $(JFLAGS) $(MANAGER_PATH)/KioskManager.java
 
-controllers :
-	$(JC) $(JFLAGS) controllers.MenuController.java controllers.SlideshowController.java controllers.PollController.java controllers.WebController.java
+Controllers :
+	$(JC) $(JFLAGS) $(CONTROLLERS_PATH)/*.java
 
 AdminPortalListener: 
 	$(JC) -cp $(PATH_TO_GSON) $(MANAGER_PATH)/AdminPortalListener.java

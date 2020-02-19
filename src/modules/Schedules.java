@@ -8,10 +8,10 @@ public class Schedules extends Module{
         //Displays schedules module view and controller
     }
     
-    public void Sort(){}
-    public void Search(){}
+    public void sort(){}
+    public void search(){}
     
-    void Update(){
+    public void update(){
     }
 
 }

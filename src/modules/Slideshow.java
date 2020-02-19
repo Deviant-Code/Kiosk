@@ -3,9 +3,10 @@ package modules;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DataFormat;
-import java.io.File;
-import java.io.IOException;
+
+
+import java.io.*;
+import java.net.URLConnection;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class Slideshow extends Module{
                 for(WatchEvent<?> event : watchKey.pollEvents()){
                     if(event.kind().equals(StandardWatchEventKinds.ENTRY_CREATE)){
                         try {
-                            Update();
+                            update();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -57,7 +58,7 @@ public class Slideshow extends Module{
 
                     if(event.kind().equals(StandardWatchEventKinds.ENTRY_DELETE)){
                         try {
-                            Update();
+                            update();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -68,47 +69,98 @@ public class Slideshow extends Module{
     }
 
     public Slideshow(ImageView imageView) throws Exception {
-
         this.imageView = imageView; //Links imageview from scene to slideshow module
         list = new ArrayList<>();
         init();
-
         Thread watchThread = new Thread(new WatchRunnable());
         watchThread.start();
     }
 
+    public Slideshow() {
+
+    }
+
     //Initializes the pictures in slideshow
     private void init() throws Exception {
-        folder = new File( slideshowDirectory);
-        if(!folder.exists()){
-            throw new Exception("Slideshow src directory not found!");
-        }
 
-        DataFormat mimeAudio = new DataFormat("audio/*");
-        DataFormat mimeVideo = new DataFormat("video/*");
-        DataFormat mimeImage = new DataFormat("image/*");
+        //Check for slideshow image directory
+        validateDirectory();
 
-        File[] listOfFiles = folder.listFiles();
-
-        if(listOfFiles.length == 0){
-            //No pictures in slideshow. Return to main menu... Print error
-            list.add("/fxml/back.jpg");
-        } else {
-            for (File file : listOfFiles) {
-                if (file.isFile()) {
-                    //Check file type: Photo? Video?
-                    if(Files.probeContentType(Paths.get(file.getPath())).equals(mimeImage)){
-                    }
-
-                    list.add(slideshowDirectory + file.getName());
-                }
-            }
-        }
+        //Build Slideshow list from directory
+        buildList();
 
         this.imageIndex = 0;
         activeImage = new Image(list.get(imageIndex));
     }
 
+    @Override
+    public void update() throws Exception {
+        pause();
+
+        //Slideshow directory not found, reinitialize
+        if(!folder.exists()){
+            init();
+            return;
+        }
+
+        list.clear();
+        buildList();
+
+        this.imageIndex = 0;
+        resume();
+    }
+
+    //Validates slideshow directory existence.
+    //Tries to create if directory is missing and logs errors
+    private void validateDirectory() throws Error {
+
+        folder = new File(slideshowDirectory);
+
+        if(!folder.exists()){
+            if(folder.mkdirs()){
+                //log folder created succesfully
+                System.out.print("Folder created");
+            } else {
+                throw new Error("Slideshow directory could not be found or created");
+            }
+        }
+    }
+
+    //Builds slideshow in array list from files in declared directory
+    private void buildList() {
+
+        File[] listOfFiles = folder.listFiles();
+
+        if(listOfFiles.length > 0){
+            for (File file : listOfFiles) {
+                if (file.isFile()) {
+                    try {
+                        String mimetype = Files.probeContentType(Paths.get(file.getPath()));
+                        if(mimetype == null){
+                            InputStream is = new BufferedInputStream(new FileInputStream(file));
+                            mimetype = URLConnection.guessContentTypeFromStream(is);
+                        }
+                        String typeFormat[] = mimetype.split("/");
+                        if(typeFormat[0].equals("image")){
+                            list.add(file.getPath());
+                        }
+                    }catch(IOException e){
+                        //file IO exception --skip file
+                    }
+                }
+            }
+        }
+
+        if(list.size() == 0){
+            //No pictures were added to slideshow. Add demo photo and log result //TODO: log result
+            File file = new File("fxml/back.jpg");
+            if(file.exists()){
+                list.add("/fxml/back.jpg");
+            } else {
+                throw new Error("No files found for slideshow");
+            }
+        }
+    }
 
     // Restarts the slideshow timer
     public void resume(){
@@ -128,8 +180,10 @@ public class Slideshow extends Module{
 
     //Pause timer for slideshow
     public void pause(){
-        t.cancel();
-        t.purge();
+        if(t != null){
+            t.cancel();
+            t.purge();
+        }
     }
 
     public void setImage() {
@@ -138,11 +192,9 @@ public class Slideshow extends Module{
             imageView.setImage(image);
         } catch(IllegalArgumentException E){
             System.out.println("ERR" + " : " + getImage());
+            list.remove(imageIndex);
         }
     }
-
-    public void playSlideshow(){}
-
 
     public String getImage() {
         return list.get(imageIndex);
@@ -162,28 +214,6 @@ public class Slideshow extends Module{
         } else {
             imageIndex--;
         }
-    }
-
-    @Override
-    void Update() throws Exception {
-        pause();
-
-        list.clear();
-
-        folder = new File( slideshowDirectory);
-        if(!folder.exists()){
-            throw new Exception("Slideshow src directory not found!");
-        }
-
-        File[] listOfFiles = folder.listFiles();
-        for (File file : listOfFiles) {
-            if (file.isFile()) {
-                list.add(slideshowDirectory + file.getName());
-            }
-        }
-
-        this.imageIndex = 0;
-        resume();
     }
 
 }

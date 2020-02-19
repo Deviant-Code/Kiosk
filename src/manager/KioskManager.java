@@ -59,8 +59,16 @@ public class KioskManager {
                 activeModule = null;
                 return menuRoot;
             case "SS":
-                startSlideShow();
-                activeModule = slideshow;
+                try {
+                    slideshow.update();
+                    slideshow.setImage();
+                    slideshow.resume();
+                    activeModule = slideshow;
+                } catch (Exception e) {
+                    //Caught error
+                    e.printStackTrace();
+                    return menuRoot;
+                }
                 return slideshowRoot;
             case "POLLS":
                 //activeModule = polls;
@@ -79,11 +87,6 @@ public class KioskManager {
             default:
                 return menuRoot;
         }
-    }
-
-    public void startSlideShow() {
-        slideshow.setImage();
-        slideshow.resume();
     }
 
     public void setRoots(Parent slideshowRoot, Parent pollRoot, Parent deptRoot, Parent menuRoot){
@@ -120,5 +123,9 @@ public class KioskManager {
 
     public Scene getScene() {
         return this.scene;
+    }
+
+    public Parent getSlideshowRoot(){
+        return this.slideshowRoot;
     }
 }
