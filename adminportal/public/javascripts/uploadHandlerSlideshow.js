@@ -174,10 +174,11 @@ function deleteUpload(filePath) {
   xhttp.onload = function () {
     if (xhttp.status !== 200) {
       alert('Request failed.  Returned status of ' + xhttp.status);
+    }else{
+      window.location.reload();
     }
   };
   xhttp.send(encodeURI('filePath=' + filePath));
-  window.location.reload(false); 
 }
 
 function loadSlideshowContent() {
@@ -236,8 +237,9 @@ function drop(ev) {
   xhttp.onload = function () {
     if (xhttp.status !== 200) {
       alert('Request failed.  Returned status of ' + xhttp.status);
+    }else{
+      window.location.reload();
     }
   };
   xhttp.send(encodeURI('movingPath=' + movingImage + '&targetPath='+ targetImage));
-  window.location.reload(false); 
 }
