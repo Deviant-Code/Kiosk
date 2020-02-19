@@ -2,9 +2,19 @@
   font-size: medium;
   width: 30%;
 
-  transition: font-size 0.4s ease-in-out;
+  transition: font-size 0.2s ease-in-out;
 }
 #scheduleTypeSelect:hover{
+  font-size: large;
+}
+
+#scheduleTypeRemove {
+  font-size: medium;
+  width: 30%;
+
+  transition: font-size 0.2s ease-in-out;
+}
+#scheduleTypeRemove:hover{
   font-size: large;
 }
 
@@ -29,4 +39,38 @@
 #newScheduleTime:focus{
   padding: 10px;
   font-size: large;
+}
+
+#scheduleManagerPortal{
+  float: right;
+}
+#scheduleTypeAdd{
+  float: left;
+}
+#scheduleTypeManager{
+  float: right;
+}
+#newScheduleAdd{
+  float: left;
+}
+
+/* Kiosk CSS */
+
+#scheduleSearchKiosk{
+  float: right;
+}
+#scheduleManagerKiosk{
+  float: left;
+}
+
+
+.schedule-display{
+  width: 40%;
+  text-align: left;
+  padding: 10px;
+  margin: 2% 2%;
+  background-color: #30a1ff;
+  border-radius: 5px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  color: white;
 }

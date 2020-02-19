@@ -1,0 +1,21 @@
+
+/* Kiosk CSS */
+
+#departmentSearchKiosk{
+  float: right;
+}
+#departmentManagerKiosk{
+  float: left;
+}
+
+
+.search-display{
+  width: 40%;
+  text-align: left;
+  padding: 10px;
+  margin: 2% 2%;
+  background-color: #30a1ff;
+  border-radius: 5px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  color: white;
+}

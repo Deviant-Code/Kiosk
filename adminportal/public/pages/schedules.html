@@ -64,7 +64,7 @@
             </div>
 
             <!-- New Schedule Type -->
-            <div class="content-input">
+            <div id="scheduleTypeAdd" class="content-input">
                 <form action="/updateScheduleTypes" method="POST" >
                     <h2>New Schedule Type</h2>
                     <input type="text" class="newFormInput" id="newScheduleField" name="newScheduleType">
@@ -72,8 +72,18 @@
                 </form>
             </div>
 
+            <!-- Schedule Type Manager -->
+            <div id="scheduleTypeManager" class="content-input">
+                <form action="/deleteScheduleTypes" method="POST" >
+                    <h2>Remove Schedule Type</h2>
+                    <select class="newFormInput" id="scheduleTypeRemove" name="scheduleType">
+                    </select>
+                    <button type="submit" class="submitButton">Remove</button>
+                </form>
+            </div>
+
             <!-- New Schedule -->
-            <div class="content-input">
+            <div id="newScheduleAdd" class="content-input">
                 <form action="/updateSchedules" method="POST" >
                     <h2>Add New Schedule</h2>
 
@@ -95,7 +105,7 @@
             </div>
 
             <!-- Schedule Manager -->
-            <div class="content-input" id="scheduleManager">
+            <div class="content-input" id="scheduleManagerPortal">
                 
             </div>
         </div>

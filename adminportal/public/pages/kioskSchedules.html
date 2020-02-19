@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Electra Schedules Module Kiosk Display</title>
+        <link rel= "stylesheet" href="../stylesheets/style.css">
+        <link rel= "stylesheet" href="../stylesheets/schedules.css">
+        <style type=text/css> 
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+            scroll-behavior: smooth;
+        }
+
+        </style>
+    </head>
+
+    <body onload="loadSchedulesContent()">
+            <!-- Schedule Manager -->
+            <div class="content-input" id="scheduleManagerKiosk">
+                
+            </div>
+            <div class="content-input" id="scheduleSearchKiosk">
+                <form>
+                    <h2>Search for Schedule</h2>
+                    Schedule Type
+                    <select class="newFormInput" id="scheduleTypeSelect">
+                    </select><br>
+
+                    Schedule Title
+                    <input type="text" class="newFormInput" id="scheduleTitle"><br>
+<!--
+                    Start Time<input type="time" class="newFormInput" id="scheduleStart">
+                    End Time<input type="time" class="newFormInput" id="scheduleEnd"><br>
+-->
+                    <button type='button' class="submitButton" onclick="search()">Search</button>
+                    <button type='button' class="submitButton" onclick="loadSchedulesContent()">Reset</button>
+                </form>
+            </div>
+        </div>
+        <script src="../javascripts/kioskSchedules.js" ></script>
+    </body>
+
+</html>

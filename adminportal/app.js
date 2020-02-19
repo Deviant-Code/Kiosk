@@ -355,6 +355,12 @@ app.post('/deleteSchedule', function (req, res) {
   res.redirect('back');
 });
 
+//Remove a schedule type from our json
+app.post('/deleteScheduleTypes', function (req, res) {
+  schedulesJson.deleteScheduleType(req.body.scheduleType);
+  res.redirect('back');
+});
+
 //Update Schedule module's with a new schedule
 app.post('/updateSchedules', function (req, res) {
   schedulesJson.addSchedule(req.body.scheduleType, 
