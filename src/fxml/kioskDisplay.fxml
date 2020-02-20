@@ -15,11 +15,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.88" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" opacity="0.88" prefHeight="2160.0" prefWidth="3840.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
     <children>
-      <VBox id="vbox" layoutX="-0.5" prefHeight="2160.0" prefWidth="3840.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox id="vbox" alignment="CENTER" cacheShape="false" centerShape="false" layoutX="-0.5" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="2160.0" prefWidth="3840.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <GridPane alignment="CENTER" cache="true" cacheHint="QUALITY" depthTest="DISABLE" focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" opacity="0.38" prefHeight="173.0" prefWidth="1920.0" snapToPixel="false" styleClass="pane">
+            <GridPane alignment="CENTER" cache="true" cacheHint="QUALITY" depthTest="DISABLE" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" opacity="0.38" prefHeight="340.0" prefWidth="3840.0" snapToPixel="false" styleClass="pane" VBox.vgrow="NEVER">
                <columnConstraints>
                   <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="267.0" />
                   <ColumnConstraints fillWidth="false" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="1494.0" />
@@ -50,7 +50,7 @@
                   <Reflection bottomOpacity="0.02" fraction="0.89" topOpacity="0.28" />
                </effect>
             </GridPane>
-              <GridPane alignment="CENTER" cache="true" cacheShape="false" centerShape="false" nodeOrientation="LEFT_TO_RIGHT" opacity="0.61" prefHeight="983.0" prefWidth="1920.0" snapToPixel="false" VBox.vgrow="NEVER">
+              <GridPane alignment="CENTER" cache="true" cacheShape="false" centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" opacity="0.61" prefHeight="1810.0" prefWidth="3840.0" snapToPixel="false" VBox.vgrow="NEVER">
                   <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -60,7 +60,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                      <Button id="SlideShow" fx:id="SlideShow" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="TOP" defaultButton="true" graphicTextGap="9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openSlideShow" onTouchPressed="#openSlideShow" prefHeight="350.0" prefWidth="350.0" styleClass="button1" text="Slideshow" textAlignment="CENTER" textFill="#fffff3" textOverrun="WORD_ELLIPSIS" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                      <Button id="SlideShow" fx:id="SlideShow" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="TOP" defaultButton="true" graphicTextGap="9.0" mnemonicParsing="false" onAction="#openSlideShow" onTouchPressed="#openSlideShow" prefHeight="350.0" prefWidth="350.0" styleClass="button1" text="Slideshow" textAlignment="CENTER" textFill="#fffff3" textOverrun="WORD_ELLIPSIS" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                           <font>
                               <Font name="Samyak Devanagari" size="36.0" />
                           </font>
@@ -68,7 +68,7 @@
                               <Cursor fx:constant="NONE" />
                           </cursor>
                   </Button>
-                      <Button id="Polls" fx:id="Polls" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="TOP" defaultButton="true" graphicTextGap="8.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openPolls" onTouchPressed="#openPolls" prefHeight="350.0" prefWidth="350.0" text="Polls" textAlignment="CENTER" textFill="#fffff3" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                      <Button id="Polls" fx:id="Polls" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="TOP" defaultButton="true" graphicTextGap="8.0" mnemonicParsing="false" onAction="#openPolls" onTouchPressed="#openPolls" prefHeight="350.0" prefWidth="350.0" text="Polls" textAlignment="CENTER" textFill="#fffff3" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                           <font>
                               <Font name="Samyak Devanagari" size="36.0" />
                           </font>
@@ -76,7 +76,7 @@
                               <Cursor fx:constant="NONE" />
                           </cursor>
                   </Button>
-                      <Button id="Department" fx:id="Department" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="TOP" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openDepartment" onTouchPressed="#openDepartment" prefHeight="350.0" prefWidth="350.0" text="Department" textAlignment="CENTER" textFill="#fffff3" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                      <Button id="Department" fx:id="Department" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" onAction="#openDepartment" onTouchPressed="#openDepartment" prefHeight="350.0" prefWidth="350.0" text="Department" textAlignment="CENTER" textFill="#fffff3" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
 
                           <font>
                               <Font name="Samyak Devanagari" size="36.0" />

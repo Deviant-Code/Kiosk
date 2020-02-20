@@ -21,7 +21,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </AnchorPane>
-      <BorderPane opacity="0.0" style="-fx-background-color: #FFFFFF;">
+      <BorderPane onDragDetected="#onTouchEvent" onMouseClicked="#onTouchReleased" opacity="0.0" style="-fx-background-color: #FFFFFF;">
          <right>
             <Pane onMouseClicked="#nextPhoto" opacity="0.55" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER_RIGHT" />
          </right>

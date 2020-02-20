@@ -30,6 +30,7 @@ public class Main extends Application {
         //new method to prevent screen resize delay
         primaryStage.setMinWidth(450);
         primaryStage.setMinHeight(300);
+        primaryStage.setResizable(false);
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         primaryStage.setWidth(bounds.getWidth());
@@ -114,5 +115,10 @@ public class Main extends Application {
         catch(IOException E){
             System.exit(0);
         }
+    }
+
+    @Override
+    public void stop() {
+        System.exit(0);
     }
 }
