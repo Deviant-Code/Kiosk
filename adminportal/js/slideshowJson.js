@@ -84,10 +84,19 @@ module.exports = {
     //Parse and return Slideshow module's settings json
     addSlide: function addSlideImageJson(files) {
         var object = this.getJson();
-
         files.forEach(file => {
+            
             var path = file.path.replace(/\\/g, '/');
             path = path.replace('public/', '');
+
+            //If is a video file, put in videos folder
+            if(isVideo(path.replace('Uploads/', ''))){
+                fs.renameSync(file.path, 'public/Uploads/Videos/' + path.replace('Uploads/', ''), function (err) {
+                    if (err) 
+                        throw err
+                })
+                path = 'Uploads/Videos/' + path.replace('Uploads/', '')
+            }
 
             object['images'].push({
                 seqnum: object['images'].length,
@@ -118,7 +127,7 @@ module.exports = {
                 let base64Image = thubmnail64.replace(/^data:image\/jpeg+;base64,/, "");
                 base64Image = base64Image.replace(/ /g, '+');
 
-                var filePath = "public/Uploads/thumbnail" + Date.now() + ".jpeg";
+                var filePath = "public/" + path.replace('Videos/', '').split('.')[0] + ".jpeg";
                 fs.writeFile(filePath, base64Image, 'base64', function (err) {
                     if (err)
                         console.log(err);
@@ -193,3 +202,16 @@ function decodeBase64Image(dataString) {
 
     return response;
 }
+
+function isVideo(filename) {
+    var ext = (filename + '').split('.').pop();
+    switch (ext.toLowerCase()) {
+    case 'm4v':
+    case 'avi':
+    case 'mpg':
+    case 'mp4':
+    case 'mov':
+        return true;
+    }
+    return false;
+  }
