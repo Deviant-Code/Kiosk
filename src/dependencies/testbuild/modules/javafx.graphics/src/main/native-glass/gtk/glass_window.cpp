@@ -422,6 +422,11 @@ void WindowContextBase::process_mouse_scroll(GdkEventScroll* event) {
 
 }
 
+//TODO: Add methods for handling touch motion gesture
+void WindowContextBase::process_touch(GDKEventTouch* event){
+
+}
+
 void WindowContextBase::process_mouse_cross(GdkEventCrossing* event) {
     bool enter = event->type == GDK_ENTER_NOTIFY;
     if (jview) {

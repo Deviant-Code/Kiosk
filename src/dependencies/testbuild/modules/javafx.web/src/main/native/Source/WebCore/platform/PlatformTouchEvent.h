@@ -28,6 +28,11 @@
 #include <jni.h>
 #endif
 
+#if PLATFORM(GTK)
+typedef struct _GdkEventTouch _GdkEventTouch;
+typedef struct _GdkEventTouchUpdate GdkEventTouchUpdate;
+#endif
+
 #if ENABLE(TOUCH_EVENTS)
 
 namespace WebCore {
