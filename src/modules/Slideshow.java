@@ -170,7 +170,7 @@ public class Slideshow extends Module{
             t.cancel();
             t.purge();
         }
-        t = new Timer();
+        t = new Timer(true);
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {

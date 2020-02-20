@@ -1,34 +1,27 @@
 package controllers;
 
 import javafx.event.Event;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.SwipeEvent;
 import manager.KioskManager;
 import javafx.scene.Parent;
 import modules.Slideshow;
+import utilities.GestureHandler;
 
 import java.io.IOException;
 
 public class SlideshowController {
 
     private Slideshow ss;
-    @FXML
-    private ImageView ss_image_view;
+    private GestureHandler gestureHandler = GestureHandler.getInstance();
 
-    //Gesture Processing
-    private boolean mouseDragEvent;
-    private final long dragTimeThreshold = 1000; // Max time for a gesture before being consumed in ms
-    private final double distanceThreshold = 20; // Min distance for a gesture
-    private final double differenceThreshold = .25; // Percent difference between vert. and horiz. distance to be considered a swipe
-    private long startTime = -1l; // Records the time a touch gesture begins
-    private double startX; // Start location of gesture
-    private double startY; // End location of gesture
-
-    public void openMenuScene(Event actionEvent) {
+    public void openMenuScene() {
         Scene scene = KioskManager.getInstance().getScene();
         Parent root = KioskManager.getInstance().transition("MENU");
         scene.setRoot(root);
@@ -62,7 +55,7 @@ public class SlideshowController {
                 previousPhoto();
                 break;
             case DOWN:
-                openMenuScene(event);
+                openMenuScene();
                 default:
                 break;
         }
@@ -70,23 +63,22 @@ public class SlideshowController {
 
     @FXML
     public void onTouchEvent(MouseEvent event) throws IOException {
-        if(event.getEventType().equals(MouseEvent.DRAG_DETECTED)){
-            mouseDragEvent = true;
-            startTime = System.currentTimeMillis();
-            startX = event.getX();
-            startY = event.getY();
-        } else {
-            event.consume();
-        }
+        gestureHandler.startGesture(event);
     }
 
     @FXML
     public void onTouchReleased(MouseEvent event) throws IOException {
-        if(mouseDragEvent){
-            //User swiped touchscreen
-            long netTime = System.currentTimeMillis() - startTime;
-            if(netTime < dragTimeThreshold && netTime != -1l){
-                processGesture(event);
+        if(gestureHandler.inMotion()){
+            if(gestureHandler.validate(event)){
+                //Gesture has just completed
+                EventType<SwipeEvent> swipe = gestureHandler.processGesture();
+                if(swipe.equals(SwipeEvent.SWIPE_UP)){
+                    openMenuScene();
+                } else if(swipe.equals(SwipeEvent.SWIPE_LEFT)){
+                    previousPhoto();
+                } else if(swipe.equals(SwipeEvent.SWIPE_RIGHT)){
+                    nextPhoto();
+                }
             }
         } else {
             //User tapped center of Touchscreen
@@ -95,40 +87,6 @@ public class SlideshowController {
                 ss.resume();
             } else {
                 ss.pause();
-            }
-        }
-        mouseDragEvent = false;
-        startTime = -1l;
-    }
-
-    private void processGesture(MouseEvent event){
-
-        double horizontalShift = event.getX() - startX;
-        double verticalShift = event.getY() - startY;
-        double horizontalMagnitude = Math.abs(horizontalShift);
-        double verticalMagnitude = Math.abs(verticalShift);
-
-        if((horizontalMagnitude < distanceThreshold && verticalMagnitude < distanceThreshold)
-            ||  Math.abs((1.0-(verticalMagnitude/horizontalMagnitude))) < differenceThreshold ){
-            return;
-        }
-
-        if(horizontalMagnitude > verticalMagnitude && (horizontalMagnitude - verticalMagnitude) > differenceThreshold){
-            if(horizontalShift < 0){
-                //Left Swipe
-                previousPhoto();
-            } else {
-                //Right Swipe
-                nextPhoto();
-            }
-        } else if((verticalMagnitude - horizontalMagnitude) > differenceThreshold){
-            //Process Swipe Up or Swipe Down
-            if(verticalShift < 0){
-                //Swipe Up
-                System.out.println("UP");
-                openMenuScene(event);
-            } else {
-                //Swipe Down
             }
         }
     }
