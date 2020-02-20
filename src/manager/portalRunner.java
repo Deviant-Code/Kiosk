@@ -5,6 +5,7 @@ package manager;
 //include the admin portal in here
 import manager.AdminPortalListener;
 //include("AdminPortalListener.class");
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,7 +24,7 @@ public class portalRunner{
                 AdminPortalListener.Listener();
             }
         }
-        catch(InterruptedException e){
+        catch(InterruptedException | IOException e){
             e.printStackTrace();
         }
 

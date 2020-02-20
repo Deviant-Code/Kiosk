@@ -1,17 +1,18 @@
 package modules;
 
-class Video extends Module{
+public class Video extends Module{
     //Video data refrence
     //Slideshow view refrence
 
-    Video(){
+    public Video(){
         //Displays video module view and controller
+
     }
     //We need to figure out how to implement media player
-    public void Play(){}
-    public void Pause(){}
+    public void play(){}
+    public void pause(){}
     
-    void Update(){
+    public void update(){
     }
 
 }

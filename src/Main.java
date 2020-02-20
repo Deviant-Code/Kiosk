@@ -1,14 +1,18 @@
-import java.util.Timer;
-import java.util.TimerTask;
+import controllers.MenuController;
+import controllers.PollController;
+import controllers.SlideshowController;
+import controllers.WebController;
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.input.KeyCombination;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import manager.KioskManager;
 import modules.Slideshow;
+
+import java.awt.event.ActionEvent;
 import java.io.*;
 
 public class Main extends Application {
@@ -18,45 +22,55 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-
-        //TODO: Use below bounds to adjust for varying screen resolutions
-        int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
-        int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
-
         //Set stage parameters
         primaryStage.setTitle("Project Electra: V0.1.2");
-        primaryStage.setResizable(true);
+
+        //12-3 New patch, added effects and modules are causing a delay in the rendering time of scene swaps. Attempting
+        //new method to prevent screen resize delay
+        primaryStage.setMinWidth(450);
+        primaryStage.setMinHeight(300);
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        primaryStage.setWidth(bounds.getWidth());
+        primaryStage.setHeight(bounds.getHeight());
+
+        //Generate FXML Loaders for each module
+        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("fxml/kioskDisplay.fxml"));
+        FXMLLoader slideshowLoader = new FXMLLoader(getClass().getResource("fxml/slideshow.fxml"));
+        FXMLLoader webViewLoader = new FXMLLoader(getClass().getResource("fxml/webview.fxml"));
+        FXMLLoader pollViewLoader = new FXMLLoader(getClass().getResource("fxml/pollView.fxml"));
+
+        //Generate Roots for each loader
+        Parent menuRoot = menuLoader.load();
+        Parent slideshowRoot = slideshowLoader.load();
+        Parent deptRoot = webViewLoader.load();
+        Parent pollViewRoot = pollViewLoader.load();
+
+        //Build Scene and pass in main menu as original root
+        //Scene scene = new Scene(menuRoot);
+
+
+        //Build Controllers for each view
+        MenuController menuController = menuLoader.getController();
+        SlideshowController ssController = slideshowLoader.getController();
+        WebController webController = webViewLoader.getController();
+        PollController pollController = pollViewLoader.getController();
+
+        //set scene, root, and controllers to kiosk manager
+        KioskManager kioskManager = KioskManager.getInstance();;
+        kioskManager.setRoots(slideshowRoot,pollViewRoot,deptRoot,menuRoot);
+        kioskManager.setControllers(menuController, ssController, webController, pollController);
+        kioskManager.setScene();
+
+        //Initialize modules
+        kioskManager.videoInit();
+        kioskManager.slideShowInit();
+
+        //Set Scene and Show Stage
+        primaryStage.setScene(kioskManager.getScene());
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.setFullScreenExitHint("Kiosk");
-
-        //Generate loader for module menu
-        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("fxml/kioskDisplay.fxml"));
-        Parent menu = menuLoader.load();
-        Scene menuScene = new Scene(menu);
-
-        //Generate loader for slideshow menu
-        FXMLLoader slideshowLoader = new FXMLLoader(getClass().getResource("fxml/slideshow.fxml"));
-        Parent slideshow = slideshowLoader.load();
-        Scene ssScene = new Scene(slideshow);
-
-        //Initiate Controller for Menu and pass reference to module scenes
-        MenuController menuController = menuLoader.getController();
-        menuController.setSlideshowScene(ssScene);
-
-        Slideshow ss = new Slideshow();
-        ss.setScene(ssScene);
-
-        //Initiate Controller for slideshow and pass reference to menu scene
-        SlideshowController ssController = slideshowLoader.getController();
-        ssController.setMenuScene(menuScene);
-        ssController.setSlideshow(ss);
-        menuController.setSlideshowController(ssController);
-
-        KioskManager.setSS(ss);
-
-        //Set Scene and Show Stage
-        primaryStage.setScene(menuScene);
         primaryStage.show();
     }
 
@@ -86,10 +100,6 @@ public class Main extends Application {
     //     launch(args);
     // }
 
-    public static Slideshow getSlideshow() throws Exception {
-        return slideshow;
-    }
-
     public static void main(String[] args){
 
         Runtime rt = Runtime.getRuntime();
@@ -101,5 +111,5 @@ public class Main extends Application {
         catch(IOException E){
             System.exit(0);
         }
-    }    
+    }
 }

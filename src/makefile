@@ -1,17 +1,18 @@
 # Last Updated 11-4-19
 
 # Dependencies Path
-PATH_TO_FX_LINUX = "dependencies/javafx-sdk-11.0.2_LINUX/lib"
+PATH_TO_FX_LINUX = "dependencies/javafx-13-sdk_new/lib"
 PATH_TO_FX_WIN = "dependencies/javafx-sdk-11.0.2_WIN/lib"
 PATH_TO_GSON = "dependencies/gson/gson-2.8.6.jar"
 
 JC = javac
-MODULES = javafx.controls,javafx.fxml,javafx.graphics
+MODULES = ALL-MODULE-PATH
 JFLAGS = --module-path $(PATH_TO_FX_LINUX) --add-modules $(MODULES)
 
-# Source Paths
+# Source Pathss
 MODULES_PATH = modules
 MANAGER_PATH = manager
+CONTROLLERS_PATH = controllers
 
 dirs = $(SRC_PATH) $(MODULES_PATH) $(MANAGER_PATH)
 SOURCES := $(foreach dir, $(dirs),$(shell find $(SOURCEDIR) -name '*.j'))
@@ -24,11 +25,11 @@ run:
 Main: KioskManager
 	$(JC) $(JFLAGS) Main.java
 
-KioskManager: Module KioskSettings AdminPortalListener Controllers 
+KioskManager: Module KioskSettings AdminPortalListener Controllers
 	$(JC) $(JFLAGS) $(MANAGER_PATH)/KioskManager.java
 
-Controllers : 
-	$(JC) $(JFLAGS) MenuController.java SlideshowController.java
+Controllers :
+	$(JC) $(JFLAGS) $(CONTROLLERS_PATH)/*.java
 
 AdminPortalListener: 
 	$(JC) -cp $(PATH_TO_GSON) $(MANAGER_PATH)/AdminPortalListener.java

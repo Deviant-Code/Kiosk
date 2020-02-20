@@ -10,7 +10,7 @@ TODO:
     Implement map module class below.
     Build fxml file for map module */
 
-class Map extends Module{
+public class Map extends Module{
     //Map data refrence
     //Map view refrence
 
@@ -18,9 +18,9 @@ class Map extends Module{
         //Displays Map module view and controller
     }
     
-    public void Search(){}
+    public void search(){}
     
-    void Update(){
+    public void update(){
     }
 
 }

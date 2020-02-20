@@ -13,5 +13,5 @@ TODO:
 public abstract class Module {
     public boolean enabled;
 
-    abstract void Update();
-} 
+    public abstract void update() throws Exception;
+}

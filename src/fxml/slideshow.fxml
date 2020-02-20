@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SlideshowController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onSwipeLeft="#previousPhoto" onSwipeRight="#nextPhoto" onSwipeUp="#openMenuScene" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SlideshowController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onTouchPressed="#nextPhoto" prefHeight="2160.0" prefWidth="3840.0">
+      <AnchorPane onTouchPressed="#nextPhoto">
          <children>
-            <BorderPane layoutX="960.0" layoutY="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <BorderPane layoutY="540.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <center>
-                  <ImageView id="ss_image_view" fx:id="ss_image_view" cache="true" cacheHint="SPEED" fitHeight="1080.0" fitWidth="1920.0" focusTraversable="true" onKeyPressed="#keyPressed" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                  <ImageView id="ss_image_view" fx:id="ss_image_view" cache="true" cacheHint="SPEED" focusTraversable="true" onKeyPressed="#keyPressed" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
          </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
       </AnchorPane>
-      <BorderPane>
+      <BorderPane opacity="0.0" style="-fx-background-color: #FFFFFF;">
          <right>
             <Pane onMouseClicked="#nextPhoto" opacity="0.55" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER_RIGHT" />
          </right>
          <left>
-            <Pane onMouseClicked="#previousPhoto" opacity="0.74" prefHeight="2112.0" prefWidth="200.0" BorderPane.alignment="CENTER_LEFT" />
+            <Pane onMouseClicked="#previousPhoto" onTouchPressed="#previousPhoto" opacity="0.74" prefHeight="2112.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER_LEFT" />
          </left>
          <bottom>
             <Pane onMouseClicked="#openMenuScene" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
