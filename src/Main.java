@@ -7,6 +7,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.input.KeyCombination;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.stage.Popup;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import manager.KioskManager;
@@ -29,11 +30,14 @@ public class Main extends Application {
         //new method to prevent screen resize delay
         primaryStage.setMinWidth(450);
         primaryStage.setMinHeight(300);
+        primaryStage.setResizable(false);
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         primaryStage.setWidth(bounds.getWidth());
         primaryStage.setHeight(bounds.getHeight());
 
+        final Popup popup = new Popup(); popup.setX(300); popup.setY(200);
+        popup.show(primaryStage);
         //Generate FXML Loaders for each module
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("fxml/kioskDisplay.fxml"));
         FXMLLoader slideshowLoader = new FXMLLoader(getClass().getResource("fxml/slideshow.fxml"));
@@ -111,5 +115,10 @@ public class Main extends Application {
         catch(IOException E){
             System.exit(0);
         }
+    }
+
+    @Override
+    public void stop() {
+        System.exit(0);
     }
 }

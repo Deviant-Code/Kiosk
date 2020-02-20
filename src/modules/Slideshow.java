@@ -23,6 +23,7 @@ public class Slideshow extends Module{
     private File folder;
     private ImageView imageView;
     private Timer t;
+    private boolean isPaused;
 
     public class WatchRunnable implements Runnable {
         @Override
@@ -164,11 +165,12 @@ public class Slideshow extends Module{
 
     // Restarts the slideshow timer
     public void resume(){
+        isPaused = false;
         if(t != null){
             t.cancel();
             t.purge();
         }
-        t = new Timer();
+        t = new Timer(true);
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -180,6 +182,7 @@ public class Slideshow extends Module{
 
     //Pause timer for slideshow
     public void pause(){
+        isPaused = true;
         if(t != null){
             t.cancel();
             t.purge();
@@ -214,6 +217,10 @@ public class Slideshow extends Module{
         } else {
             imageIndex--;
         }
+    }
+
+    public boolean isPaused() {
+        return isPaused;
     }
 
 }
