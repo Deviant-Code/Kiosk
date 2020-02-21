@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 public class ScheduleController implements Initializable {
     @FXML
     private WebView viewweb;
-    private final String urlweb = "http://www.google.com"; //UPDATE ME PLEASE
+    private final String urlweb = "http://localhost:3000/pages/kioskSchedules.html"; //UPDATE ME PLEASE
 
     private GestureHandler gestureHandler = GestureHandler.getInstance();
 
