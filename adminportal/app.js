@@ -298,7 +298,14 @@ app.post('/updateRooms', function (req, res) {
 
 //Remove a room type from our json
 app.post('/deleteRoomTypes', function (req, res) {
-  departmentJson.deleteRoomType(req.body.scheduleType);
+  departmentJson.deleteRoomType(req.body.roomType);
+  res.redirect('back');
+});
+
+//Update department module's with a new schedule
+app.post('/deleteRoom', function (req, res) {
+  departmentJson.deleteRoom(req.body.roomType,
+                              req.body.roomTitle);
   res.redirect('back');
 });
 

@@ -92,17 +92,76 @@ function loadDepartmentContent() {
                                                                   + '<div id="top-left">'+ (i + 1) + '</div>'
                                                                   + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>' +
                                                                   '</div>';
-
       }
 
-      document.getElementById("info-heading").value = res.heading;
-      document.getElementById("info-description").value = res.description;
       document.getElementById("enabledValue").checked = (res.moduleEnabled == true);
       document.getElementById("defaultValue").checked = (res.default == true);
 
-      
+      var roomTypeSelect = document.getElementById("roomTypeSelect");
+      var roomTypeSelectRemove = document.getElementById("roomTypeRemove");
+
+      for (var i = 0; i < res.roomTypes.length; i++) {
+        //Populate options for form
+        var option = document.createElement("option");
+        option.text = res.roomTypes[i].name;
+        option.className = "roomTypeContent"
+        roomTypeSelect.add(option);
+        option = document.createElement("option");
+        option.text = res.roomTypes[i].name;
+        option.className = "roomTypeContent"
+        roomTypeSelectRemove.add(option);
+
+        //Populate rooms manager
+        var typeHeading = document.createElement("h2");
+        typeHeading.innerHTML = res.roomTypes[i].name;
+        document.getElementById("roomManagerPortal").appendChild(typeHeading);
+
+        //add all rooms for each room type in its own div with delete button
+        for (var j = 0; j < res.roomTypes[i].rooms.length; j++) {
+          var roomDiv = document.createElement("div");
+          roomDiv.id = res.roomTypes[i].name + res.roomTypes[i].rooms[j].title;
+          roomDiv.className = "room-display"
+          document.getElementById("roomManagerPortal").appendChild(roomDiv);
+
+          var button = document.createElement('button');
+          button.innerHTML = "x";
+          var name=res.roomTypes[i].name;
+          var title = res.roomTypes[i].rooms[j].title;
+
+          button.onclick = function(){deleteRoom(name,title, roomDiv.id)};
+          button.type = "submit"
+          roomDiv.appendChild(button);
+
+          var roomTitle = document.createElement("h4");
+          roomTitle.innerHTML = res.roomTypes[i].rooms[j].title;
+          roomDiv.appendChild(roomTitle);
+
+          var roomP = document.createElement("p");
+          roomP.innerHTML = res.roomTypes[i].rooms[j].faculty + "<br> Start: " +
+                                res.roomTypes[i].rooms[j].startTime + " End: " + res.roomTypes[i].rooms[j].startTime;
+          roomDiv.appendChild(roomP);
+        }
+      }
+
     }
   };
   xhttp.open("GET", "/getDepartmentParams", true);
   xhttp.send();
+}
+
+function deleteRoom(roomType, roomTitle, divId) {
+  //Remove room from html
+  var element = document.getElementById(divId);
+  element.parentNode.removeChild(element);
+
+  xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '/deleteRoom');
+  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhttp.onload = function () {
+    if (xhttp.status !== 200) {
+      alert('Request failed.  Returned status of ' + xhttp.status);
+    }
+  };
+  xhttp.send(encodeURI('roomType=' + roomType + '&roomTitle='+ roomTitle));
+  location.reload();
 }

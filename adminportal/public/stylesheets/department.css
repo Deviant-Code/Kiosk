@@ -106,3 +106,81 @@ p {
 #speedValue {
   margin-left: 30px;
 }
+
+/* ROOM FORM STYLES */
+
+#roomTypeSelect {
+  font-size: medium;
+  width: 30%;
+
+  transition: font-size 0.2s ease-in-out;
+}
+#roomTypeSelect:hover{
+  font-size: large;
+}
+
+#roomTypeRemove {
+  font-size: medium;
+  width: 30%;
+
+  transition: font-size 0.2s ease-in-out;
+}
+#roomTypeRemove:hover{
+  font-size: large;
+}
+
+#newRoomField{
+  resize: none;
+  width: 30%;
+  height: auto;
+
+  transition: width 0.4s ease-in-out;
+
+}
+#newRoomField:focus{
+  width: 50%;
+}
+
+#newRoomTime{
+  font-size: medium;
+  transition: padding 0.4s ease-in-out;
+  transition: font-size 0.4s ease-in-out;
+
+}
+#newRoomTime:focus{
+  padding: 10px;
+  font-size: large;
+}
+
+#roomManagerPortal{
+  float: right;
+}
+#roomTypeAdd{
+  float: left;
+}
+#roomTypeManager{
+  float: right;
+}
+#newRoomAdd{
+  float: left;
+}
+
+/* Kiosk CSS */
+
+#roomSearchKiosk{
+  float: right;
+}
+#roomManagerKiosk{
+  float: left;
+}
+
+.room-display{
+  width: 40%;
+  text-align: left;
+  padding: 10px;
+  margin: 2% 2%;
+  background-color: #30a1ff;
+  border-radius: 5px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  color: white;
+}
