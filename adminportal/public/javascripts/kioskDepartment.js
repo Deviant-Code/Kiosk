@@ -1,4 +1,4 @@
-/* Functions used on the schedules kiosk module page */
+/* Functions used on the department kiosk module page */
 
 //Grabs Json from server and parses then populates page with data
 function loadDepartmentContent() {
@@ -10,21 +10,27 @@ function loadDepartmentContent() {
       //Clear all content on the page
       document.getElementById("departmentManagerKiosk").innerHTML = "";
 
-      var scheduleTypeSelect = document.getElementById("scheduleTypeSelect");
+      //For each floor
+      for (var i = 0; i < res.images.length; i++) {
+        
+        //Add a floor div
+        var floorDiv = document.createElement("div");
+        floorDiv.className = "content-input"
+        document.getElementById("departmentManagerKiosk").appendChild(floorDiv);
 
-      for (var i = 0; i < res.scheduleTypes.length; i++) {
-        //Populate options for form
-        var option = document.createElement("option");
-        option.text = res.scheduleTypes[i].name;
-        option.className = "scheduleTypeContent"
-        scheduleTypeSelect.add(option);
+        //Add a floor heading
+        var floorHeading = document.createElement("h2");
+        floorHeading.innerHTML = "Floor " + i; 
+        floorDiv.appendChild(floorHeading);
 
-        //Populate schedules manager
-        var typeHeading = document.createElement("h2");
-        typeHeading.innerHTML = res.scheduleTypes[i].name; 
-        document.getElementById("scheduleManagerKiosk").appendChild(typeHeading);
+        //Add image for floor
+        var floorImg = document.createElement("IMG");
+        floorImg.setAttribute("src", res.images[i].location);
+        floorImg.setAttribute("alt", "Floor " + i + " Plan");
+        floorDiv.appendChild(floorImg);
 
-        //add all schedules for each schedule type in its own div with delete button
+        //add all rooms for floor
+        /*
         for (var j = 0; j < res.scheduleTypes[i].schedules.length; j++) {
           var scheduleDiv = document.createElement("div");
           scheduleDiv.id = res.scheduleTypes[i].name + res.scheduleTypes[i].schedules[j].title;
@@ -39,31 +45,30 @@ function loadDepartmentContent() {
           scheduleP.innerHTML = res.scheduleTypes[i].schedules[j].description + "<br> Start: " + 
                                 res.scheduleTypes[i].schedules[j].startTime + " End: " + res.scheduleTypes[i].schedules[j].startTime; 
           scheduleDiv.appendChild(scheduleP);
-        }
+        }*/
       }
     }
   };
-  xhttp.open("GET", "/getSchedulesParams", true);
+  xhttp.open("GET", "/getDepartmentParams", true);
   xhttp.send();
 }
 
-// Used by the serach div to reload the schedule manager display with specfici parameters as defined
+// Used by the serach div to reload the department manager display with specfied parameters as defined
 function search(){
-  title = document.getElementById("scheduleTitle").value;
-  type = document.getElementById("scheduleTypeSelect").value;
+  term = document.getElementById("searchTerm").value;
 
-  loadSchedulesContentAux(type, title);
+  loadDepartmentContentAux(term);
 }
 
 // Is called by search to reload content on the kiosk
-function loadSchedulesContentAux(type, title) {
+function loadDepartmentContentAux(term) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       var res = JSON.parse(this.responseText);
 
       //Clear all content in the div
-      document.getElementById("scheduleManagerKiosk").innerHTML = "";
+      document.getElementById("departmentManagerKiosk").innerHTML = "";
 
       for (var i = 0; i < res.scheduleTypes.length; i++) {
         if(type == "" || type == res.scheduleTypes[i].name){
@@ -96,6 +101,6 @@ function loadSchedulesContentAux(type, title) {
       }
     }
   };
-  xhttp.open("GET", "/getSchedulesParams", true);
+  xhttp.open("GET", "/getDepartmentParams", true);
   xhttp.send();
 }
