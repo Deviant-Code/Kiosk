@@ -151,3 +151,29 @@ function deleteRoom(floorName, roomName, divId) {
   xhttp.send(encodeURI('floorName=' + floorName + '&roomName='+ roomName));
   location.reload();
 }
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var movingImage = 'public/Uploads/' + ev.dataTransfer.getData("text");
+  var targetImage = 'public/Uploads/' + ev.target.id;
+
+  xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '/updateFloorOrder');
+  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhttp.onload = function () {
+    if (xhttp.status !== 200) {
+      alert('Request failed.  Returned status of ' + xhttp.status);
+    }else{
+      window.location.reload();
+    }
+  };
+  xhttp.send(encodeURI('movingPath=' + movingImage + '&targetPath='+ targetImage));
+}

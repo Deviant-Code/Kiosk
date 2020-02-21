@@ -264,6 +264,12 @@ app.post('/updateDeptFloors', function (req, res) {
   res.redirect('back');
 });
 
+//Update Slideshow module's image order in json file and reload page
+app.post('/updateFloorOrder', function (req, res) {
+  departmentJson.reorderFloors(req.body.movingPath, req.body.targetPath);
+  res.redirect('back');
+});
+
 //Update department module with a new room
 app.post('/updateRooms', function (req, res) {
   departmentJson.addRoom(req.body.floorName,

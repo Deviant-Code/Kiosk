@@ -4,12 +4,5 @@
   "willTransition": true,
   "autoPlayVideo": true,
   "default": true,
-  "images": [
-    {
-      "seqnum": 0,
-      "location": "Uploads/slideImage1574457725569.jpg",
-      "lastModified": 1574457725581,
-      "thumbnail": ""
-    }
-  ]
+  "images": []
 }

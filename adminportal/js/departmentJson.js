@@ -1,6 +1,48 @@
 const fs = require('fs');
 
 module.exports = {
+    //Find the target and moving path within our json array and swap them
+    //Update the seqnum values for all floors
+    reorderFloors: function reorderFloorsJson(movingPath, targetPath) {
+        var object = this.getJson();
+
+        movingPath = movingPath.replace('public/', '');
+        targetPath = targetPath.replace('public/', '');
+
+        var targetIndex;
+        var movingIndex, movingElement;
+
+        for (var i = 0; i < object.images.length; i++) {
+            if (object.images[i].location == movingPath) {
+                movingIndex = i;
+                movingElement = object.images[i];
+            }
+            if (object.images[i].location == targetPath) {
+                targetIndex = i;
+            }
+        }
+
+        if (targetIndex != null && movingIndex != null && movingElement != null) {
+            //Remove old copy from array
+            object.images.splice(movingIndex, 1);
+            //Insert copy into array
+            object.images.splice(targetIndex, 0, movingElement);
+        }
+
+        //Update the seqnum of next slides if there is one or more after the removed
+        for (var i = 0; i < object.images.length; i++) {
+            object.images[i].seqnum = i;
+        }
+
+        let data = JSON.stringify(object, null, 2);
+
+        fs.writeFileSync("public/json/department.json", data, (err) => {
+            if (err) {
+                console.error(err);
+                return;
+            };
+        });
+    },
 
     removeImage: function removeImageJson(path) {
         var object = this.getJson();

@@ -163,14 +163,18 @@
   color: black;
 }
 
-.room-display-Kiosk{
+.floor-image{
+  left: 0;
+  width: 60%;
+  height: 35%;
+}
+.room-display-kiosk{
   width: 20%;
-  float: right;
-  text-align: left;
   padding: 10px;
   margin: 2% 2%;
-  background-color: #ccc;
+  text-align: left;
+  background-color: #30a1ff;
   border-radius: 5px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-  color: black;
+  color: white;
 }
