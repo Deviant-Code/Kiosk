@@ -15,6 +15,7 @@ var departmentJson = require('./js/departmentJson');
 var pollJson = require('./js/pollJson');
 var schedulesJson = require('./js/schedulesJson');
 var defaultHandler = require('./js/defaultModuleHandler');
+var passJson = require('./js/passwordManager');
 
 var fs = require('fs');
 
@@ -99,12 +100,12 @@ function hidePages(pathsToHide = []) {
 // serve everything but hidden pages
 app.use(hidePages(hiddenContent));
 
-// Post request for loging into portal
+// Post request for logging into portal
 app.post('/login', (req, res) => {
   var username = req.body.username;
   var password = req.body.password;
 	if (username && password) {
-		if (username == "admin" && password == "password") {
+		if (username == passJson.getJson().username && password == passJson.getJson().password) {
       //No longer hide pages
 			req.session.loggedin = true;
 			res.redirect('/pages/home.html');
@@ -112,11 +113,28 @@ app.post('/login', (req, res) => {
 			res.send('<h2>Incorrect Username and/or Password!</h2>' +
                '<a href="index.html"><button type="button" class="module">Return to Login</button></a>');
 		}			
-		res.end();
 	} else {
 		res.send('<h2>Please enter Username and Password!</h2>' +
               '<a href="index.html"><button type="button" class="module">Return to Login</button></a>');
-		res.end();
+	}
+});
+
+// Post request for updating password
+app.post('/updatePassword', (req, res) => {
+  var currentPass = req.body.currentPass;
+  var newPass = req.body.newPass;
+	if (currentPass && newPass) {
+		if (currentPass == passJson.getJson().password) {
+      passJson.updatePassword(newPass);
+			res.send('<h2>Password updated!</h2>' +
+               '<a href="/pages/home.html"><button type="button" class="module">Return to Home</button></a>');
+		} else {
+			res.send('<h2>Incorrect Password! Password not updated</h2>' +
+               '<a href="/pages/home.html"><button type="button" class="module">Return to Home</button></a>');
+		}			
+	} else {
+		res.send('<h2>Please enter Password</h2>' +
+              '<a href="/pages/home.html"><button type="button" class="module">Return to Home</button></a>');
 	}
 });
 
@@ -352,6 +370,12 @@ app.post('/updateSchedulesParams', function (req, res) {
 app.post('/deleteSchedule', function (req, res) {
   schedulesJson.deleteSchedule(req.body.scheduleType, 
                               req.body.scheduleTitle);
+  res.redirect('back');
+});
+
+//Remove a schedule type from our json
+app.post('/deleteScheduleTypes', function (req, res) {
+  schedulesJson.deleteScheduleType(req.body.scheduleType);
   res.redirect('back');
 });
 

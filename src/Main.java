@@ -1,7 +1,4 @@
-import controllers.MenuController;
-import controllers.PollController;
-import controllers.SlideshowController;
-import controllers.WebController;
+import controllers.*;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -9,6 +6,8 @@ import javafx.scene.input.KeyCombination;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
+
+import javafx.stage.Popup;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import manager.KioskManager;
@@ -29,6 +28,7 @@ public class Main extends Application {
 
         primaryStage.setMinWidth(450);
         primaryStage.setMinHeight(300);
+        primaryStage.setResizable(false);
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         primaryStage.setWidth(bounds.getWidth());
@@ -49,6 +49,7 @@ public class Main extends Application {
         Parent slideshowRoot = slideshowLoader.load();
         Parent deptRoot = webViewLoader.load();
         Parent pollViewRoot = pollViewLoader.load();
+        Parent scheduleRoot = schedulerLoader.load();
 
         //Build Scene and pass in main menu as original root
         Scene scene = new Scene(menuRoot,bounds.getWidth(), bounds.getHeight());
@@ -58,10 +59,11 @@ public class Main extends Application {
         SlideshowController ssController = slideshowLoader.getController();
         WebController webController = webViewLoader.getController();
         PollController pollController = pollViewLoader.getController();
+        ScheduleController scheduleController = schedulerLoader.getController();
 
         //set scene, root, and controllers to kiosk manager
-        kioskManager.setRoots(slideshowRoot,pollViewRoot,deptRoot,menuRoot);
-        kioskManager.setControllers(menuController, ssController, webController, pollController);
+        kioskManager.setRoots(slideshowRoot,pollViewRoot,deptRoot,menuRoot,scheduleRoot);
+        kioskManager.setControllers(menuController, ssController, webController, pollController, scheduleController);
 
         //Set Scene and Show Stage
         kioskManager.setScene(scene);
@@ -114,5 +116,10 @@ public class Main extends Application {
         catch(IOException E){
             System.exit(0);
         }
+    }
+
+    @Override
+    public void stop() {
+        System.exit(0);
     }
 }

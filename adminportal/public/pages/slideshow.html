@@ -5,6 +5,7 @@
     <head>
         <title>Electra Admin Portal</title>
         <link rel= "stylesheet" href="../stylesheets/style.css">
+        <link rel= "stylesheet" href="../stylesheets/slideshow.css">
     </head>
 
     <body onload="loadSlideshowContent()">
@@ -73,7 +74,7 @@
             </div>
 
             <!-- File upload -->
-            <div id="drop-area">
+            <div id="drop-area" >
                 <form action="/upload" method="POST" enctype="multipart/form-data" id="upload-form">
                     <p>Drag&amp;Drop files here</p>
                     <input name= "slideImage" type="file" id="fileElem" multiple accept="image/*,video/*" onchange="this.form.submit()" >

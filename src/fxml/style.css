@@ -3,7 +3,7 @@
 }
 
 .button{
-     -fx-background-color: linear-gradient(#A68A73,#151C26);
-     -fx-background-radius: 10;
+     -fx-background-color: linear-gradient(#b3b8bd,#3d4247);
+     -fx-background-radius: 5;
      -fx-font-weight: bold;
  }

@@ -72,10 +72,15 @@ function isVideo(filename) {
   return false;
 }
 
-function getVideoThumnail(image, path){
+function getVideoThumnail(image, path, i){
   //If thumbnail exists, use it, if not, generate it and upload it
   if(image.thumbnail != ""){
-    document.getElementById('uploadGallery').innerHTML += '<img src="' + "../" + image.thumbnail + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
+    document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="' 
+                                                                  + "../" + image.thumbnail + '" id="' + path + '"alt="image' + i + '"/>'
+                                                                  + '<div id="top-left">'+ (i + 1) + '</div>'
+                                                                  + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>' +
+                                                                  '</div>';
+    //document.getElementById('uploadGallery').innerHTML += '<img src="' + "../" + image.thumbnail + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
   }else{
     var video = document.createElement('video');
     var loc = image.location;
@@ -88,7 +93,12 @@ function getVideoThumnail(image, path){
     video.addEventListener('loadeddata', function() {
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
         var URI = canvas.toDataURL('image/jpeg');
-        document.getElementById('uploadGallery').innerHTML += '<img src="' + URI + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
+        document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="' 
+                                                                  + URI + '" id="' + path + '"alt="image' + i + '"/>'
+                                                                  + '<div id="top-left">'+ (i + 1) + '</div>'
+                                                                  + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>' +
+                                                                  '</div>';
+        //document.getElementById('uploadGallery').innerHTML += '<img src="' + URI + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
         updateSlideThumbnail(loc, URI);
     });
   }
@@ -164,6 +174,8 @@ function deleteUpload(filePath) {
   xhttp.onload = function () {
     if (xhttp.status !== 200) {
       alert('Request failed.  Returned status of ' + xhttp.status);
+    }else{
+      window.location.reload();
     }
   };
   xhttp.send(encodeURI('filePath=' + filePath));
@@ -185,7 +197,7 @@ function loadSlideshowContent() {
         var path = res.images[i].location.replace('Uploads\\', '');
         path = path.replace('Uploads/', '');
         if(isVideo(path)){
-          getVideoThumnail(res.images[i], path);
+          getVideoThumnail(res.images[i], path, i);
         }else{
           document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="' 
                                                                   + images[i] + '" id="' + path + '"alt="image' + i + '"/>'
@@ -225,8 +237,9 @@ function drop(ev) {
   xhttp.onload = function () {
     if (xhttp.status !== 200) {
       alert('Request failed.  Returned status of ' + xhttp.status);
+    }else{
+      window.location.reload();
     }
   };
   xhttp.send(encodeURI('movingPath=' + movingImage + '&targetPath='+ targetImage));
-  window.location.reload(false); 
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onSwipeLeft="#previousPhoto" onSwipeRight="#nextPhoto" onSwipeUp="#openMenuScene" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SlideshowController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onSwipeLeft="#previousPhoto" onSwipeRight="#nextPhoto" onSwipeUp="#openMenuScene" prefHeight="2160.0" prefWidth="3840.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SlideshowController">
    <children>
       <AnchorPane onTouchPressed="#nextPhoto">
          <children>
@@ -21,15 +21,15 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </AnchorPane>
-      <BorderPane opacity="0.0" style="-fx-background-color: #FFFFFF;">
+      <BorderPane onDragDetected="#onTouchEvent" onMouseClicked="#onTouchReleased" opacity="0.0">
          <right>
-            <Pane onMouseClicked="#nextPhoto" opacity="0.55" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER_RIGHT" />
+            <Pane onDragDetected="#onTouchEvent" onMouseClicked="#nextPhoto" opacity="0.55" prefHeight="1760.0" prefWidth="400.0" BorderPane.alignment="CENTER_RIGHT" />
          </right>
          <left>
-            <Pane onMouseClicked="#previousPhoto" onTouchPressed="#previousPhoto" opacity="0.74" prefHeight="2112.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER_LEFT" />
+            <Pane onDragDetected="#onTouchEvent" onMouseClicked="#nextPhoto" onTouchPressed="#previousPhoto" opacity="0.74" prefHeight="1760.0" prefWidth="400.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER_LEFT" />
          </left>
          <bottom>
-            <Pane onMouseClicked="#openMenuScene" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <Pane onMouseClicked="#onTouchReleased" prefHeight="400.0" visible="false" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </children>

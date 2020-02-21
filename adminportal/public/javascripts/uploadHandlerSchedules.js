@@ -49,6 +49,7 @@ function loadSchedulesContent() {
       document.getElementById("defaultValue").checked = (res.default == true);
 
       var scheduleTypeSelect = document.getElementById("scheduleTypeSelect");
+      var scheduleTypeSelectRemove = document.getElementById("scheduleTypeRemove");
 
       for (var i = 0; i < res.scheduleTypes.length; i++) {
         //Populate options for form
@@ -56,18 +57,22 @@ function loadSchedulesContent() {
         option.text = res.scheduleTypes[i].name;
         option.className = "scheduleTypeContent"
         scheduleTypeSelect.add(option);
+        option = document.createElement("option");
+        option.text = res.scheduleTypes[i].name;
+        option.className = "scheduleTypeContent"
+        scheduleTypeSelectRemove.add(option);
 
         //Populate schedules manager
         var typeHeading = document.createElement("h2");
         typeHeading.innerHTML = res.scheduleTypes[i].name; 
-        document.getElementById("scheduleManager").appendChild(typeHeading);
+        document.getElementById("scheduleManagerPortal").appendChild(typeHeading);
 
         //add all schedules for each schedule type in its own div with delete button
         for (var j = 0; j < res.scheduleTypes[i].schedules.length; j++) {
           var scheduleDiv = document.createElement("div");
           scheduleDiv.id = res.scheduleTypes[i].name + res.scheduleTypes[i].schedules[j].title;
-          scheduleDiv.className = "content-input"
-          document.getElementById("scheduleManager").appendChild(scheduleDiv);
+          scheduleDiv.className = "schedule-display"
+          document.getElementById("scheduleManagerPortal").appendChild(scheduleDiv);
 
           var button = document.createElement('button');
           button.innerHTML = "x";
@@ -75,6 +80,7 @@ function loadSchedulesContent() {
           var title = res.scheduleTypes[i].schedules[j].title;
 
           button.onclick = function(){deleteSchedule(name,title, scheduleDiv.id)};
+          button.type = "submit"
           scheduleDiv.appendChild(button);
 
           var scheduleTitle = document.createElement("h4");
@@ -95,7 +101,7 @@ function loadSchedulesContent() {
 
 function deleteSchedule(scheduleType, scheduleTitle, divId) {
   //Remove schedule from html
-  var element = document.getElementById(divId).parentNode;
+  var element = document.getElementById(divId);
   element.parentNode.removeChild(element);
 
   xhttp = new XMLHttpRequest();
@@ -107,4 +113,5 @@ function deleteSchedule(scheduleType, scheduleTitle, divId) {
     }
   };
   xhttp.send(encodeURI('scheduleType=' + scheduleType + '&scheduleTitle='+ scheduleTitle));
+  location.reload();
 }

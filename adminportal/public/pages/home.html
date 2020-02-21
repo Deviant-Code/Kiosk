@@ -23,7 +23,18 @@
             <a href="department.html"><button type="button" class="module">Department</button></a>
             <a href="schedules.html"><button type="button" class="module">Schedules</button></a>
         </div>
-
-
+        <hr class="hr2">
+        <h1>Dashboard</h1>
+        <!-- Password Update -->
+        <div class="content-input">
+            <form action="/updatePassword" method="POST" >
+                <h2>Update Password</h2>
+                <p>Current Password</p>
+                <input type="password" class="newFormInput" id="currentPassInput" name="currentPass">
+                <p>New Password</p>
+                <input type="password" class="newFormInput" id="newPassInput" name="newPass">
+                <button type="submit" class="submitButton">Update Password</button>
+            </form>
+        </div>
     </body>
 </html>

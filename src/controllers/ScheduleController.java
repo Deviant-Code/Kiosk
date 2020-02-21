@@ -1,6 +1,5 @@
 package controllers;
 
-import javafx.event.Event;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,18 +16,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class WebController implements Initializable {
+public class ScheduleController implements Initializable {
     @FXML
     private WebView viewweb;
-    private Scene scene;
-    private Parent menuRoot;
-    private final String urlweb = "https://cse.wwu.edu/computer-science";
+    private final String urlweb = "http://www.google.com"; //UPDATE ME PLEASE
 
     private GestureHandler gestureHandler = GestureHandler.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final WebEngine web = viewweb.getEngine();
+        web.setJavaScriptEnabled(true);
+        web.executeScript("location.reload(true);");
         web.load(urlweb);
     }
 
@@ -46,11 +45,13 @@ public class WebController implements Initializable {
 
     @FXML
     public void onTouchReleased(MouseEvent event) throws IOException {
-        if(gestureHandler.inMotion()) {
-            if (gestureHandler.validate(event)) {
+
+        if(gestureHandler.inMotion()){
+
+            if(gestureHandler.validate(event)){
                 //Gesture has just completed
                 EventType<SwipeEvent> swipe = gestureHandler.processGesture();
-                if (swipe.equals(SwipeEvent.SWIPE_UP)) {
+                if(swipe.equals(SwipeEvent.SWIPE_UP)){
                     openMenuScene();
                 }
             }

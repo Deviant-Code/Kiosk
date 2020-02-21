@@ -42,8 +42,8 @@ public class MenuController {
         background.fitWidthProperty().bind(menuRoot.widthProperty());
         bind(modules, menuRoot,1,1);
         topbuffer.maxHeightProperty().bind(menuRoot.heightProperty().multiply(.19));
-        modules.maxHeightProperty().bind(menuRoot.heightProperty().multiply(.66));
-        modules.maxWidthProperty().bind(menuRoot.widthProperty().multiply(.66));
+        modules.maxHeightProperty().bind(menuRoot.heightProperty().multiply(.70));
+        modules.maxWidthProperty().bind(menuRoot.widthProperty().multiply(.70));
         bind(slideshow, modules,.35,.21);
         bind(schedules,modules,.35,.21);
         bind(polls,modules, .35,.21);
