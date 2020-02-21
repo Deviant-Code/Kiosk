@@ -3,6 +3,10 @@ package manager;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import modules.*;
 import controllers.*;
 
@@ -30,6 +34,7 @@ public class KioskManager {
     private SlideshowController slideshowController;
     private PollController pollController;
     private WebController deptController;
+    private Stage stage;
     //private MapController mapController;
     //private ScheduleController scheduleController;
 
@@ -44,8 +49,9 @@ public class KioskManager {
         return instance;
     }
 
-    public void setScene(){
-        this.scene = new Scene(menuRoot);
+    public void setScene(Scene scene){
+        this.scene = scene;
+
     }
 
     //Transition kiosk to a different module given the name of the module
@@ -117,15 +123,19 @@ public class KioskManager {
         video = new Video();
     }
 
-    public void setScene(Scene scene) {
-        this.scene = scene;
-    }
-
     public Scene getScene() {
         return this.scene;
     }
 
     public Parent getSlideshowRoot(){
         return this.slideshowRoot;
+    }
+
+    public void setStage(Stage primaryStage) {
+        this.stage = primaryStage;
+    }
+
+    public Stage getStage(){
+        return this.stage;
     }
 }
