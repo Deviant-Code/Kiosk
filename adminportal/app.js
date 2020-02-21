@@ -86,7 +86,7 @@ function hidePages(pathsToHide = []) {
     if (pathsToHide.length === 0 || req.session.loggedin) {
       return statics(req, res, next); // Do not secure, forward to static route
     }
-    
+
     //If is included in hidden content then return with error
     else if (pathsToHide.indexOf(req.path) > -1) {
       return res.status(403).send('<h1>403 Forbidden</h1><h2>Login to gain access</h2>' +
@@ -112,7 +112,7 @@ app.post('/login', (req, res) => {
 		} else {
 			res.send('<h2>Incorrect Username and/or Password!</h2>' +
                '<a href="index.html"><button type="button" class="module">Return to Login</button></a>');
-		}			
+		}
 	} else {
 		res.send('<h2>Please enter Username and Password!</h2>' +
               '<a href="index.html"><button type="button" class="module">Return to Login</button></a>');
@@ -131,11 +131,30 @@ app.post('/updatePassword', (req, res) => {
 		} else {
 			res.send('<h2>Incorrect Password! Password not updated</h2>' +
                '<a href="/pages/home.html"><button type="button" class="module">Return to Home</button></a>');
-		}			
+		}
 	} else {
 		res.send('<h2>Please enter Password</h2>' +
               '<a href="/pages/home.html"><button type="button" class="module">Return to Home</button></a>');
 	}
+});
+
+// Post request for department image upload
+app.post('/departmentUpload', (req, res) => {
+  upload(req, res, err => {
+    if (err) {
+      res.send(err + " - Use the arrow buttons to return to the previous page");
+      console.log(err);
+    } else {
+      if (req.files == undefined) {
+        res.send("No file selected - Use the arrow buttons to return to the previous page");
+        console.log("No file selected");
+      } else {
+        res.redirect('back');
+        console.log("Department Image Uploaded!");
+        departmentJson.addImage(req.files);
+      }
+    }
+  });
 });
 
 // Post request for file upload
@@ -167,6 +186,17 @@ app.post('/deleteFile', function (req, res) {
   res.redirect('back');
 });
 
+//Call when wanting to delete a file from /department
+app.post('/deleteDeptFile', function (req, res) {
+  departmentJson.removeImage(req.body.filePath);
+  fs.unlink(req.body.filePath, (err) => {
+    if (err)
+      console.log(err);
+  });
+  res.redirect('back');
+});
+
+
 //Update Slideshow module's image order in json file and reload page
 app.post('/updateSlideOrder', function (req, res) {
   slideshowJson.reorderSlides(req.body.movingPath, req.body.targetPath);
@@ -175,6 +205,11 @@ app.post('/updateSlideOrder', function (req, res) {
 
 //Update Slideshow module's settings json
 app.post('/updateSlideThumbnail', function (req, res) {
+  slideshowJson.addThumbnail(req.body.path, req.body.thumbnail);
+});
+
+//Update Department module's settings json
+app.post('/updateDeptThumbnail', function (req, res) {
   slideshowJson.addThumbnail(req.body.path, req.body.thumbnail);
 });
 
@@ -241,6 +276,36 @@ app.post('/updateDepartment', function (req, res) {
       return;
     };
   });
+
+  res.redirect('back');
+});
+
+//Update department module's types with new type
+app.post('/updateDeptTypes', function (req, res) {
+  departmentJson.addRoomType(req.body.newRoomType);
+  res.redirect('back');
+});
+
+//Update department module's with a new schedule
+app.post('/updateRooms', function (req, res) {
+  departmentJson.addRoom(req.body.roomType,
+                            req.body.newRoomNumber,
+                            req.body.newFaculty,
+                            req.body.newHourStart,
+                            req.body.newHourEnd);
+  res.redirect('back');
+});
+
+//Remove a room type from our json
+app.post('/deleteRoomTypes', function (req, res) {
+  departmentJson.deleteRoomType(req.body.roomType);
+  res.redirect('back');
+});
+
+//Update department module's with a new schedule
+app.post('/deleteRoom', function (req, res) {
+  departmentJson.deleteRoom(req.body.roomType,
+                              req.body.roomTitle);
   res.redirect('back');
 });
 
@@ -249,6 +314,7 @@ app.get('/getDepartmentParams', function (req, res) {
   var object = departmentJson.getJson();
   res.json(object);
 });
+
 
 //Update Poll module's settings json
 app.post('/updatePollParams', function (req, res) {
@@ -368,7 +434,7 @@ app.post('/updateSchedulesParams', function (req, res) {
 
 //Update Schedule module's with a new schedule
 app.post('/deleteSchedule', function (req, res) {
-  schedulesJson.deleteSchedule(req.body.scheduleType, 
+  schedulesJson.deleteSchedule(req.body.scheduleType,
                               req.body.scheduleTitle);
   res.redirect('back');
 });
@@ -381,7 +447,7 @@ app.post('/deleteScheduleTypes', function (req, res) {
 
 //Update Schedule module's with a new schedule
 app.post('/updateSchedules', function (req, res) {
-  schedulesJson.addSchedule(req.body.scheduleType, 
+  schedulesJson.addSchedule(req.body.scheduleType,
                             req.body.newScheduleTitle,
                             req.body.newScheduleDescription,
                             req.body.newScheduleStart,
