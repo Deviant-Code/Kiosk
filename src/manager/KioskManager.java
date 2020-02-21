@@ -3,6 +3,10 @@ package manager;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import modules.*;
 import controllers.*;
 
@@ -22,6 +26,7 @@ public class KioskManager {
     private Parent menuRoot;
     private Parent pollRoot;
     private Parent deptRoot;
+    private Parent scheduleRoot;
     private Parent slideshowRoot;
     private Scene scene;
 
@@ -30,6 +35,9 @@ public class KioskManager {
     private SlideshowController slideshowController;
     private PollController pollController;
     private WebController deptController;
+    private Stage stage;
+    private ScheduleController scheduleController;
+
     //private MapController mapController;
     //private ScheduleController scheduleController;
 
@@ -44,8 +52,9 @@ public class KioskManager {
         return instance;
     }
 
-    public void setScene(){
-        this.scene = new Scene(menuRoot);
+    public void setScene(Scene scene){
+        this.scene = scene;
+
     }
 
     //Transition kiosk to a different module given the name of the module
@@ -79,7 +88,7 @@ public class KioskManager {
             case "SCHED":
                 //Future modules, not yet implemented
                 //activeModule = schedules;
-                //return scheduleRoot;
+                return scheduleRoot;
             case "MAPS":
                 //Future modules, not yet implemented
                 //activeModule = maps;
@@ -89,18 +98,20 @@ public class KioskManager {
         }
     }
 
-    public void setRoots(Parent slideshowRoot, Parent pollRoot, Parent deptRoot, Parent menuRoot){
+    public void setRoots(Parent slideshowRoot, Parent pollRoot, Parent deptRoot, Parent menuRoot, Parent scheduleRoot){
         this.slideshowRoot = slideshowRoot;
         this.pollRoot = pollRoot;
         this.deptRoot = deptRoot;
         this.menuRoot = menuRoot;
+        this.scheduleRoot = scheduleRoot;
     }
 
-    public void setControllers(MenuController menuController, SlideshowController slideshowController, WebController deptController, PollController pollController){
+    public void setControllers(MenuController menuController, SlideshowController slideshowController, WebController deptController, PollController pollController, ScheduleController scheduleController){
         this.menuController = menuController;
         this.slideshowController = slideshowController;
         this.deptController = deptController;
         this.pollController = pollController;
+        this.scheduleController = scheduleController;
     }
 
     public void slideShowInit() throws Exception {
@@ -117,15 +128,19 @@ public class KioskManager {
         video = new Video();
     }
 
-    public void setScene(Scene scene) {
-        this.scene = scene;
-    }
-
     public Scene getScene() {
         return this.scene;
     }
 
     public Parent getSlideshowRoot(){
         return this.slideshowRoot;
+    }
+
+    public void setStage(Stage primaryStage) {
+        this.stage = primaryStage;
+    }
+
+    public Stage getStage(){
+        return this.stage;
     }
 }

@@ -1,12 +1,9 @@
 .root {
--fx-background-image:url('back_2.jpg');
--fx-background-size:cover;
+	-fx-font-size: 20;
 }
+
 .button{
-     -fx-background-color: linear-gradient(#A68A73,#151C26);
-     -fx-background-radius: 25;
+     -fx-background-color: linear-gradient(#b3b8bd,#3d4247);
+     -fx-background-radius: 5;
      -fx-font-weight: bold;
- }
- .pane{
-    -fx-background-color: linear-gradient(#0C4F8C, #476589);
  }
