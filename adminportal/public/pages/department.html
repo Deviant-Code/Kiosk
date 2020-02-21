@@ -5,6 +5,7 @@
     <head>
         <title>Electra Admin Portal</title>
         <link rel= "stylesheet" href="../stylesheets/style.css">
+        <link rel= "stylesheet" href="../stylesheets/department.css">
     </head>
 
     <body onload="loadDepartmentContent()">
@@ -23,7 +24,7 @@
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <form action="/updateDepartmentParams" method="POST" >
-                    <!-- Hidden input values are sent if normal input not checked -->                    
+                    <!-- Hidden input values are sent if normal input not checked -->
                     <a href="#">Module Enabled
                         <input type='hidden' id="enabledValueHidden" value='false' name='enabledValue'>
                         <input class='enabled' id="enabledValue" name="enabledValue" type='checkbox' value='true'>
@@ -33,7 +34,7 @@
                         <input class='default' id="defaultValue" name="defaultValue" type='checkbox' value='true'>
                     </a>
 
-                    <input type="submit" value="Update" onclick="checkHiddenValues()">                    
+                    <input type="submit" class="setting-update" value="Update" onclick="checkHiddenValues()">
             </form>
         </div>
 
@@ -53,6 +54,7 @@
           });
         }
         </script>
+
         <div id="main">
             <!-- Modules -->
             <div class="button_grp">
@@ -63,16 +65,15 @@
             </div>
 
             <!-- File upload -->
-            <!--
-            <div id="content-input">
-                <form action="/updateDepartment" method="POST" >
-                    <p>Heading</p>
-                    <input type="text" id="info-heading" name="heading"><br>
-                    <p>Description</p>
-                    <textarea name="description" id="info-description" cols="40" rows="5"></textarea>
-                    <button type="submit">Upload</button>
+            <div id="drop-area" >
+                <form action="/departmentUpload" method="POST" enctype="multipart/form-data" id="upload-form">
+                    <p>Drag&amp;Drop files here</p>
+                    <input name= "deptImage" type="file" id="fileElem" multiple accept="image/*" onchange="this.form.submit()" >
+                    <label class="submitButton" for="fileElem">Browse Files</label>
                 </form>
-            </div>-->
+                <div id="uploadGallery"></div>
+            </div>
+
         </div>
         <script src="../javascripts/uploadHandlerDepartment.js" ></script>
     </body>

@@ -86,7 +86,7 @@ function hidePages(pathsToHide = []) {
     if (pathsToHide.length === 0 || req.session.loggedin) {
       return statics(req, res, next); // Do not secure, forward to static route
     }
-    
+
     //If is included in hidden content then return with error
     else if (pathsToHide.indexOf(req.path) > -1) {
       return res.status(403).send('<h1>403 Forbidden</h1><h2>Login to gain access</h2>' +
@@ -112,7 +112,7 @@ app.post('/login', (req, res) => {
 		} else {
 			res.send('<h2>Incorrect Username and/or Password!</h2>' +
                '<a href="index.html"><button type="button" class="module">Return to Login</button></a>');
-		}			
+		}
 	} else {
 		res.send('<h2>Please enter Username and Password!</h2>' +
               '<a href="index.html"><button type="button" class="module">Return to Login</button></a>');
@@ -131,11 +131,30 @@ app.post('/updatePassword', (req, res) => {
 		} else {
 			res.send('<h2>Incorrect Password! Password not updated</h2>' +
                '<a href="/pages/home.html"><button type="button" class="module">Return to Home</button></a>');
-		}			
+		}
 	} else {
 		res.send('<h2>Please enter Password</h2>' +
               '<a href="/pages/home.html"><button type="button" class="module">Return to Home</button></a>');
 	}
+});
+
+// Post request for department image upload
+app.post('/departmentUpload', (req, res) => {
+  upload(req, res, err => {
+    if (err) {
+      res.send(err + " - Use the arrow buttons to return to the previous page");
+      console.log(err);
+    } else {
+      if (req.files == undefined) {
+        res.send("No file selected - Use the arrow buttons to return to the previous page");
+        console.log("No file selected");
+      } else {
+        res.redirect('back');
+        console.log("Department Image Uploaded!");
+        departmentJson.addImage(req.files);
+      }
+    }
+  });
 });
 
 // Post request for file upload
@@ -368,7 +387,7 @@ app.post('/updateSchedulesParams', function (req, res) {
 
 //Update Schedule module's with a new schedule
 app.post('/deleteSchedule', function (req, res) {
-  schedulesJson.deleteSchedule(req.body.scheduleType, 
+  schedulesJson.deleteSchedule(req.body.scheduleType,
                               req.body.scheduleTitle);
   res.redirect('back');
 });
@@ -381,7 +400,7 @@ app.post('/deleteScheduleTypes', function (req, res) {
 
 //Update Schedule module's with a new schedule
 app.post('/updateSchedules', function (req, res) {
-  schedulesJson.addSchedule(req.body.scheduleType, 
+  schedulesJson.addSchedule(req.body.scheduleType,
                             req.body.newScheduleTitle,
                             req.body.newScheduleDescription,
                             req.body.newScheduleStart,

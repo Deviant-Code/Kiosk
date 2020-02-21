@@ -39,12 +39,49 @@ function checkHiddenValues() {
   }
 }
 
+function deleteUpload(filePath) {
+  //Remove from html
+  var element = document.getElementById(filePath).parentNode;
+  element.parentNode.removeChild(element);
+
+  xhttp = new XMLHttpRequest();
+  //Re-add the public/uploads
+  filePath = 'public/Uploads/Department/' + filePath;
+  xhttp.open('POST', '/deleteFile');
+  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhttp.onload = function () {
+    if (xhttp.status !== 200) {
+      alert('Request failed.  Returned status of ' + xhttp.status);
+    }else{
+      window.location.reload();
+    }
+  };
+  xhttp.send(encodeURI('filePath=' + filePath));
+}
 
 function loadDepartmentContent() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       var res = JSON.parse(this.responseText);
+      var images = [];
+
+      for (var i = 0; i < res.images.length; i++) {
+        var path = res.images[i].location.replace('public/', '');
+        images.push("../" + path);
+      }
+
+      for (var i = 0; i < images.length; i++) {
+        var path = res.images[i].location.replace('Uploads\\', '');
+        path = path.replace('Uploads/', '');
+
+        document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="'
+                                                                  + images[i] + '" id="' + path + '"alt="image' + i + '"/>'
+                                                                  + '<div id="top-left">'+ (i + 1) + '</div>'
+                                                                  + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>' +
+                                                                  '</div>';
+
+      }
 
       document.getElementById("info-heading").value = res.heading;
       document.getElementById("info-description").value = res.description;
