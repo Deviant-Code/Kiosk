@@ -78,4 +78,49 @@
         <script src="../javascripts/uploadHandlerDepartment.js" ></script>
     </body>
 
+    <!-- New Room Type -->
+    <div id="roomTypeAdd" class="content-input">
+        <form action="/updateDeptTypes" method="POST" >
+            <h2>New Room Type</h2>
+            <input type="text" class="newFormInput" id="newRoomField" name="newRoomType">
+            <button type="submit" class="submitButton">Add Room Type</button>
+        </form>
+    </div>
+
+    <!-- Room Type Manager -->
+    <div id="roomTypeManager" class="content-input">
+        <form action="/deleteRoomTypes" method="POST" >
+            <h2>Remove Room Type</h2>
+            <select class="newFormInput" id="roomTypeRemove" name="roomType">
+            </select>
+            <button type="submit" class="submitButton">Remove</button>
+        </form>
+    </div>
+
+
+    <!-- New Room -->
+    <div id="newRoomAdd" class="content-input">
+        <form action="/updateRooms" method="POST" >
+            <h2>Add New Room</h2>
+
+            Room Type
+            <select class="newFormInput" id="roomTypeSelect" name="newRoomType">
+            </select><br>
+
+            Room Number
+            <input type="text" class="newFormInput" id="newRoomField" name="newRoomNumber"><br>
+
+            Faculty
+            <input type="text" class="newFormInput" id="newRoomField" name="newFaculty"><br>
+
+            Start Hour<input type="time" class="newFormInput" id="newScheduleTime" name="newHourStart">
+            End Hour<input type="time" class="newFormInput" id="newScheduleTime" name="newHourEnd"><br>
+
+            <button type="submit" class="submitButton">Add Room</button>
+        </form>
+    </div>
+
+
+
+
 </html>

@@ -186,6 +186,17 @@ app.post('/deleteFile', function (req, res) {
   res.redirect('back');
 });
 
+//Call when wanting to delete a file from /department
+app.post('/deleteDeptFile', function (req, res) {
+  departmentJson.removeImage(req.body.filePath);
+  fs.unlink(req.body.filePath, (err) => {
+    if (err)
+      console.log(err);
+  });
+  res.redirect('back');
+});
+
+
 //Update Slideshow module's image order in json file and reload page
 app.post('/updateSlideOrder', function (req, res) {
   slideshowJson.reorderSlides(req.body.movingPath, req.body.targetPath);
@@ -194,6 +205,11 @@ app.post('/updateSlideOrder', function (req, res) {
 
 //Update Slideshow module's settings json
 app.post('/updateSlideThumbnail', function (req, res) {
+  slideshowJson.addThumbnail(req.body.path, req.body.thumbnail);
+});
+
+//Update Department module's settings json
+app.post('/updateDeptThumbnail', function (req, res) {
   slideshowJson.addThumbnail(req.body.path, req.body.thumbnail);
 });
 
@@ -260,6 +276,29 @@ app.post('/updateDepartment', function (req, res) {
       return;
     };
   });
+
+  res.redirect('back');
+});
+
+//Update department module's types with new type
+app.post('/updateDeptTypes', function (req, res) {
+  departmentJson.addRoomType(req.body.newRoomType);
+  res.redirect('back');
+});
+
+//Update department module's with a new schedule
+app.post('/updateRooms', function (req, res) {
+  departmentJson.addRoom(req.body.roomType,
+                            req.body.newRoomNumber,
+                            req.body.newFaculty,
+                            req.body.newHourStart,
+                            req.body.newHourEnd);
+  res.redirect('back');
+});
+
+//Remove a room type from our json
+app.post('/deleteRoomTypes', function (req, res) {
+  departmentJson.deleteRoomType(req.body.scheduleType);
   res.redirect('back');
 });
 
@@ -268,6 +307,7 @@ app.get('/getDepartmentParams', function (req, res) {
   var object = departmentJson.getJson();
   res.json(object);
 });
+
 
 //Update Poll module's settings json
 app.post('/updatePollParams', function (req, res) {

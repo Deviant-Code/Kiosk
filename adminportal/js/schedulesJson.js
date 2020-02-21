@@ -26,10 +26,10 @@ module.exports = {
                     });
 
                     break;
-                }     
+                }
             }
         }
-        
+
     },
 
     //Delete a Schedule from Json
@@ -57,7 +57,7 @@ module.exports = {
                     };
                 });
                 break;
-            }     
+            }
         }
     },
 
@@ -80,7 +80,7 @@ module.exports = {
                     };
                 });
                 break;
-            }     
+            }
         }
     },
 

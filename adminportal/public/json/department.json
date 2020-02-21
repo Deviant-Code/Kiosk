@@ -1,8 +1,22 @@
 {
   "moduleEnabled": true,
   "default": false,
-  "heading": "*insert heading*",
-  "description": "*insert description*",
   "images": [
+    {
+      "seqnum": 0,
+      "location": "Uploads/Department/deptImage1582271793907.png",
+      "lastModified": 1582271793915,
+      "thumbnail": ""
+    }
+  ],
+  "roomTypes": [
+    {
+      "name": "Office",
+      "rooms": []
+    },
+    {
+      "name": "Lab",
+      "rooms": []
+    }
   ]
 }

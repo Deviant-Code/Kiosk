@@ -27,7 +27,18 @@ function dropdown() {
   }
 }
 
-
+//Sends the thumbnail in base64 and the associated slide location
+function updateSlideThumbnail(filePath, thumbnail) {
+  xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '/updateDeptThumbnail');
+  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhttp.onload = function () {
+    if (xhttp.status !== 200) {
+      alert('Request failed.  Returned status of ' + xhttp.status);
+    }
+  };
+  xhttp.send(encodeURI('path=' + filePath + '&thumbnail='+ thumbnail));
+}
 
 function checkHiddenValues() {
   //Hide hidden values if real is checked
@@ -39,15 +50,16 @@ function checkHiddenValues() {
   }
 }
 
+
 function deleteUpload(filePath) {
   //Remove from html
   var element = document.getElementById(filePath).parentNode;
   element.parentNode.removeChild(element);
 
   xhttp = new XMLHttpRequest();
-  //Re-add the public/uploads
-  filePath = 'public/Uploads/Department/' + filePath;
-  xhttp.open('POST', '/deleteFile');
+  //Re-add the public/uploads/department
+  filePath = 'public/Uploads/' + filePath;
+  xhttp.open('POST', '/deleteDeptFile');
   xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhttp.onload = function () {
     if (xhttp.status !== 200) {
@@ -87,6 +99,8 @@ function loadDepartmentContent() {
       document.getElementById("info-description").value = res.description;
       document.getElementById("enabledValue").checked = (res.moduleEnabled == true);
       document.getElementById("defaultValue").checked = (res.default == true);
+
+      
     }
   };
   xhttp.open("GET", "/getDepartmentParams", true);
