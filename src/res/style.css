@@ -1,8 +1,9 @@
-.button
-{
--fx-background-color : ;
+.root {
+-fx-background-image:url('gradient_background.jpg');
+-fx-background-size:cover,auto;
 }
-.button:pressed
-{
--fx-background-color : ;
-}
+.button{
+     -fx-background-color: linear-gradient(#A68A73,#151C26);
+     -fx-background-radius: 25;
+     -fx-font-weight: bold;
+ }
