@@ -51,7 +51,7 @@ function previewFile(file) {
 
     if(isVideo(file.name)){
       //Set video to default thumbnail
-      img.src = null 
+      img.src = null
     }else{
       img.src = reader.result
     }
@@ -75,7 +75,7 @@ function isVideo(filename) {
 function getVideoThumnail(image, path, i){
   //If thumbnail exists, use it, if not, generate it and upload it
   if(image.thumbnail != ""){
-    document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="' 
+    document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="'
                                                                   + "../" + image.thumbnail + '" id="' + path + '"alt="image' + i + '"/>'
                                                                   + '<div id="top-left">'+ (i + 1) + '</div>'
                                                                   + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>' +
@@ -86,14 +86,14 @@ function getVideoThumnail(image, path, i){
     var loc = image.location;
 
     video.src = "../" + image.location;
-  
+
     var canvas = document.createElement('canvas');
     var context = canvas.getContext('2d');
-  
+
     video.addEventListener('loadeddata', function() {
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
         var URI = canvas.toDataURL('image/jpeg');
-        document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="' 
+        document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="'
                                                                   + URI + '" id="' + path + '"alt="image' + i + '"/>'
                                                                   + '<div id="top-left">'+ (i + 1) + '</div>'
                                                                   + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>' +
@@ -199,7 +199,7 @@ function loadSlideshowContent() {
         if(isVideo(path)){
           getVideoThumnail(res.images[i], path, i);
         }else{
-          document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="' 
+          document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="'
                                                                   + images[i] + '" id="' + path + '"alt="image' + i + '"/>'
                                                                   + '<div id="top-left">'+ (i + 1) + '</div>'
                                                                   + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>' +

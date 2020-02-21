@@ -3,8 +3,15 @@
   "default": false,
   "scheduleTypes": [
     {
-      "name": "Labs",
-      "schedules": []
+      "name": "lab",
+      "schedules": [
+        {
+          "title": "420",
+          "description": "",
+          "startTime": "",
+          "endTime": ""
+        }
+      ]
     }
   ]
 }

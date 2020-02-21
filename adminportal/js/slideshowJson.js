@@ -85,14 +85,14 @@ module.exports = {
     addSlide: function addSlideImageJson(files) {
         var object = this.getJson();
         files.forEach(file => {
-            
+
             var path = file.path.replace(/\\/g, '/');
             path = path.replace('public/', '');
 
             //If is a video file, put in videos folder
             if(isVideo(path.replace('Uploads/', ''))){
                 fs.renameSync(file.path, 'public/Uploads/Videos/' + path.replace('Uploads/', ''), function (err) {
-                    if (err) 
+                    if (err)
                         throw err
                 })
                 path = 'Uploads/Videos/' + path.replace('Uploads/', '')

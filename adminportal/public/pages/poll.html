@@ -24,7 +24,7 @@
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <form action="/updatePollParams" method="POST" >
-                    <!-- Hidden input values are sent if normal input not checked -->                    
+                    <!-- Hidden input values are sent if normal input not checked -->
                     <a href="#">Module Enabled
                         <input type='hidden' id="enabledValueHidden" value='false' name='enabledValue'>
                         <input class='enabled' id="enabledValue" name="enabledValue" type='checkbox' value='true'>
@@ -34,7 +34,7 @@
                         <input class='default' id="defaultValue" name="defaultValue" type='checkbox' value='true'>
                     </a>
 
-                    <input type="submit" value="Update" onclick="checkHiddenValues()">                    
+                    <input type="submit" class="setting-update" value="Update" onclick="checkHiddenValues()">
             </form>
         </div>
 
