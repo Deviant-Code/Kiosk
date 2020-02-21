@@ -4,15 +4,26 @@
   "images": [
     {
       "seqnum": 0,
-      "location": "Uploads/Department/deptImage1582276817251.png",
-      "lastModified": 1582276817259,
-      "thumbnail": ""
+      "location": "Uploads/Department/deptImage1582298682901.png"
+    },
+    {
+      "seqnum": 1,
+      "location": "Uploads/Department/deptImage1582300663476.png"
     }
   ],
-  "roomTypes": [
+  "floors": [
     {
-      "name": "Office",
-      "rooms": []
+      "name": "1",
+      "rooms": [
+        {
+          "name": "412",
+          "faculty": "Clauson"
+        },
+        {
+          "name": "420",
+          "faculty": "Hearne"
+        }
+      ]
     }
   ]
 }

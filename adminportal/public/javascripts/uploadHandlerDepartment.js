@@ -27,19 +27,6 @@ function dropdown() {
   }
 }
 
-//Sends the thumbnail in base64 and the associated slide location
-function updateSlideThumbnail(filePath, thumbnail) {
-  xhttp = new XMLHttpRequest();
-  xhttp.open('POST', '/updateDeptThumbnail');
-  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhttp.onload = function () {
-    if (xhttp.status !== 200) {
-      alert('Request failed.  Returned status of ' + xhttp.status);
-    }
-  };
-  xhttp.send(encodeURI('path=' + filePath + '&thumbnail='+ thumbnail));
-}
-
 function checkHiddenValues() {
   //Hide hidden values if real is checked
   if (document.getElementById("enabledValue").checked) {
@@ -97,48 +84,47 @@ function loadDepartmentContent() {
       document.getElementById("enabledValue").checked = (res.moduleEnabled == true);
       document.getElementById("defaultValue").checked = (res.default == true);
 
-      var roomTypeSelect = document.getElementById("roomTypeSelect");
-      var roomTypeSelectRemove = document.getElementById("roomTypeRemove");
+      var floorSelect = document.getElementById("floorSelect");
+      var floorSelectRemove = document.getElementById("floorSelectRemove");
 
-      for (var i = 0; i < res.roomTypes.length; i++) {
+      for (var i = 0; i < res.floors.length; i++) {
         //Populate options for form
         var option = document.createElement("option");
-        option.text = res.roomTypes[i].name;
+        option.text = res.floors[i].name;
         option.className = "roomTypeContent"
-        roomTypeSelect.add(option);
+        floorSelect.add(option);
         option = document.createElement("option");
-        option.text = res.roomTypes[i].name;
+        option.text = res.floors[i].name;
         option.className = "roomTypeContent"
-        roomTypeSelectRemove.add(option);
+        floorSelectRemove.add(option);
 
         //Populate rooms manager
         var typeHeading = document.createElement("h2");
-        typeHeading.innerHTML = res.roomTypes[i].name;
+        typeHeading.innerHTML = res.floors[i].name;
         document.getElementById("roomManagerPortal").appendChild(typeHeading);
 
         //add all rooms for each room type in its own div with delete button
-        for (var j = 0; j < res.roomTypes[i].rooms.length; j++) {
+        for (var j = 0; j < res.floors[i].rooms.length; j++) {
           var roomDiv = document.createElement("div");
-          roomDiv.id = res.roomTypes[i].name + res.roomTypes[i].rooms[j].title;
+          roomDiv.id = res.floors[i].name + res.floors[i].rooms[j].name;
           roomDiv.className = "room-display"
           document.getElementById("roomManagerPortal").appendChild(roomDiv);
 
           var button = document.createElement('button');
           button.innerHTML = "x";
-          var name=res.roomTypes[i].name;
-          var title = res.roomTypes[i].rooms[j].title;
+          var floorName = res.floors[i].name;
+          var roomName = res.floors[i].rooms[j].name;
 
-          button.onclick = function(){deleteRoom(name,title, roomDiv.id)};
+          button.onclick = function(){deleteRoom(floorName, roomName, roomDiv.id)};
           button.type = "submit"
           roomDiv.appendChild(button);
 
-          var roomTitle = document.createElement("h4");
-          roomTitle.innerHTML = res.roomTypes[i].rooms[j].title;
-          roomDiv.appendChild(roomTitle);
+          var roomName = document.createElement("h4");
+          roomName.innerHTML = res.floors[i].rooms[j].name;
+          roomDiv.appendChild(roomName);
 
           var roomP = document.createElement("p");
-          roomP.innerHTML = res.roomTypes[i].rooms[j].faculty + "<br> Start: " +
-                                res.roomTypes[i].rooms[j].startTime + " End: " + res.roomTypes[i].rooms[j].startTime;
+          roomP.innerHTML = res.floors[i].rooms[j].faculty;
           roomDiv.appendChild(roomP);
         }
       }
@@ -149,7 +135,7 @@ function loadDepartmentContent() {
   xhttp.send();
 }
 
-function deleteRoom(roomType, roomTitle, divId) {
+function deleteRoom(floorName, roomName, divId) {
   //Remove room from html
   var element = document.getElementById(divId);
   element.parentNode.removeChild(element);
@@ -162,6 +148,32 @@ function deleteRoom(roomType, roomTitle, divId) {
       alert('Request failed.  Returned status of ' + xhttp.status);
     }
   };
-  xhttp.send(encodeURI('roomType=' + roomType + '&roomTitle='+ roomTitle));
+  xhttp.send(encodeURI('floorName=' + floorName + '&roomName='+ roomName));
   location.reload();
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var movingImage = 'public/Uploads/' + ev.dataTransfer.getData("text");
+  var targetImage = 'public/Uploads/' + ev.target.id;
+
+  xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '/updateFloorOrder');
+  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhttp.onload = function () {
+    if (xhttp.status !== 200) {
+      alert('Request failed.  Returned status of ' + xhttp.status);
+    }else{
+      window.location.reload();
+    }
+  };
+  xhttp.send(encodeURI('movingPath=' + movingImage + '&targetPath='+ targetImage));
 }

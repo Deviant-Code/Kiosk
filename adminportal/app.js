@@ -208,10 +208,6 @@ app.post('/updateSlideThumbnail', function (req, res) {
   slideshowJson.addThumbnail(req.body.path, req.body.thumbnail);
 });
 
-//Update Department module's settings json
-app.post('/updateDeptThumbnail', function (req, res) {
-  slideshowJson.addThumbnail(req.body.path, req.body.thumbnail);
-});
 
 //Update Slideshow module's settings json
 app.post('/updateSlideshowParams', function (req, res) {
@@ -262,50 +258,37 @@ app.post('/updateDepartmentParams', function (req, res) {
   res.redirect('back');
 });
 
-//Update Department module's settings json with new content
-app.post('/updateDepartment', function (req, res) {
-  var object = departmentJson.getJson();
-  object.heading = req.body.heading;
-  object.description = req.body.description;
-
-  let data = JSON.stringify(object, null, 2);
-
-  fs.writeFileSync("public/json/department.json", data, (err) => {
-    if (err) {
-      console.error(err);
-      return;
-    };
-  });
-
+//Update department module a new floor
+app.post('/updateDeptFloors', function (req, res) {
+  departmentJson.addFloor(req.body.newFloor);
   res.redirect('back');
 });
 
-//Update department module's types with new type
-app.post('/updateDeptTypes', function (req, res) {
-  departmentJson.addRoomType(req.body.newRoomType);
+//Update Slideshow module's image order in json file and reload page
+app.post('/updateFloorOrder', function (req, res) {
+  departmentJson.reorderFloors(req.body.movingPath, req.body.targetPath);
   res.redirect('back');
 });
 
-//Update department module's with a new schedule
+//Update department module with a new room
 app.post('/updateRooms', function (req, res) {
-  departmentJson.addRoom(req.body.roomType,
-                            req.body.newRoomNumber,
-                            req.body.newFaculty,
-                            req.body.newHourStart,
-                            req.body.newHourEnd);
+  departmentJson.addRoom(req.body.floorName,
+                         req.body.newRoomName,
+                         req.body.newFaculty,
+                         );
   res.redirect('back');
 });
 
-//Remove a room type from our json
-app.post('/deleteRoomTypes', function (req, res) {
-  departmentJson.deleteRoomType(req.body.roomType);
+//Remove a floor from our json
+app.post('/deleteFloor', function (req, res) {
+  departmentJson.deleteFloor(req.body.floorName);
   res.redirect('back');
 });
 
-//Update department module's with a new schedule
+//Delete a room from the department module
 app.post('/deleteRoom', function (req, res) {
-  departmentJson.deleteRoom(req.body.roomType,
-                              req.body.roomTitle);
+  departmentJson.deleteRoom(req.body.floorName,
+                            req.body.roomName);
   res.redirect('back');
 });
 
