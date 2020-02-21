@@ -11,7 +11,7 @@ import java.nio.channels.FileChannel;
 public class AdminPortalListener{
 
     public static void main(String[] args) throws IOException{
-        //try simpler method, lol
+        //try simpler method
         try{
             while(true){
                 //sleep for 10 sec
@@ -32,13 +32,66 @@ public class AdminPortalListener{
         downloadAllJSON();
 
         //call checkJson to compare 2 modify times
-        checkAllJSON();
+        //checkAllJSON();
         
+        deleteImages("slideshow.json");
+
         downloadImages();
 
-        //other methods to update kiosk...
+        
 
     }
+
+    //right now, goes through all images, and deletes them if they are not in the JSON
+    //file included.
+    private static void deleteImages(String JSONName){
+
+        
+        
+        try{
+            File folder = new File("slideshow");
+            Gson gson = new Gson();
+            Slideshow slideshow = gson.fromJson(new FileReader("slideshow.json"), Slideshow.class);
+
+            if(!folder.exists()){
+                folder = new File("src/" + "slideshow");
+            }
+            //loop through files in slideshow
+            File[] listOfFiles = folder.listFiles();
+            
+            for (File file : listOfFiles) {     
+                if(file.isFile()){
+                    Boolean imageIn = false;
+
+                    for(int i = 0; i < slideshow.images.length; i++){
+                        //get image name
+                        String pictureName = slideshow.images[i].location.substring(8,slideshow.images[i].location.length());
+                        System.out.println("pictureName: " + pictureName);
+                        if(pictureName.equals(file.getName())){
+                            imageIn = true;
+                            break;
+                        }
+                    }
+
+                    if(!imageIn){
+                        
+                        System.out.println("file name: " + file.getName());
+                        file.delete();
+                        
+                    }
+                    imageIn = false;
+                }
+            }
+        }
+        catch(FileNotFoundException E){
+            System.out.println("file: not found!");
+            System.exit(1);
+        }
+    
+    }
+
+        
+
 
     //this class will be used to eventually loop through and download all
     //needed JSON
@@ -73,7 +126,7 @@ public class AdminPortalListener{
         in.close();
         byte[] response = out.toByteArray();
 
-        FileOutputStream fos = new FileOutputStream("temp" + fileName);
+        FileOutputStream fos = new FileOutputStream(fileName);
         fos.write(response);
         fos.close();
 
@@ -183,6 +236,7 @@ public class AdminPortalListener{
         int seqNum;
         String location;
         long lastModified;
+        String thumbnail;
     }
 
 
@@ -315,39 +369,7 @@ public class AdminPortalListener{
         //}
     }
 
-/*
-    private  String readUrl(String urlString) throws Exception {
-        BufferedReader br = null;
-        try {
-            URL url = new URL(urlString);
-            br = new BufferedReader(new InputStreamReader(url.openStream()));
-            StringBuffer buffer = new StringBuffer();
-            int read;
-            char[] chars = new char[1024];
-            while ((read = br.read(chars)) != -1)
-                buffer.append(chars, 0, read); 
 
-            return buffer.toString();
-        } finally {
-            if (br != null)
-                br.close();
-        }
-    }
-    
-    //Grabs json from portal via URL to json file
-    public Object getObject(String url) throws Exception {
-        Object obj;
-        try {
-            String json = readUrl(url);
-            Gson gson = new Gson();        
-            obj = gson.fromJson(json, Object.class);
-        } catch(Exception err) {
-            obj = null;
-        }
-        return obj;
-    }
-
-    */
 
 }
 

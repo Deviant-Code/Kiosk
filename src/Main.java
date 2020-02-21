@@ -6,7 +6,8 @@ import javafx.scene.input.KeyCombination;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
-
+import javafx.stage.WindowEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Popup;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -19,6 +20,7 @@ import java.io.*;
 public class Main extends Application {
 
     private static Slideshow slideshow;
+    private static Process pr;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -76,6 +78,12 @@ public class Main extends Application {
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.setFullScreenExitHint("Kiosk");
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                if(pr != null)
+                    pr.destroy();
+            }
+        });       
         primaryStage.show();
     }
 
@@ -109,17 +117,23 @@ public class Main extends Application {
 
         Runtime rt = Runtime.getRuntime();
         try{
-            Process pr = rt.exec("java -cp dependencies/gson/gson-2.8.6.jar manager/AdminPortalListener.java");
+            pr = rt.exec("java -cp dependencies/gson/gson-2.8.6.jar manager/AdminPortalListener.java");
             launch(args);
             pr.destroy();
         }
         catch(IOException E){
+            if(pr != null)
+                pr.destroy();
+
             System.exit(0);
         }
     }
 
     @Override
     public void stop() {
+        if(pr != null)
+            pr.destroy();
+
         System.exit(0);
     }
 }

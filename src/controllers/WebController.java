@@ -22,7 +22,7 @@ public class WebController implements Initializable {
     private WebView viewweb;
     private Scene scene;
     private Parent menuRoot;
-    private final String urlweb = "http://localhost:3000/pages/kioskdepartment.html";
+    private final String urlweb = "http://localhost:3000/pages/kioskDepartment.html";
 
     private GestureHandler gestureHandler = GestureHandler.getInstance();
 
