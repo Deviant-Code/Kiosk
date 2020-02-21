@@ -74,20 +74,20 @@
                 <div id="uploadGallery"></div>
             </div>
 
-            <!-- New Room Type -->
-            <div id="roomTypeAdd" class="content-input">
-                <form action="/updateDeptTypes" method="POST" >
-                    <h2>New Room Type</h2>
-                    <input type="text" class="newFormInput" id="newRoomField" name="newRoomType">
-                    <button type="submit" class="submitButton">Add Room Type</button>
+            <!-- New Floor -->
+            <div id="floorAdd" class="content-input">
+                <form action="/updateDeptFloors" method="POST" >
+                    <h2>New Floor</h2>
+                    <input type="text" class="newFormInput" id="newFloorField" name="newFloor">
+                    <button type="submit" class="submitButton">Add New Floor</button>
                 </form>
             </div>
 
-            <!-- Room Type Manager -->
-            <div id="roomTypeManager" class="content-input">
-                <form action="/deleteRoomTypes" method="POST" >
+            <!-- Floor Manager -->
+            <div id="floorManager" class="content-input">
+                <form action="/deleteFloor" method="POST" >
                     <h2>Remove Room Type</h2>
-                    <select class="newFormInput" id="roomTypeRemove" name="roomType">
+                    <select class="newFormInput" id="floorSelectRemove" name="floorName">
                     </select>
                     <button type="submit" class="submitButton">Remove</button>
                 </form>
@@ -98,18 +98,15 @@
                 <form action="/updateRooms" method="POST" >
                     <h2>Add New Room</h2>
 
-                    Room Type
-                    <select class="newFormInput" id="roomTypeSelect" name="newRoomType">
+                    Floor
+                    <select class="newFormInput" id="floorSelect" name="floorName">
                     </select><br>
 
-                    Room Number
-                    <input type="text" class="newFormInput" id="newRoomField" name="newRoomNumber"><br>
+                    Room Name
+                    <input type="text" class="newFormInput" id="newRoomField" name="newRoomName"><br>
 
                     Faculty
-                    <input type="text" class="newFormInput" id="newRoomField" name="newFaculty"><br>
-
-                    Start Hour<input type="time" class="newFormInput" id="newRoomTime" name="newHourStart">
-                    End Hour<input type="time" class="newFormInput" id="newRoomTime" name="newHourEnd"><br>
+                    <input type="text" class="newFormInput" id="newRoomField" name="newFaculty"><br><br>
 
                     <button type="submit" class="submitButton">Add Room</button>
                 </form>

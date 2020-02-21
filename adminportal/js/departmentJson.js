@@ -9,13 +9,6 @@ module.exports = {
 
         for (var i = 0; i < object.images.length; i++) {
             if (object.images[i].location == path) {
-
-                if (object.images[i].thumbnail != "") {
-                    fs.unlink('public/' + object.images[i].thumbnail, (err) => {
-                        if (err)
-                            console.log(err);
-                    });
-                }
                 //Remove from array
                 object.images.splice(i, 1);
 
@@ -57,8 +50,6 @@ module.exports = {
             object['images'].push({
                 seqnum: object['images'].length,
                 location: path,
-                lastModified: Date.now(),
-                thumbnail: ""
             });
         });
 
@@ -73,18 +64,16 @@ module.exports = {
     },
 
     //Add New Room to Json
-    addRoom: function addRoom(roomType, title, faculty, startTime, endTime) {
+    addRoom: function addRoom(floorName, roomName, faculty) {
         var object = this.getJson();
 
-        if(title != ""){
-            //Find the schedule type in our list
-            for (var i = 0; i < object['roomTypes'].length; i++) {
-                if (object.roomTypes[i].name == roomType){
-                    object.roomTypes[i]['rooms'].push({
-                        title: title,
+        if(floorName != ""){
+            //Find the floor in our list
+            for (var i = 0; i < object['floors'].length; i++) {
+                if (object.floors[i].name == floorName){
+                    object.floors[i]['rooms'].push({
+                        name: roomName,
                         faculty: faculty,
-                        startTime: startTime,
-                        endTime: endTime
                     });
 
                     let data = JSON.stringify(object, null, 2);
@@ -104,17 +93,17 @@ module.exports = {
     },
 
     //Add New Room Type to Json
-    addRoomType: function addRoomType(name) {
+    addFloor: function addFloor(floorName) {
         var object = this.getJson();
 
         //If the name already exists then dont add the type
-        for (var i = 0; i < object['roomTypes'].length; i++) {
-            if (object.roomTypes[i].name == name)
+        for (var i = 0; i < object['floors'].length; i++) {
+            if (object.floors[i].name == floorName)
                 return;
         }
 
-        object['roomTypes'].push({
-            name: name,
+        object['floors'].push({
+            name: floorName,
             rooms: []
         });
 
@@ -128,15 +117,15 @@ module.exports = {
         });
     },
 
-    //Delete a Room Type from Json
-    deleteRoomType: function deleteRoom(roomType) {
+    //Delete a Floor from Json
+    deleteFloor: function deleteFloor(floorName) {
         var object = this.getJson();
 
         //Find the schedule type in our list and splice it
-        for (var i = 0; i < object['roomTypes'].length; i++) {
-            if (object.roomTypes[i].name == roomType){
+        for (var i = 0; i < object['floors'].length; i++) {
+            if (object.floors[i].name == floorName){
 
-                object.roomTypes.splice(i, 1);
+                object.floors.splice(i, 1);
 
                 let data = JSON.stringify(object, null, 2);
 
@@ -151,18 +140,18 @@ module.exports = {
         }
     },
 
-    //Delete a Schedule from Json
-    deleteRoom: function deleteRoom(roomType, title) {
+    //Delete a Room from Json
+    deleteRoom: function deleteRoom(floorName, roomName) {
         var object = this.getJson();
 
-        //Find the schedule type in our list
-        for (var i = 0; i < object['roomTypes'].length; i++) {
-            if (object.roomTypes[i].name == roomType){
-                var type = object.roomTypes[i];
+        //Find the floor the room is on, in our list
+        for (var i = 0; i < object['floors'].length; i++) {
+            if (object.floors[i].name == floorName){
+                var floor = object.floors[i];
 
-                for(var j =0; j < type.rooms.length; j++){
-                    if(type.rooms[j].title = title){
-                        type.rooms.splice(j, 1);
+                for(var j =0; j < floor.rooms.length; j++){
+                    if(floor.rooms[j].name = roomName){
+                        floor.rooms.splice(j, 1);
                         break;
                     }
                 }
@@ -191,9 +180,8 @@ module.exports = {
             let department = {
                 moduleEnabled: true,
                 default: false,
-                heading: '*insert heading*',
-                description: '*insert description*',
-
+                images: [],
+                floors: []
             };
 
             rawdata = JSON.stringify(department, null, 2);
