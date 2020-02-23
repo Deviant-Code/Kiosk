@@ -12,7 +12,7 @@ function loadDepartmentContent() {
 
       //For each floor
       for (var i = 0; i < res.images.length; i++) {
-        
+
         //Add a floor div
         var floorDiv = document.createElement("div");
         floorDiv.className = "floor-display"
@@ -20,8 +20,8 @@ function loadDepartmentContent() {
 
         //Add a floor heading
         var floorHeading = document.createElement("h1");
-        floorHeading.innerHTML = "Floor " + (i + 1);
-        floorHeading.setAttribute("style", "font-size: 4vw;margin: 0 0;") 
+        floorHeading.innerHTML = "Floor " + res.floors[i].name;
+        floorHeading.setAttribute("style", "font-size: 4vw;margin: 0 0;")
         floorDiv.appendChild(floorHeading);
 
         //Add image for floor
@@ -37,11 +37,11 @@ function loadDepartmentContent() {
             var roomDiv = document.createElement("div");
             roomDiv.className = "room-display-kiosk"
             floorDiv.appendChild(roomDiv);
-  
+
             var roomName = document.createElement("h2");
-            roomName.innerHTML = res.floors[i].rooms[j].name; 
+            roomName.innerHTML = res.floors[i].rooms[j].name;
             roomDiv.appendChild(roomName);
-  
+
             var roomP = document.createElement("p");
             roomP.innerHTML = res.floors[i].rooms[j].faculty;
             roomDiv.appendChild(roomP);
@@ -51,9 +51,11 @@ function loadDepartmentContent() {
       }
     }
   };
+
   xhttp.open("GET", "/getDepartmentParams", true);
   xhttp.send();
 }
+
 
 // Used by the serach div to reload the department manager display with specfied parameters as defined
 function search(){
@@ -81,13 +83,13 @@ function loadDepartmentContentAux(term) {
               floorDiv = document.createElement("div");
               floorDiv.className = "floor-display"
               document.getElementById("departmentManagerKiosk").appendChild(floorDiv);
-      
+
               //Add a floor heading
               var floorHeading = document.createElement("h1");
               floorHeading.innerHTML = "Floor " + (i + 1);
-              floorHeading.setAttribute("style", "font-size: 4vw;margin: 0 0;") 
+              floorHeading.setAttribute("style", "font-size: 4vw;margin: 0 0;")
               floorDiv.appendChild(floorHeading);
-      
+
               //Add image for floor
               var floorImg = document.createElement("IMG");
               floorImg.className = "floor-image"
@@ -102,13 +104,15 @@ function loadDepartmentContentAux(term) {
             floorDiv.appendChild(roomDiv);
 
             var roomName = document.createElement("h2");
-            roomName.innerHTML = res.floors[i].rooms[j].name; 
+            roomName.innerHTML = res.floors[i].rooms[j].name;
             roomDiv.appendChild(roomName);
 
             var roomP = document.createElement("p");
-            roomP.innerHTML = res.floors[i].rooms[j].faculty;
+            roomP.innerHTML = res.floors[i].rooms[j].faculty +
+            res.floors[i].rooms[j].description + "<br> Hours: " +
+                                  res.floors[i].rooms[j].startHour+ " - " + res.floors[i].rooms[j].endHour;
             roomDiv.appendChild(roomP);
-            
+
           }else{
             continue;
           }

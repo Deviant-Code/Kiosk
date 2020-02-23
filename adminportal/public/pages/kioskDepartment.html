@@ -5,7 +5,7 @@
         <title>Electra Department Module Kiosk Display</title>
         <link rel= "stylesheet" href="../stylesheets/style.css">
         <link rel= "stylesheet" href="../stylesheets/department.css">
-        <style type=text/css> 
+        <style type=text/css>
 
         html, body {
             margin: 0;
@@ -19,20 +19,20 @@
 
     <body onload="loadDepartmentContent()">
             <!-- Schedule Manager -->
-            <div class="content-input" id="departmentManagerKiosk">
-                
-            </div>
-            <div class="content-input" id="departmentSearchKiosk">
-                <form>
-                    <h2>Search</h2>
-                    <input type="text" class="newFormInput" id="searchTerm"><br><br>
+            <div class="content-display" id="departmentManagerKiosk">
 
+            </div>
+            <div class="content-search" id="departmentSearchKiosk">
+                <form>
+                    <input type="text" class="searchInput" id="searchTerm" placeholder="Search faculty or rooms"><br><br>
                     <button type='button' class="submitButton" onclick="search()">Search</button>
                     <button type='button' class="submitButton" onclick="loadDepartmentContent()">Reset</button>
                 </form>
             </div>
+            <div id="content"> </div>
         </div>
         <script src="../javascripts/kioskDepartment.js" ></script>
     </body>
+
 
 </html>

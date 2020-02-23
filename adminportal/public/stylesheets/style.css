@@ -4,7 +4,7 @@ body {
   font-family: sans-serif;
   margin: 0;
   background-color: white;
-} 
+}
 
 div.banner {
   width: 100%;
@@ -25,7 +25,7 @@ div.upload {
   margin: 10px;
 }
 hr.hr1 {
-  border-top: 4px solid #0096D6;
+  border-top: 4px solid #30a1ff;
   padding: 0;
   margin-top: 0;
 }
@@ -143,8 +143,14 @@ div.settings img {
   padding: 15px 12px;
   font-size: 21px;
 }
+#selectedButton {
+    background-color: #FFFF;
+    color: #30a1ff;
+    border: 2px solid #30a1ff;
+    text-shadow: none;
+}
 
-/* General UI to be used */ 
+/* General UI to be used */
 .submitButton {
   cursor: pointer;
   display:inline-block;
