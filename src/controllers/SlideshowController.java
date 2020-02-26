@@ -1,14 +1,19 @@
 package controllers;
 
+import com.jfoenix.controls.JFXDrawer;
 import javafx.event.Event;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.SwipeEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import manager.KioskManager;
 import javafx.scene.Parent;
 import modules.Slideshow;
@@ -20,6 +25,9 @@ public class SlideshowController {
 
     private Slideshow ss;
     private GestureHandler gestureHandler = GestureHandler.getInstance();
+
+    @FXML
+    private JFXDrawer drawer;
 
     public void openMenuScene() {
         Scene scene = KioskManager.getInstance().getScene();
@@ -73,7 +81,8 @@ public class SlideshowController {
                 //Gesture has just completed
                 EventType<SwipeEvent> swipe = gestureHandler.processGesture();
                 if(swipe.equals(SwipeEvent.SWIPE_UP)){
-                    openMenuScene();
+                    System.out.println("SWIPEUP");
+                    initDrawer();
                 } else if(swipe.equals(SwipeEvent.SWIPE_LEFT)){
                     previousPhoto();
                 } else if(swipe.equals(SwipeEvent.SWIPE_RIGHT)){
@@ -94,4 +103,18 @@ public class SlideshowController {
     public void setSS(Slideshow ss){
         this.ss = ss;
     }
+
+    private void initDrawer(){
+        try {
+            HBox menu = FXMLLoader.load(getClass().getResource("../fxml/kioskNavMenu.fxml"));
+            drawer.setSidePane(menu);
+            drawer.setPrefWidth((KioskManager.getInstance().getScene().getWidth()/3)*2);
+            drawer.setPrefHeight(KioskManager.getInstance().getScene().getHeight()/6);
+            drawer.open();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

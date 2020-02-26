@@ -1,6 +1,7 @@
 package modules;
 
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Slideshow extends Module{
+public class Slideshow extends Module {
 
     private int imageIndex;
     private int secondsPerImage = 5;
@@ -94,7 +95,6 @@ public class Slideshow extends Module{
         activeImage = new Image(list.get(imageIndex));
     }
 
-    @Override
     public void update() throws Exception {
         pause();
 

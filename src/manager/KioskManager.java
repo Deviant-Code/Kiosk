@@ -61,12 +61,6 @@ public class KioskManager {
     //Returns requested scene to controller to set root
     public Parent transition(String module){
         switch (module){
-            case "MENU":
-                if(activeModule == slideshow){
-                    slideshow.pause();
-                }
-                activeModule = null;
-                return menuRoot;
             case "SS":
                 try {
                     slideshow.update();
@@ -98,16 +92,14 @@ public class KioskManager {
         }
     }
 
-    public void setRoots(Parent slideshowRoot, Parent pollRoot, Parent deptRoot, Parent menuRoot, Parent scheduleRoot){
+    public void setRoots(Parent slideshowRoot, Parent pollRoot, Parent deptRoot, Parent scheduleRoot){
         this.slideshowRoot = slideshowRoot;
         this.pollRoot = pollRoot;
         this.deptRoot = deptRoot;
-        this.menuRoot = menuRoot;
         this.scheduleRoot = scheduleRoot;
     }
 
-    public void setControllers(MenuController menuController, SlideshowController slideshowController, WebController deptController, PollController pollController, ScheduleController scheduleController){
-        this.menuController = menuController;
+    public void setControllers(SlideshowController slideshowController, WebController deptController, PollController pollController, ScheduleController scheduleController){
         this.slideshowController = slideshowController;
         this.deptController = deptController;
         this.pollController = pollController;
