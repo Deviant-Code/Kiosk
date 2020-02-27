@@ -1,11 +1,7 @@
 package modules;
 
-
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-
 import java.io.*;
 import java.net.URLConnection;
 import java.nio.file.*;
@@ -14,11 +10,11 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Slideshow extends Module {
+public class Slideshow implements ModuleInterface{
 
     private int imageIndex;
     private int secondsPerImage = 5;
-    private static String slideshowDirectory = "slideshow/";
+    private static String slideshowDirectory = "slideshow/"; //local directory used by adminportal listener
     private List<String> list;
     private Image activeImage;
     private File folder;
@@ -26,64 +22,16 @@ public class Slideshow extends Module {
     private Timer t;
     private boolean isPaused;
 
-    public class WatchRunnable implements Runnable {
-        @Override
-        public void run() {
-            WatchService watchService = null;
-            try {
-                watchService = FileSystems.getDefault().newWatchService();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            Path directory = Paths.get(slideshowDirectory);
-
-            WatchKey watchKey = null;
-            try {
-                watchKey = directory.register(watchService,
-                        StandardWatchEventKinds.ENTRY_CREATE,
-                        StandardWatchEventKinds.ENTRY_DELETE,
-                        StandardWatchEventKinds.ENTRY_MODIFY);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            while(true) {
-                for(WatchEvent<?> event : watchKey.pollEvents()){
-                    if(event.kind().equals(StandardWatchEventKinds.ENTRY_CREATE)){
-                        try {
-                            update();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    if(event.kind().equals(StandardWatchEventKinds.ENTRY_DELETE)){
-                        try {
-                            update();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public Slideshow(ImageView imageView) throws Exception {
-        this.imageView = imageView; //Links imageview from scene to slideshow module
+    public Slideshow(ImageView imageView) {
+        this.imageView = imageView;
         list = new ArrayList<>();
         init();
         Thread watchThread = new Thread(new WatchRunnable());
         watchThread.start();
     }
 
-    public Slideshow() {
-
-    }
-
     //Initializes the pictures in slideshow
-    private void init() throws Exception {
+    private void init() {
 
         //Check for slideshow image directory
         validateDirectory();
@@ -93,22 +41,29 @@ public class Slideshow extends Module {
 
         this.imageIndex = 0;
         activeImage = new Image(list.get(imageIndex));
+        setImage();
     }
 
-    public void update() throws Exception {
+    public void update() {
         pause();
 
         //Slideshow directory not found, reinitialize
         if(!folder.exists()){
-            init();
+            try {
+                init();
+            } catch (Exception e) {
+                //TODO: Log exception with high severity
+            }
             return;
         }
 
         list.clear();
         buildList();
+    }
 
-        this.imageIndex = 0;
-        resume();
+    @Override
+    public void onExit() {
+
     }
 
     //Validates slideshow directory existence.
@@ -154,9 +109,9 @@ public class Slideshow extends Module {
 
         if(list.size() == 0){
             //No pictures were added to slideshow. Add demo photo and log result //TODO: log result
-            File file = new File("fxml/back.jpg");
+            File file = new File("fxml/gallery_empty_img.jpg");
             if(file.exists()){
-                list.add("/fxml/back.jpg");
+                list.add("/fxml/gallery_empty_img.jpg");
             } else {
                 throw new Error("No files found for slideshow");
             }
@@ -223,4 +178,47 @@ public class Slideshow extends Module {
         return isPaused;
     }
 
+    public class WatchRunnable implements Runnable {
+        @Override
+        public void run() {
+            WatchService watchService = null;
+            try {
+                watchService = FileSystems.getDefault().newWatchService();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Path directory = Paths.get(slideshowDirectory);
+
+            WatchKey watchKey = null;
+            try {
+                watchKey = directory.register(watchService,
+                        StandardWatchEventKinds.ENTRY_CREATE,
+                        StandardWatchEventKinds.ENTRY_DELETE,
+                        StandardWatchEventKinds.ENTRY_MODIFY);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            while(true) {
+                for(WatchEvent<?> event : watchKey.pollEvents()){
+                    if(event.kind().equals(StandardWatchEventKinds.ENTRY_CREATE)){
+                        try {
+                            update();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    if(event.kind().equals(StandardWatchEventKinds.ENTRY_DELETE)){
+                        try {
+                            update();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

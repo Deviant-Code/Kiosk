@@ -19,24 +19,17 @@ import java.util.ResourceBundle;
 
 public class PollController implements Initializable {
     @FXML
-    private WebView viewweb;
+    private WebView webView;
     private final String urlweb = "http://127.0.0.1:3000/pages/kioskPoll.html";
 
     private GestureHandler gestureHandler = GestureHandler.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        final WebEngine web = viewweb.getEngine();
+        final WebEngine web = webView.getEngine();
         web.setJavaScriptEnabled(true);
         web.executeScript("location.reload(true);");
         web.load(urlweb);
-    }
-
-    public void openMenuScene() {
-        Scene scene = KioskManager.getInstance().getScene();
-        Parent root = KioskManager.getInstance().transition("MENU");
-        scene.setRoot(root);
-        refresh();
     }
 
     @FXML
@@ -53,13 +46,10 @@ public class PollController implements Initializable {
                 //Gesture has just completed
                 EventType<SwipeEvent> swipe = gestureHandler.processGesture();
                 if(swipe.equals(SwipeEvent.SWIPE_UP)){
-                    openMenuScene();
+
                 }
             }
         }
     }
 
-    public void refresh() {
-        viewweb.getEngine().load(urlweb);
-    }
 }

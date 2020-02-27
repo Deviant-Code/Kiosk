@@ -5,21 +5,21 @@
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="3040.0" styleClass="hboxmenu" stylesheets="@../res/kioskStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DrawerController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="360.0" prefWidth="2560.0" styleClass="hboxmenu" stylesheets="@../res/kioskStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DrawerController">
    <children>
-      <JFXButton fx:id="ssButton" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="540.0" ripplerFill="#081a51" text="Slideshow" HBox.hgrow="ALWAYS">
+      <JFXButton fx:id="ssButton" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openSlideshow" onMouseClicked="#openSlideshow" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Slideshow" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
          </HBox.margin></JFXButton>
-      <JFXButton fx:id="pollsButton" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="540.0" ripplerFill="#081a51" text="Polls" HBox.hgrow="ALWAYS">
+      <JFXButton fx:id="pollsButton" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openPolls" onMouseClicked="#openPolls" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Polls" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
          </HBox.margin></JFXButton>
-      <JFXButton fx:id="schedButton" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="540.0" ripplerFill="#081a51" text="Schedules" HBox.hgrow="ALWAYS">
+      <JFXButton fx:id="schedButton" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openSchedules" onMouseClicked="#openSchedules" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Schedules" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
          </HBox.margin></JFXButton>
-      <JFXButton fx:id="deptButton" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="540.0" ripplerFill="#081a51" text="Department" HBox.hgrow="ALWAYS">
+      <JFXButton fx:id="deptButton" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openDepartment" onMouseClicked="#openDepartment" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Department" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
          </HBox.margin></JFXButton>

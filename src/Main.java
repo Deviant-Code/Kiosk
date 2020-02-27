@@ -1,4 +1,3 @@
-import controllers.*;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -34,49 +33,44 @@ public class Main extends Application {
         KioskManager kioskManager = KioskManager.getInstance();;
         kioskManager.setStage(primaryStage);
 
-        //Generate FXML Loaders for each module
-        FXMLLoader slideshowLoader = new FXMLLoader(getClass().getResource("fxml/slideshow.fxml"));
-        FXMLLoader webViewLoader = new FXMLLoader(getClass().getResource("fxml/webview.fxml"));
-        FXMLLoader pollViewLoader = new FXMLLoader(getClass().getResource("fxml/pollView.fxml"));
-        FXMLLoader schedulerLoader = new FXMLLoader(getClass().getResource("fxml/schedule.fxml"));
+        try {
 
-        //Generate Roots for each loader
-        Parent slideshowRoot = slideshowLoader.load();
-        Parent deptRoot = webViewLoader.load();
-        Parent pollViewRoot = pollViewLoader.load();
-        Parent scheduleRoot = schedulerLoader.load();
+            //Generate FXML Loaders for each module
+            FXMLLoader slideshowLoader = new FXMLLoader(getClass().getResource("fxml/slideshow.fxml"));
+            FXMLLoader webViewLoader = new FXMLLoader(getClass().getResource("fxml/webView.fxml"));
+            FXMLLoader pollViewLoader = new FXMLLoader(getClass().getResource("fxml/pollView.fxml"));
+            FXMLLoader schedulerLoader = new FXMLLoader(getClass().getResource("fxml/schedule.fxml"));
 
-        //Build Scene and pass in slideshow as original root
-        Scene scene = new Scene(slideshowRoot,bounds.getWidth(), bounds.getHeight());
+            //Generate Roots for each loader
+            Parent slideshowRoot = slideshowLoader.load();
+            Parent deptRoot = webViewLoader.load();
+            Parent pollViewRoot = pollViewLoader.load();
+            Parent scheduleRoot = schedulerLoader.load();
 
-        //Build Controllers for each view
-        SlideshowController ssController = slideshowLoader.getController();
-        WebController webController = webViewLoader.getController();
-        PollController pollController = pollViewLoader.getController();
-        ScheduleController scheduleController = schedulerLoader.getController();
+            //Set Roots
+            kioskManager.setRoots(slideshowRoot, pollViewRoot, deptRoot, scheduleRoot);
 
-        //set scene, root, and controllers to kiosk manager
-        kioskManager.setRoots(slideshowRoot,pollViewRoot,deptRoot,scheduleRoot);
-        kioskManager.setControllers(ssController, webController, pollController, scheduleController);
+            //Build Scene and pass in slideshow as original root
+            Scene scene = new Scene(slideshowRoot, bounds.getWidth(), bounds.getHeight());
 
-        //Set Scene and Show Stage
-        kioskManager.setScene(scene);
 
-        //Initialize modules
-        kioskManager.videoInit();
-        kioskManager.slideShowInit();
+            //Set Scene and Show Stage
+            kioskManager.setScene(scene);
 
-        primaryStage.setScene(scene);
-        primaryStage.setFullScreen(true);
-        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-        primaryStage.setFullScreenExitHint("Kiosk");
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            public void handle(WindowEvent we) {
-                if(pr != null)
-                    pr.destroy();
-            }
-        });       
-        primaryStage.show();
+            primaryStage.setScene(scene);
+            primaryStage.setFullScreen(true);
+            primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+            primaryStage.setFullScreenExitHint("Kiosk");
+            primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                public void handle(WindowEvent we) {
+                    if (pr != null)
+                        pr.destroy();
+                }
+            });
+            primaryStage.show();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     // //running the kiosk

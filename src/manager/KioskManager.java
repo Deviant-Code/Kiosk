@@ -2,44 +2,32 @@ package manager;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import modules.*;
 import controllers.*;
-
-import java.io.IOException;
 
 public class KioskManager {
 
     private static KioskManager instance = null;
 
-    static modules.Module activeModule; //shows current module being used
+    static ModuleInterface activeModule; //shows current module being used
     static Slideshow slideshow;
     static Video video;
     static Schedules schedules;
     static Map map;
+    static Polls polls;
+    static Department department;
 
-    //Save state of root for changing scenes
-    private Parent menuRoot;
+
+    // Root for each module to change between scenes
     private Parent pollRoot;
     private Parent deptRoot;
     private Parent scheduleRoot;
     private Parent slideshowRoot;
+
+    // Scene & Display Controls
     private Scene scene;
-
-    //Controllers for fxml files
-    private MenuController menuController;
-    private SlideshowController slideshowController;
-    private PollController pollController;
-    private WebController deptController;
     private Stage stage;
-    private ScheduleController scheduleController;
-
-    //private MapController mapController;
-    //private ScheduleController scheduleController;
 
     private KioskManager(){
         //Private Constructor
@@ -52,44 +40,47 @@ public class KioskManager {
         return instance;
     }
 
-    public void setScene(Scene scene){
-        this.scene = scene;
-
-    }
-
     //Transition kiosk to a different module given the name of the module
     //Returns requested scene to controller to set root
-    public Parent transition(String module){
+    public void transition(String module){
         switch (module){
             case "SS":
-                try {
+                if (activeModule != slideshow) {
                     slideshow.update();
                     slideshow.setImage();
                     slideshow.resume();
                     activeModule = slideshow;
-                } catch (Exception e) {
-                    //Caught error
-                    e.printStackTrace();
-                    return menuRoot;
+                    scene.setRoot(slideshowRoot);
                 }
-                return slideshowRoot;
             case "POLLS":
-                //activeModule = polls;
-                return pollRoot;
+                activeModule = polls;
+                scene.setRoot(pollRoot);
+                stage.show();
             case "DEPT":
-                //activeModule = department;
-                return deptRoot;
+                activeModule = department;
+                scene.setRoot(deptRoot);
             case "SCHED":
-                //Future modules, not yet implemented
-                //activeModule = schedules;
-                return scheduleRoot;
-            case "MAPS":
-                //Future modules, not yet implemented
-                //activeModule = maps;
-                //return mapRoot;
+                activeModule = schedules;
+                scene.setRoot(scheduleRoot);
+            case "MAPS": //TODO: Implement a map module
+                //activeModule = map;
+                //scene.setRoot(mapRoot);
             default:
-                return menuRoot;
+                activeModule = slideshow;
+                scene.setRoot(slideshowRoot);
         }
+        stage.show();
+    }
+
+
+    // *********** Getters and Setters *********** \\
+
+    public void setScene(Scene scene){
+        this.scene = scene;
+    }
+
+    public void setStage(Stage primaryStage) {
+        this.stage = primaryStage;
     }
 
     public void setRoots(Parent slideshowRoot, Parent pollRoot, Parent deptRoot, Parent scheduleRoot){
@@ -99,40 +90,13 @@ public class KioskManager {
         this.scheduleRoot = scheduleRoot;
     }
 
-    public void setControllers(SlideshowController slideshowController, WebController deptController, PollController pollController, ScheduleController scheduleController){
-        this.slideshowController = slideshowController;
-        this.deptController = deptController;
-        this.pollController = pollController;
-        this.scheduleController = scheduleController;
-    }
-
-    public void slideShowInit() throws Exception {
-        ImageView imageView = (ImageView) slideshowRoot.lookup("#ss_image_view");
-        imageView.setPreserveRatio(true);
-        imageView.fitWidthProperty().bind(scene.widthProperty());
-        imageView.fitHeightProperty().bind(scene.heightProperty());
-
-        slideshow = new Slideshow(imageView);
-        slideshowController.setSS(slideshow);
-    }
-
-    public void videoInit() {
-        video = new Video();
-    }
-
     public Scene getScene() {
         return this.scene;
     }
 
-    public Parent getSlideshowRoot(){
-        return this.slideshowRoot;
-    }
 
-    public void setStage(Stage primaryStage) {
-        this.stage = primaryStage;
-    }
-
-    public Stage getStage(){
+    public Stage getStage() {
         return this.stage;
     }
+
 }

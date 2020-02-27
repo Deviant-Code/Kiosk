@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.web.WebView?>
-
 
 <StackPane onMouseClicked="#onTouchReleased" prefHeight="2160.0" prefWidth="3840.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ScheduleController">
    <children>
       <AnchorPane onMouseClicked="#onTouchReleased">
          <children>
-            <WebView fx:id="viewweb" maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" onMouseClicked="#onTouchReleased" pickOnBounds="true" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <WebView fx:id="webView" maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" onMouseClicked="#onTouchReleased" pickOnBounds="true" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <Button mnemonicParsing="false" onDragDetected="#onTouchEvent" onMouseClicked="#onTouchReleased" opacity="0.0" prefHeight="400.0" prefWidth="3840.0" text="Button" StackPane.alignment="BOTTOM_CENTER" />
+      <BorderPane onDragDetected="#onTouchEvent" onMouseClicked="#onTouchReleased" prefHeight="2160.0" prefWidth="3840.0">
+         <right>
+            <Pane onDragDetected="#onTouchEvent" opacity="0.55" prefHeight="1760.0" prefWidth="400.0" BorderPane.alignment="CENTER_RIGHT" />
+         </right>
+         <left>
+            <Pane onDragDetected="#onTouchEvent" opacity="0.74" prefHeight="1760.0" prefWidth="400.0" BorderPane.alignment="CENTER_LEFT" />
+         </left>
+         <bottom>
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="150.0" direction="BOTTOM" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="3040.0" BorderPane.alignment="BOTTOM_CENTER">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </JFXDrawer>
+         </bottom>
+      </BorderPane>
    </children>
 </StackPane>

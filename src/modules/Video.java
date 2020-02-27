@@ -1,6 +1,6 @@
 package modules;
 
-public class Video extends Module {
+public class Video implements ModuleInterface {
     //Video data refrence
     //Slideshow view refrence
 
@@ -14,6 +14,11 @@ public class Video extends Module {
     public void pause(){}
     
     public void update(){
+    }
+
+    @Override
+    public void onExit() {
+
     }
 
 }

@@ -1,9 +1,0 @@
-.root {
-	-fx-font-size: 20;
-}
-
-.button{
-     -fx-background-color: linear-gradient(#b3b8bd,#3d4247);
-     -fx-background-radius: 5;
-     -fx-font-weight: bold;
- }

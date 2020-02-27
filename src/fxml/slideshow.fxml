@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onSwipeLeft="#previousPhoto" onSwipeRight="#nextPhoto" onSwipeUp="#openMenuScene" prefHeight="2160.0" prefWidth="3840.0" style="-fx-background-color: #52489C;" stylesheets="@../res/kioskStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SlideshowController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2160.0" prefWidth="3840.0" style="-fx-background-color: #52489C;" stylesheets="@../res/kioskStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SlideshowController">
    <children>
-      <AnchorPane nodeOrientation="RIGHT_TO_LEFT" onTouchPressed="#nextPhoto" prefHeight="2160.0" prefWidth="3840.0">
+      <AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="2160.0" prefWidth="3840.0">
          <children>
             <BorderPane layoutY="540.0" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <center>
-                  <ImageView id="ss_image_view" fx:id="ss_image_view" cache="true" depthTest="DISABLE" focusTraversable="true" onKeyPressed="#keyPressed" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="imageView" fx:id="imageView" cache="true" depthTest="DISABLE" focusTraversable="true" onKeyPressed="#keyPressed" pickOnBounds="true" preserveRatio="true">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
@@ -35,7 +35,7 @@
             <Pane onDragDetected="#onTouchEvent" onMouseClicked="#nextPhoto" opacity="0.55" prefHeight="1760.0" prefWidth="400.0" BorderPane.alignment="CENTER_RIGHT" />
          </right>
          <left>
-            <Pane onDragDetected="#onTouchEvent" onMouseClicked="#nextPhoto" onTouchPressed="#previousPhoto" opacity="0.74" prefHeight="1760.0" prefWidth="400.0" BorderPane.alignment="CENTER_LEFT" />
+            <Pane onDragDetected="#onTouchEvent" onMouseClicked="#previousPhoto" onTouchPressed="#previousPhoto" opacity="0.74" prefHeight="1760.0" prefWidth="400.0" BorderPane.alignment="CENTER_LEFT" />
          </left>
          <bottom>
             <JFXDrawer fx:id="drawer" defaultDrawerSize="150.0" direction="BOTTOM" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="3040.0" BorderPane.alignment="BOTTOM_CENTER">
