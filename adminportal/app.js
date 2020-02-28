@@ -208,6 +208,10 @@ app.post('/updateSlideThumbnail', function (req, res) {
   slideshowJson.addThumbnail(req.body.path, req.body.thumbnail);
 });
 
+//Update Slide settings in json
+app.post('/updateSlideSettings', function (req, res) {
+  slideshowJson.updateSlideSettings(req.body.path, req.body.transitionTime, req.body.expirationDate);
+});
 
 //Update Slideshow module's settings json
 app.post('/updateSlideshowParams', function (req, res) {

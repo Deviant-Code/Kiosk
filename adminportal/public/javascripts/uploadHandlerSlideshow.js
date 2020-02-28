@@ -96,7 +96,8 @@ function getVideoThumnail(image, path, i){
         document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="'
                                                                   + URI + '" id="' + path + '"alt="image' + i + '"/>'
                                                                   + '<div id="top-left">'+ (i + 1) + '</div>'
-                                                                  + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>' +
+                                                                  + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>'
+                                                                  + '<div id="bottom-left"> ⚙️ </div>' +
                                                                   '</div>';
         //document.getElementById('uploadGallery').innerHTML += '<img src="' + URI + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
         updateSlideThumbnail(loc, URI);
@@ -202,7 +203,8 @@ function loadSlideshowContent() {
           document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="'
                                                                   + images[i] + '" id="' + path + '"alt="image' + i + '"/>'
                                                                   + '<div id="top-left">'+ (i + 1) + '</div>'
-                                                                  + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>' +
+                                                                  + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>'
+                                                                  + '<div id="bottom-left" onclick="openSlideSettings(' + '\'' + path + '\' ,' + i + ')"> ⚙️ </div>' +
                                                                   '</div>';
         }
       }
@@ -242,4 +244,43 @@ function drop(ev) {
     }
   };
   xhttp.send(encodeURI('movingPath=' + movingImage + '&targetPath='+ targetImage));
+}
+
+//open slide settings menu and populate with current settings
+function openSlideSettings(path, i){
+  document.getElementById("slideSettingsForm").style.display = "inline-block";
+  document.getElementById("slideSettingsImage").src = "../Uploads/" + path;
+  document.getElementById("slideSettingsImage").name = "Uploads/" + path;
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      var res = JSON.parse(this.responseText);
+      
+      document.getElementById("slideTransitionTime").value = res.images[i].transitionTime;
+      document.getElementById("slideExpDate").value = res.images[i].expiration;
+    }
+  };
+  xhttp.open("GET", "/getSlideshowParams", true);
+  xhttp.send();
+}
+
+function updateSlideSettings(){
+  xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '/updateSlideSettings');
+  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhttp.onload = function () {
+    if (xhttp.status !== 200) {
+      alert('Request failed.  Returned status of ' + xhttp.status);
+    }else{
+      window.location.reload();
+    }
+  };
+  xhttp.send(encodeURI( 'path=' + document.getElementById("slideSettingsImage").name
+                        + '&transitionTime=' + document.getElementById("slideTransitionTime").value 
+                        + '&expirationDate='+ document.getElementById("slideExpDate").value));
+}
+
+function closeSlideSettings(){
+  document.getElementById("slideSettingsForm").style.display = "none";
 }

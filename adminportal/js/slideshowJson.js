@@ -1,6 +1,29 @@
 const fs = require('fs');
 
 module.exports = {
+    //Find the target path and update its settings
+    updateSlideSettings: function reorderSlidesJson(path, transitionTime, expiration) {
+        var object = this.getJson();
+
+
+        for (var i = 0; i < object.images.length; i++) {
+            if (object.images[i].location == path) {
+                object.images[i].expiration = expiration;
+                object.images[i].transitionTime = parseInt(transitionTime);
+                console.log(path);
+            }   
+        }
+
+        let data = JSON.stringify(object, null, 2);
+
+        fs.writeFileSync("public/json/slideshow.json", data, (err) => {
+            if (err) {
+                console.error(err);
+                return;
+            };
+        });
+    },
+
     //Find the target and moving path within our json array and swap them
     //Update the seqnum values for all slides
     reorderSlides: function reorderSlidesJson(movingPath, targetPath) {
@@ -102,7 +125,9 @@ module.exports = {
                 seqnum: object['images'].length,
                 location: path,
                 lastModified: Date.now(),
-                thumbnail: ""
+                thumbnail: "",
+                expiration: "",
+                transitionTime: 10
             });
         });
 
@@ -166,7 +191,7 @@ module.exports = {
             //Slideshow default module settings
             let slideshow = {
                 moduleEnabled: true,
-                transitionSpeed: 3,
+                transitionSpeed: 10,
                 willTransition: true,
                 autoPlayVideo: true,
                 default: true,

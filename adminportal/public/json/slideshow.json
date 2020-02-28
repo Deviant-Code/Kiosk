@@ -7,9 +7,11 @@
   "images": [
     {
       "seqnum": 0,
-      "location": "Uploads/slideImage1582307335407.jpg",
-      "lastModified": 1582307335412,
-      "thumbnail": ""
+      "location": "Uploads/slideImage1582915446398.png",
+      "lastModified": 1582915446403,
+      "thumbnail": "",
+      "expiration": "2020-02-29",
+      "transitionTime": "8"
     }
   ]
 }
