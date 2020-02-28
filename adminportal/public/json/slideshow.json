@@ -7,19 +7,19 @@
   "slides": [
     {
       "seqnum": 0,
-      "location": "Uploads/slideImage1582916960111.png",
-      "lastModified": 1582916960117,
+      "location": "Uploads/slideImage1582932327355.png",
+      "lastModified": 1582932327356,
       "thumbnail": "",
-      "expiration": "2020-02-15",
+      "expiration": "",
       "transitionTime": 10
     },
     {
       "seqnum": 1,
-      "location": "Uploads/Videos/slideImage1582917585906.mp4",
-      "lastModified": 1582917586080,
-      "thumbnail": "Uploads/slideImage1582917585906.jpeg",
-      "expiration": "2020-02-29",
-      "transitionTime": 7
+      "location": "Uploads/Videos/slideImage1582932271939.mp4",
+      "lastModified": 1582932272345,
+      "thumbnail": "Uploads/slideImage1582932271939.jpeg",
+      "expiration": "",
+      "transitionTime": 10
     }
   ]
 }

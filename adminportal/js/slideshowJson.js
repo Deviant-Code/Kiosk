@@ -104,6 +104,45 @@ module.exports = {
         });
     },
 
+    //Parse and remove any expired slides
+    removeExpiredSlides: function removeExpiredSlides() {
+        var object = this.getJson();
+
+        for (var i = 0; i < object.slides.length; i++) {
+            if (Date.parse(object.slides[i].expiration) <= Date.now()) {
+                if (object.slides[i].thumbnail != "") {
+                    fs.unlink('public/' + object.slides[i].thumbnail, (err) => {
+                        if (err)
+                            console.log(err);
+                    });
+                }
+
+                fs.unlink('public/' + object.slides[i].location, (err) => {
+                    if (err)
+                        console.log(err);
+                });
+                //Remove from array
+                object.slides.splice(i, 1);
+
+                //Update the seqnum of next slides if there is one or more after the removed
+                for (var j = i; j < object.slides.length; j++) {
+                    if (object.slides[j])
+                        object.slides[j].seqnum = object.slides[j].seqnum - 1;
+                }
+                break;
+            }
+        }
+
+        let data = JSON.stringify(object, null, 2);
+
+        fs.writeFileSync("public/json/slideshow.json", data, (err) => {
+            if (err) {
+                console.error(err);
+                return;
+            };
+        });
+    },
+
     //Parse and return Slideshow module's settings json
     addSlide: function addSlideImageJson(files) {
         var object = this.getJson();
