@@ -72,20 +72,21 @@ function isVideo(filename) {
   return false;
 }
 
-function getVideoThumnail(image, path, i){
+function getVideoThumbnail(slide, path, i){
   //If thumbnail exists, use it, if not, generate it and upload it
-  if(image.thumbnail != ""){
+  if(slide.thumbnail != ""){
     document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="'
-                                                                  + "../" + image.thumbnail + '" id="' + path + '"alt="image' + i + '"/>'
+                                                                  + "../" + slide.thumbnail + '" id="' + path + '"alt="image' + i + '"/>'
                                                                   + '<div id="top-left">'+ (i + 1) + '</div>'
-                                                                  + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>' +
+                                                                  + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>' 
+                                                                  + '<div id="bottom-left" onclick="openSlideSettings(' + '\'' + path + '\' ,' + i + ')"> ⚙️ </div>' +
                                                                   '</div>';
     //document.getElementById('uploadGallery').innerHTML += '<img src="' + "../" + image.thumbnail + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
   }else{
     var video = document.createElement('video');
-    var loc = image.location;
+    var loc = slide.location;
 
-    video.src = "../" + image.location;
+    video.src = "../" + slide.location;
 
     var canvas = document.createElement('canvas');
     var context = canvas.getContext('2d');
@@ -97,7 +98,7 @@ function getVideoThumnail(image, path, i){
                                                                   + URI + '" id="' + path + '"alt="image' + i + '"/>'
                                                                   + '<div id="top-left">'+ (i + 1) + '</div>'
                                                                   + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>'
-                                                                  + '<div id="bottom-left"> ⚙️ </div>' +
+                                                                  + '<div id="bottom-left" onclick="openSlideSettings(' + '\'' + path + '\' ,' + i + ')"> ⚙️ </div>' +
                                                                   '</div>';
         //document.getElementById('uploadGallery').innerHTML += '<img src="' + URI + '" id="' + path + '"alt="" onclick="deleteUpload(' + '\'' + path + '\'' + ')"/>';
         updateSlideThumbnail(loc, URI);
@@ -170,6 +171,7 @@ function deleteUpload(filePath) {
   xhttp = new XMLHttpRequest();
   //Re-add the public/uploads
   filePath = 'public/Uploads/' + filePath;
+  
   xhttp.open('POST', '/deleteFile');
   xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhttp.onload = function () {
@@ -187,21 +189,21 @@ function loadSlideshowContent() {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       var res = JSON.parse(this.responseText);
-      var images = [];
+      var slides = [];
 
-      for (var i = 0; i < res.images.length; i++) {
-        var path = res.images[i].location.replace('public/', '');
-        images.push("../" + path);
+      for (var i = 0; i < res.slides.length; i++) {
+        var path = res.slides[i].location.replace('public/', '');
+        slides.push("../" + path);
       }
 
-      for (var i = 0; i < images.length; i++) {
-        var path = res.images[i].location.replace('Uploads\\', '');
+      for (var i = 0; i < slides.length; i++) {
+        var path = res.slides[i].location.replace('Uploads\\', '');
         path = path.replace('Uploads/', '');
         if(isVideo(path)){
-          getVideoThumnail(res.images[i], path, i);
+          getVideoThumbnail(res.slides[i], path, i);
         }else{
           document.getElementById('uploadGallery').innerHTML += '<div id="uploadedImage"> <img draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" src="'
-                                                                  + images[i] + '" id="' + path + '"alt="image' + i + '"/>'
+                                                                  + slides[i] + '" id="' + path + '"alt="image' + i + '"/>'
                                                                   + '<div id="top-left">'+ (i + 1) + '</div>'
                                                                   + '<div id="top-right" onclick="deleteUpload(' + '\'' + path + '\'' + ')"> X </div>'
                                                                   + '<div id="bottom-left" onclick="openSlideSettings(' + '\'' + path + '\' ,' + i + ')"> ⚙️ </div>' +
@@ -249,16 +251,24 @@ function drop(ev) {
 //open slide settings menu and populate with current settings
 function openSlideSettings(path, i){
   document.getElementById("slideSettingsForm").style.display = "inline-block";
-  document.getElementById("slideSettingsImage").src = "../Uploads/" + path;
+  if(!isVideo(path)){
+    document.getElementById("slideSettingsImage").src = "../Uploads/" + path;
+  }
+   
   document.getElementById("slideSettingsImage").name = "Uploads/" + path;
+  
 
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       var res = JSON.parse(this.responseText);
       
-      document.getElementById("slideTransitionTime").value = res.images[i].transitionTime;
-      document.getElementById("slideExpDate").value = res.images[i].expiration;
+      document.getElementById("slideTransitionTime").value = res.slides[i].transitionTime;
+      document.getElementById("slideExpDate").value = res.slides[i].expiration;
+
+      if(isVideo(path)){
+        document.getElementById("slideSettingsImage").src = "../" + res.slides[i].thumbnail;
+      }
     }
   };
   xhttp.open("GET", "/getSlideshowParams", true);
