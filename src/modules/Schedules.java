@@ -8,8 +8,10 @@ package modules;
 
 public class Schedules extends WebView implements ModuleInterface{
 
-    protected Schedules(String url) {
-        super(url);
+    private static final String URL = "http://localhost:3000/pages/kioskSchedules.html";
+
+    public Schedules() {
+        super(URL);
     }
 
     public void update(){
@@ -17,8 +19,19 @@ public class Schedules extends WebView implements ModuleInterface{
     }
 
     @Override
-    public void onExit() {
-        refresh();
+    public void onWake() {
+
     }
+
+    @Override
+    public void onSleep() {
+
+    }
+
+    @Override
+    public void onShutdown() {
+
+    }
+
 
 }

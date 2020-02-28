@@ -17,7 +17,17 @@ public class Video implements ModuleInterface {
     }
 
     @Override
-    public void onExit() {
+    public void onWake() {
+
+    }
+
+    @Override
+    public void onSleep() {
+
+    }
+
+    @Override
+    public void onShutdown() {
 
     }
 

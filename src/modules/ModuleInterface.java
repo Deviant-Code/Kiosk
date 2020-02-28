@@ -7,9 +7,11 @@ framework and module subsystems. */
 
 public interface ModuleInterface {
 
-    public abstract void update() throws Exception;
+    void update() throws Exception;
 
-    public abstract void onExit();
+    void onWake();
 
+    void onSleep();
 
+    void onShutdown();
 }

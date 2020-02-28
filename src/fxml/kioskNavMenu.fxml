@@ -5,24 +5,28 @@
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="360.0" prefWidth="2560.0" styleClass="hboxmenu" stylesheets="@../res/kioskStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DrawerController">
+<HBox fx:id="navMenu" alignment="BOTTOM_CENTER" styleClass="hboxmenu" stylesheets="@../res/kioskStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NavMenuController">
    <children>
-      <JFXButton fx:id="ssButton" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openSlideshow" onMouseClicked="#openSlideshow" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Slideshow" HBox.hgrow="ALWAYS">
+      <JFXButton fx:id="slideshow" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openSlideshow" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Slideshow" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
-         </HBox.margin></JFXButton>
-      <JFXButton fx:id="pollsButton" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openPolls" onMouseClicked="#openPolls" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Polls" HBox.hgrow="ALWAYS">
+         </HBox.margin>
+      </JFXButton>
+      <JFXButton fx:id="polls" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openPolls" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Polls" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
-         </HBox.margin></JFXButton>
-      <JFXButton fx:id="schedButton" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openSchedules" onMouseClicked="#openSchedules" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Schedules" HBox.hgrow="ALWAYS">
+         </HBox.margin>
+      </JFXButton>
+      <JFXButton fx:id="schedules" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openSchedules" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Schedules" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
-         </HBox.margin></JFXButton>
-      <JFXButton fx:id="deptButton" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openDepartment" onMouseClicked="#openDepartment" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Department" HBox.hgrow="ALWAYS">
+         </HBox.margin>
+      </JFXButton>
+      <JFXButton fx:id="department" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openDepartment" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Department" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
-         </HBox.margin></JFXButton>
+         </HBox.margin>
+      </JFXButton>
    </children>
    <effect>
       <InnerShadow blurType="TWO_PASS_BOX" choke="0.3" height="100.0" radius="44.5" width="80.0" />

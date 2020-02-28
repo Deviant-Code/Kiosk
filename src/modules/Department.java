@@ -2,8 +2,10 @@ package modules;
 
 public class Department extends WebView implements ModuleInterface {
 
-    protected Department(String url) {
-        super(url);
+    private static final String URL = "http://localhost:3000/pages/kioskDepartment.html";
+
+    public Department() {
+        super(URL);
     }
 
     @Override
@@ -12,7 +14,18 @@ public class Department extends WebView implements ModuleInterface {
     }
 
     @Override
-    public void onExit() {
+    public void onWake() {
 
     }
+
+    @Override
+    public void onSleep() {
+
+    }
+
+    @Override
+    public void onShutdown() {
+
+    }
+
 }

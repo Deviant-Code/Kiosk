@@ -12,18 +12,20 @@ import java.util.TimerTask;
 
 public class Slideshow implements ModuleInterface{
 
+    private static final short INACTIIVITY_TIMEOUT = 30;
     private int imageIndex;
-    private int secondsPerImage = 5;
+    private short secondsPerImage = 5;
     private static String slideshowDirectory = "slideshow/"; //local directory used by adminportal listener
     private List<String> list;
     private Image activeImage;
     private File folder;
     private ImageView imageView;
     private Timer t;
-    private boolean isPaused;
+    private boolean timerEnabled;
 
-    public Slideshow(ImageView imageView) {
-        this.imageView = imageView;
+    //TODO: Move timer to separate event listener class and have it maintain scope of user activity and inactivity
+
+    public Slideshow() {
         list = new ArrayList<>();
         init();
         Thread watchThread = new Thread(new WatchRunnable());
@@ -41,11 +43,9 @@ public class Slideshow implements ModuleInterface{
 
         this.imageIndex = 0;
         activeImage = new Image(list.get(imageIndex));
-        setImage();
     }
 
     public void update() {
-        pause();
 
         //Slideshow directory not found, reinitialize
         if(!folder.exists()){
@@ -62,7 +62,19 @@ public class Slideshow implements ModuleInterface{
     }
 
     @Override
-    public void onExit() {
+    public void onWake() {
+        update();
+        setImage();
+        startTimer();
+    }
+
+    @Override
+    public void onSleep() {
+
+    }
+
+    @Override
+    public void onShutdown() {
 
     }
 
@@ -109,9 +121,9 @@ public class Slideshow implements ModuleInterface{
 
         if(list.size() == 0){
             //No pictures were added to slideshow. Add demo photo and log result //TODO: log result
-            File file = new File("fxml/gallery_empty_img.jpg");
+            File file = new File("gallery_empty_img.jpg");
             if(file.exists()){
-                list.add("/fxml/gallery_empty_img.jpg");
+                list.add("/gallery_empty_img.jpg");
             } else {
                 throw new Error("No files found for slideshow");
             }
@@ -119,8 +131,7 @@ public class Slideshow implements ModuleInterface{
     }
 
     // Restarts the slideshow timer
-    public void resume(){
-        isPaused = false;
+    public void startTimer(){
         if(t != null){
             t.cancel();
             t.purge();
@@ -133,15 +144,15 @@ public class Slideshow implements ModuleInterface{
                 setImage();
             }
         },(secondsPerImage*1000),(secondsPerImage*1000));
+        timerEnabled = true;
     }
 
-    //Pause timer for slideshow
-    public void pause(){
-        isPaused = true;
+    public void cancelTimer(){
         if(t != null){
             t.cancel();
             t.purge();
         }
+        timerEnabled = false;
     }
 
     public void setImage() {
@@ -174,8 +185,8 @@ public class Slideshow implements ModuleInterface{
         }
     }
 
-    public boolean isPaused() {
-        return isPaused;
+    public boolean isTimerEnabled() {
+        return timerEnabled;
     }
 
     public class WatchRunnable implements Runnable {

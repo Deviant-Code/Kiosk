@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.SwipeEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -28,6 +29,9 @@ public class WebController implements Initializable {
 
     private WebEngine web;
 
+    @FXML
+    private BorderPane kioskOverlay;
+
     private final String urlweb = "http://localhost:3000/pages/kioskDepartment.html";
 
     private GestureHandler gestureHandler = GestureHandler.getInstance();
@@ -36,20 +40,8 @@ public class WebController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        HBox menu = null;
-        try {
-            menu = FXMLLoader.load(getClass().getResource("../fxml/kioskNavMenu.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         this.web = webView.getEngine();
         web.load(urlweb);
-
-        //TODO: Move FXML Loaders to KioskManager to eliminate redundancies
-        drawer.setSidePane(menu);
-        drawer.setPrefWidth((KioskManager.getInstance().getStage().getWidth()/3)*2);
-        drawer.setPrefHeight(KioskManager.getInstance().getStage().getHeight()/6);
     }
 
     public void load(){

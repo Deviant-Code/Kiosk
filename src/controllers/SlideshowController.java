@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.SwipeEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import manager.KioskManager;
 import modules.Slideshow;
@@ -20,8 +21,10 @@ import java.util.ResourceBundle;
 
 public class SlideshowController implements Initializable {
 
-    private Slideshow ss;
+    private Slideshow slideshow;
     private GestureHandler gestureHandler = GestureHandler.getInstance();
+    @FXML
+    private AnchorPane anchorRoot;
 
     @FXML
     private ImageView imageView;
@@ -31,45 +34,24 @@ public class SlideshowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ss = new Slideshow(imageView);
-
+        this.slideshow = (Slideshow) KioskManager.getInstance().getModule("slideshow");
         imageView.setPreserveRatio(true);
-        imageView.fitHeightProperty().bind(KioskManager.getInstance().getStage().widthProperty());
-        imageView.fitHeightProperty().bind(KioskManager.getInstance().getStage().heightProperty());
-
-        HBox menu = null;
-        try {
-            menu = FXMLLoader.load(getClass().getResource("../fxml/kioskNavMenu.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //TODO: Move FXML Loaders to KioskManager to eliminate redundancies
-        drawer.setSidePane(menu);
-        drawer.setPrefWidth((KioskManager.getInstance().getStage().getWidth()/3)*2);
-        drawer.setPrefHeight(KioskManager.getInstance().getStage().getHeight()/6);
-
-        ss.resume();
+        imageView.fitHeightProperty().bind(anchorRoot.heightProperty());
+        imageView.fitHeightProperty().bind(anchorRoot.widthProperty());
     }
 
     @FXML
     //Transition slideshow active_image to previous photo
     public void previousPhoto() {
-        ss.previousImage();
-        ss.setImage();
-        if(!ss.isPaused()){
-            ss.resume();
-        }
+        slideshow.previousImage();
+        slideshow.setImage();
     }
 
     @FXML
     //Transition slideshow active_image to next photo
     public void nextPhoto() {
-        ss.nextImage();
-        ss.setImage();
-        if(!ss.isPaused()){
-            ss.resume();
-        }
+        slideshow.nextImage();
+        slideshow.setImage();
     }
 
     @FXML
@@ -82,7 +64,7 @@ public class SlideshowController implements Initializable {
                 previousPhoto();
                 break;
             case DOWN:
-                openDrawer();
+                //openDrawer();
                 default:
                 break;
         }
@@ -112,11 +94,7 @@ public class SlideshowController implements Initializable {
         } else {
             //User tapped center of Touchscreen
             //Pause Slideshow / Show options
-            if(ss.isPaused()){
-                ss.resume();
-            } else {
-                ss.pause();
-            }
+            //TODO: Call timer to wait for inactivity
         }
     }
 

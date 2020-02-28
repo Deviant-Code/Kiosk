@@ -2,8 +2,10 @@ package modules;
 
 public class Polls extends WebView implements ModuleInterface {
 
-    protected Polls(String url) {
-        super(url);
+    private static final String URL = "http://127.0.0.1:3000/pages/kioskPoll.html";
+
+    public Polls() {
+        super(URL);
     }
 
     @Override
@@ -12,7 +14,18 @@ public class Polls extends WebView implements ModuleInterface {
     }
 
     @Override
-    public void onExit() {
-        refresh();
+    public void onWake() {
+
     }
+
+    @Override
+    public void onSleep() {
+
+    }
+
+    @Override
+    public void onShutdown() {
+
+    }
+
 }

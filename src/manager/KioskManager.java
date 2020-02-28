@@ -1,23 +1,24 @@
 package manager;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import modules.*;
-import controllers.*;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class KioskManager {
 
     private static KioskManager instance = null;
 
-    static ModuleInterface activeModule; //shows current module being used
-    static Slideshow slideshow;
-    static Video video;
-    static Schedules schedules;
-    static Map map;
-    static Polls polls;
-    static Department department;
+    private final static Logger logr = Logger.getLogger(KioskManager.class.getName());
 
+    private static ModuleInterface activeModule; //shows current module being used
+    private static final Map<String,ModuleInterface> modules = new HashMap<>();
 
     // Root for each module to change between scenes
     private Parent pollRoot;
@@ -25,12 +26,13 @@ public class KioskManager {
     private Parent scheduleRoot;
     private Parent slideshowRoot;
 
-    // Scene & Display Controls
-    private Scene scene;
-    private Stage stage;
-
     private KioskManager(){
         //Private Constructor
+        initializeModules();
+    }
+
+    public static HashMap getModules(){
+        return (HashMap) modules;
     }
 
     public static KioskManager getInstance(){
@@ -40,48 +42,31 @@ public class KioskManager {
         return instance;
     }
 
-    //Transition kiosk to a different module given the name of the module
-    //Returns requested scene to controller to set root
-    public void transition(String module){
-        switch (module){
-            case "SS":
-                if (activeModule != slideshow) {
-                    slideshow.update();
-                    slideshow.setImage();
-                    slideshow.resume();
-                    activeModule = slideshow;
-                    scene.setRoot(slideshowRoot);
-                }
-            case "POLLS":
-                activeModule = polls;
-                scene.setRoot(pollRoot);
-                stage.show();
-            case "DEPT":
-                activeModule = department;
-                scene.setRoot(deptRoot);
-            case "SCHED":
-                activeModule = schedules;
-                scene.setRoot(scheduleRoot);
-            case "MAPS": //TODO: Implement a map module
-                //activeModule = map;
-                //scene.setRoot(mapRoot);
-            default:
-                activeModule = slideshow;
-                scene.setRoot(slideshowRoot);
+    private static void initializeModules() {
+        modules.put("slideshow", new Slideshow());
+        modules.put("schedules", new Schedules());
+        modules.put("polls", new Polls());
+        modules.put("department", new Department());
+        modules.put("maps", new Maps());
+        modules.put("video", new Video());
+    }
+
+    // Manages the transition between two modules at the data level
+    public void transition(String moduleName){
+        ModuleInterface module = modules.get(moduleName);
+
+        if(module == null){
+            logr.log(Level.SEVERE, "Requested module was not found in HashMap. String: ", moduleName);
+        } else if(activeModule != module){
+            //activeModule.onSleep();
+            //module.onResume();
+            activeModule = module;
         }
-        stage.show();
     }
 
 
     // *********** Getters and Setters *********** \\
 
-    public void setScene(Scene scene){
-        this.scene = scene;
-    }
-
-    public void setStage(Stage primaryStage) {
-        this.stage = primaryStage;
-    }
 
     public void setRoots(Parent slideshowRoot, Parent pollRoot, Parent deptRoot, Parent scheduleRoot){
         this.slideshowRoot = slideshowRoot;
@@ -90,13 +75,8 @@ public class KioskManager {
         this.scheduleRoot = scheduleRoot;
     }
 
-    public Scene getScene() {
-        return this.scene;
+
+    public ModuleInterface getModule(String moduleName){
+        return modules.get(moduleName);
     }
-
-
-    public Stage getStage() {
-        return this.stage;
-    }
-
 }

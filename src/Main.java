@@ -1,3 +1,4 @@
+import controllers.DynamicController;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -15,62 +16,48 @@ import java.io.*;
 
 public class Main extends Application {
 
-    private static Slideshow slideshow;
     private static Process pr;
+    private Stage stage;
+
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-
-        //Set stage parameters
-        primaryStage.setTitle("Project Electra: V0.1.2");
-
-        primaryStage.setFullScreen(true);
-        Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
-        primaryStage.setWidth(bounds.getWidth());
-        primaryStage.setHeight(bounds.getHeight());
-
-        KioskManager kioskManager = KioskManager.getInstance();;
-        kioskManager.setStage(primaryStage);
-
+    public void start(Stage primaryStage) throws Exception {
         try {
-
-            //Generate FXML Loaders for each module
-            FXMLLoader slideshowLoader = new FXMLLoader(getClass().getResource("fxml/slideshow.fxml"));
-            FXMLLoader webViewLoader = new FXMLLoader(getClass().getResource("fxml/webView.fxml"));
-            FXMLLoader pollViewLoader = new FXMLLoader(getClass().getResource("fxml/pollView.fxml"));
-            FXMLLoader schedulerLoader = new FXMLLoader(getClass().getResource("fxml/schedule.fxml"));
-
-            //Generate Roots for each loader
-            Parent slideshowRoot = slideshowLoader.load();
-            Parent deptRoot = webViewLoader.load();
-            Parent pollViewRoot = pollViewLoader.load();
-            Parent scheduleRoot = schedulerLoader.load();
-
-            //Set Roots
-            kioskManager.setRoots(slideshowRoot, pollViewRoot, deptRoot, scheduleRoot);
-
-            //Build Scene and pass in slideshow as original root
-            Scene scene = new Scene(slideshowRoot, bounds.getWidth(), bounds.getHeight());
-
+            this.stage = primaryStage;
+            setWindowProperties(primaryStage);
+            KioskManager kioskManager = KioskManager.getInstance();
+            FXMLLoader dynamicContainer = new FXMLLoader(getClass().getResource("fxml/dynamicContainer.fxml"));
+            Scene scene = new Scene(dynamicContainer.load(),primaryStage.getWidth(), primaryStage.getHeight());
 
             //Set Scene and Show Stage
-            kioskManager.setScene(scene);
-
+            DynamicController controller = dynamicContainer.getController();
+            controller.bindScene(scene);
             primaryStage.setScene(scene);
-            primaryStage.setFullScreen(true);
-            primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-            primaryStage.setFullScreenExitHint("Kiosk");
-            primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                public void handle(WindowEvent we) {
-                    if (pr != null)
-                        pr.destroy();
-                }
-            });
             primaryStage.show();
         } catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void setWindowProperties(Stage primaryStage) {
+        // Set Window Properties
+        primaryStage.setTitle("Western Washington University - CS Department Display");
+
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        //primaryStage.setX(bounds.getMinX());
+       // primaryStage.setY(bounds.getMinY());
+       // primaryStage.setWidth(bounds.getWidth());
+       // primaryStage.setHeight(bounds.getHeight());
+
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                if (pr != null)
+                    pr.destroy();
+            }
+        });
     }
 
     // //running the kiosk
