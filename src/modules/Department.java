@@ -1,11 +1,13 @@
 package modules;
 
-public class Department extends WebView implements ModuleInterface {
+import com.teamdev.jxbrowser.engine.RenderingMode;
+
+public class Department extends WebViewModule implements ModuleInterface {
 
     private static final String URL = "http://localhost:3000/pages/kioskDepartment.html";
 
     public Department() {
-        super(URL);
+        super(URL, RenderingMode.OFF_SCREEN);
     }
 
     @Override
@@ -15,12 +17,10 @@ public class Department extends WebView implements ModuleInterface {
 
     @Override
     public void onWake() {
-
     }
 
     @Override
     public void onSleep() {
-
     }
 
     @Override

@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox fx:id="navMenu" alignment="BOTTOM_CENTER" styleClass="hboxmenu" stylesheets="@../res/kioskStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NavMenuController">
+<HBox fx:id="navMenu" alignment="BOTTOM_CENTER" cache="true" cacheHint="SPEED" styleClass="hboxmenu" stylesheets="@../res/kioskStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NavMenuController">
    <children>
-      <JFXButton fx:id="slideshow" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openSlideshow" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Slideshow" HBox.hgrow="ALWAYS">
+      <JFXButton fx:id="slideshowBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openSlideshow" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" styleClass="navButton" text="Slideshow" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
          </HBox.margin>
+         <graphic>
+            <MaterialDesignIconView glyphName="PLAY_BOX_OUTLINE" size="25" />
+         </graphic>
       </JFXButton>
-      <JFXButton fx:id="polls" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openPolls" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Polls" HBox.hgrow="ALWAYS">
+      <JFXButton fx:id="pollsBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openPolls" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" styleClass="navButton" text="Polls" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
          </HBox.margin>
+         <graphic>
+            <MaterialDesignIconView glyphName="POLL" size="25" />
+         </graphic>
       </JFXButton>
-      <JFXButton fx:id="schedules" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openSchedules" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Schedules" HBox.hgrow="ALWAYS">
+      <JFXButton fx:id="schedulesBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openSchedules" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" styleClass="navButton" text="Schedules" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
          </HBox.margin>
+         <graphic>
+            <MaterialDesignIconView glyphName="TIMETABLE" size="25" />
+         </graphic>
       </JFXButton>
-      <JFXButton fx:id="department" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openDepartment" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" text="Department" HBox.hgrow="ALWAYS">
+      <JFXButton fx:id="departmentBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openDepartment" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" styleClass="navButton" text="Department" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
          </HBox.margin>
+         <graphic>
+            <MaterialDesignIconView glyphName="SCHOOL" size="25" />
+         </graphic>
       </JFXButton>
    </children>
    <effect>

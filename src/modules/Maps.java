@@ -4,12 +4,14 @@ package modules;
 Map Module: An interactive map to show where faculty and rooms are located.
 */
 
-public class Maps extends WebView implements ModuleInterface {
+import com.teamdev.jxbrowser.engine.RenderingMode;
+
+public class Maps extends WebViewModule implements ModuleInterface {
 
     private static final String URL = "http://localhost:3000/pages/kioskMap.html";
 
     public Maps() {
-        super(URL);
+        super(URL, RenderingMode.HARDWARE_ACCELERATED);
     }
 
     public void search(){}

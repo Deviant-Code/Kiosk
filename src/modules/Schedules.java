@@ -6,16 +6,17 @@ package modules;
    TODO: cache the webpage and explore data solutions to keep track of local data for all webview modules
  */
 
-public class Schedules extends WebView implements ModuleInterface{
+import com.teamdev.jxbrowser.engine.RenderingMode;
+
+public class Schedules extends WebViewModule implements ModuleInterface{
 
     private static final String URL = "http://localhost:3000/pages/kioskSchedules.html";
 
     public Schedules() {
-        super(URL);
+        super(URL, RenderingMode.OFF_SCREEN);
     }
 
     public void update(){
-        refresh();
     }
 
     @Override

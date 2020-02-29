@@ -79,4 +79,8 @@ public class KioskManager {
     public ModuleInterface getModule(String moduleName){
         return modules.get(moduleName);
     }
+
+    public int getModuleCount() {
+        return modules.size();
+    }
 }

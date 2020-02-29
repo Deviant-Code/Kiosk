@@ -15,6 +15,7 @@
 
 .root{
     -fx-background-color: -fx-blue;
+    -fx-font-size: 30px;
 }
 
 .glyph-icon
@@ -27,14 +28,22 @@
     -fx-opacity:0.85;
 }
 
-.button{
+.navButton{
     -fx-text-fill: -fx-primarytext;
     -fx-background-color: -fx-primary1;
     -fx-border-color: #24252a;
     -fx-border-width: 4;
     -fx-border-radius: 3;
     -fx-background-radius:3;
-    -fx-font-size: 15pt;
+}
+
+.navButtonActive{
+    -fx-text-fill: -fx-primarytext;
+    -fx-background-color: -fx-secondary1;
+    -fx-border-color: #24252a;
+    -fx-border-width: 4;
+    -fx-border-radius: 3;
+    -fx-background-radius:3;
 }
 
 .button:hover, .button:focused{

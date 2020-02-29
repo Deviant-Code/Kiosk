@@ -3,14 +3,12 @@ package controllers;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.SwipeEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import manager.KioskManager;
 import modules.Slideshow;
 import utilities.GestureHandler;
@@ -23,8 +21,9 @@ public class SlideshowController implements Initializable {
 
     private Slideshow slideshow;
     private GestureHandler gestureHandler = GestureHandler.getInstance();
+
     @FXML
-    private AnchorPane anchorRoot;
+    private StackPane slideshowContainer;
 
     @FXML
     private ImageView imageView;
@@ -36,8 +35,10 @@ public class SlideshowController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.slideshow = (Slideshow) KioskManager.getInstance().getModule("slideshow");
         imageView.setPreserveRatio(true);
-        imageView.fitHeightProperty().bind(anchorRoot.heightProperty());
-        imageView.fitHeightProperty().bind(anchorRoot.widthProperty());
+        imageView.fitHeightProperty().bind(slideshowContainer.heightProperty());
+        imageView.fitWidthProperty().bind(slideshowContainer.widthProperty());
+        slideshow.init(imageView);
+        //TODO: Remove imageview references from slideshow module data layer and integrate into this controller
     }
 
     @FXML

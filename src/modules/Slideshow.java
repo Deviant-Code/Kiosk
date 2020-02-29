@@ -27,14 +27,13 @@ public class Slideshow implements ModuleInterface{
 
     public Slideshow() {
         list = new ArrayList<>();
-        init();
         Thread watchThread = new Thread(new WatchRunnable());
         watchThread.start();
     }
 
     //Initializes the pictures in slideshow
-    private void init() {
-
+    public void init(ImageView imageView) {
+        this.imageView = imageView;
         //Check for slideshow image directory
         validateDirectory();
 
@@ -43,6 +42,7 @@ public class Slideshow implements ModuleInterface{
 
         this.imageIndex = 0;
         activeImage = new Image(list.get(imageIndex));
+        setImage();
     }
 
     public void update() {
@@ -50,7 +50,7 @@ public class Slideshow implements ModuleInterface{
         //Slideshow directory not found, reinitialize
         if(!folder.exists()){
             try {
-                init();
+                init(imageView);
             } catch (Exception e) {
                 //TODO: Log exception with high severity
             }

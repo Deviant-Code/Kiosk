@@ -1,16 +1,18 @@
 package modules;
 
-public class Polls extends WebView implements ModuleInterface {
+import com.teamdev.jxbrowser.engine.RenderingMode;
+
+public class Polls extends WebViewModule implements ModuleInterface {
 
     private static final String URL = "http://127.0.0.1:3000/pages/kioskPoll.html";
 
     public Polls() {
-        super(URL);
+        super(URL, RenderingMode.OFF_SCREEN);
     }
 
     @Override
     public void update() throws Exception {
-        refresh();
+
     }
 
     @Override
