@@ -38,7 +38,7 @@ public class SlideshowController implements Initializable {
         imageView.fitHeightProperty().bind(slideshowContainer.heightProperty());
         imageView.fitWidthProperty().bind(slideshowContainer.widthProperty());
         slideshow.init(imageView);
-        //TODO: Remove imageview references from slideshow module data layer and integrate into this controller
+        slideshow.onWake();
     }
 
     @FXML
@@ -83,14 +83,11 @@ public class SlideshowController implements Initializable {
                 //Gesture has just completed
                 EventType<SwipeEvent> swipe = gestureHandler.processGesture();
                 if(swipe.equals(SwipeEvent.SWIPE_UP)){
-                    openDrawer();
                 } else if(swipe.equals(SwipeEvent.SWIPE_LEFT)){
                     previousPhoto();
                 } else if(swipe.equals(SwipeEvent.SWIPE_RIGHT)){
                     nextPhoto();
-                } else if(swipe.equals(SwipeEvent.SWIPE_DOWN)){
-                    closeDrawer();
-                }
+                } else if(swipe.equals(SwipeEvent.SWIPE_DOWN)){ }
             }
         } else {
             //User tapped center of Touchscreen
@@ -98,19 +95,4 @@ public class SlideshowController implements Initializable {
             //TODO: Call timer to wait for inactivity
         }
     }
-
-    private void openDrawer(){
-        if(drawer.isClosed()){
-            drawer.open();
-        }
-    }
-
-    private void closeDrawer() {
-        if(drawer.isOpened()){
-            drawer.close();
-        }
-    }
-
-
-
 }

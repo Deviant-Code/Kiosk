@@ -5,6 +5,7 @@ import com.teamdev.jxbrowser.view.javafx.BrowserView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
+import manager.KioskManager;
 import modules.Department;
 import utilities.GestureHandler;
 import java.net.URL;
@@ -19,7 +20,7 @@ public class DeptController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Department department = new Department();
+        Department department = (Department) KioskManager.getInstance().getModule("department");
         BrowserView browserView = BrowserView.newInstance(department.getBrowser());
         webViewContainer.getChildren().addAll(browserView);
     }

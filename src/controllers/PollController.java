@@ -4,6 +4,7 @@ import com.teamdev.jxbrowser.view.javafx.BrowserView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
+import manager.KioskManager;
 import modules.Polls;
 import utilities.GestureHandler;
 import java.net.URL;
@@ -20,9 +21,10 @@ public class PollController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Polls poll = new Polls();
+        Polls poll = (Polls) KioskManager.getInstance().getModule("polls");
         BrowserView browserView = BrowserView.newInstance(poll.getBrowser());
         webViewContainer.getChildren().addAll(browserView);
+
 
         //browser.set(MouseEvent.DRAG_DETECTED.class -> Response.suppress())
         /* webViewContainer.getChildren().add(browserView);

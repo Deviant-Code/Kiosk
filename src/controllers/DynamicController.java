@@ -102,13 +102,14 @@ public class DynamicController implements Initializable {
 
     @FXML
     public void onTouchEvent(MouseEvent event) throws IOException {
-        kioskOverlay.setPickOnBounds(true);
         gestureHandler.startGesture(event);
+        if(gestureHandler.inMotion()){
+            kioskOverlay.setPickOnBounds(true);
+        }
     }
 
     @FXML
     public void onTouchReleased(MouseEvent event) throws IOException {
-        kioskOverlay.setPickOnBounds(false);
         if(gestureHandler.inMotion()){
             if(gestureHandler.validate(event)){
                 //Gesture has just completed
@@ -120,17 +121,24 @@ public class DynamicController implements Initializable {
                 }
             }
         }
+        if(!drawer.isOpened() && !drawer.isOpening()){
+            kioskOverlay.setPickOnBounds(false);
+        }
     }
 
     private void openDrawer(){
         if(drawer.isClosed()){
             drawer.open();
+            kioskOverlay.setPickOnBounds(true);
+
+
         }
     }
 
     private void closeDrawer() {
         if(drawer.isOpened()){
             drawer.close();
+            kioskOverlay.setPickOnBounds(false);
         }
     }
 

@@ -4,10 +4,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
 
-
 <StackPane fx:id="slideshowContainer" prefHeight="2160.0" prefWidth="3840.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SlideshowController">
    <children>
-      <ImageView id="imageView" fx:id="imageView" cache="true" depthTest="DISABLE" focusTraversable="true" onKeyPressed="#keyPressed" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+      <ImageView id="imageView" fx:id="imageView" cache="true" depthTest="DISABLE" focusTraversable="true" onDragDetected="#onTouchEvent" onKeyPressed="#keyPressed" onMouseClicked="#onTouchReleased" onMouseDragged="#onTouchEvent" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>

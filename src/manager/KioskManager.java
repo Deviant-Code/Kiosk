@@ -49,6 +49,7 @@ public class KioskManager {
         modules.put("department", new Department());
         modules.put("maps", new Maps());
         modules.put("video", new Video());
+        activeModule = modules.get("slideshow");
     }
 
     // Manages the transition between two modules at the data level
@@ -58,22 +59,14 @@ public class KioskManager {
         if(module == null){
             logr.log(Level.SEVERE, "Requested module was not found in HashMap. String: ", moduleName);
         } else if(activeModule != module){
-            //activeModule.onSleep();
-            //module.onResume();
+            activeModule.onSleep();
+            module.onWake();
             activeModule = module;
         }
     }
 
 
     // *********** Getters and Setters *********** \\
-
-
-    public void setRoots(Parent slideshowRoot, Parent pollRoot, Parent deptRoot, Parent scheduleRoot){
-        this.slideshowRoot = slideshowRoot;
-        this.pollRoot = pollRoot;
-        this.deptRoot = deptRoot;
-        this.scheduleRoot = scheduleRoot;
-    }
 
 
     public ModuleInterface getModule(String moduleName){

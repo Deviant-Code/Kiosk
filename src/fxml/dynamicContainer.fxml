@@ -16,9 +16,9 @@
             <Insets />
          </StackPane.margin>
       </AnchorPane>
-      <BorderPane fx:id="kioskOverlay" cache="true" cacheHint="SPEED" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#onTouchReleased" pickOnBounds="false" prefHeight="2160.0" prefWidth="3840.0">
+      <BorderPane fx:id="kioskOverlay" cache="true" cacheHint="SPEED" maxHeight="-Infinity" maxWidth="-Infinity" onDragDetected="#onTouchEvent" onMouseClicked="#onTouchReleased" onMouseDragEntered="#onTouchEvent" pickOnBounds="false" prefHeight="2160.0" prefWidth="3840.0">
          <bottom>
-            <JFXDrawer fx:id="drawer" alignment="BOTTOM_CENTER" defaultDrawerSize="150.0" direction="BOTTOM" maxHeight="-Infinity" maxWidth="-Infinity" onDragDetected="#onTouchEvent" onMouseDragEntered="#onTouchEvent" onMouseDragged="#onTouchEvent" prefHeight="400.0" prefWidth="3040.0" BorderPane.alignment="CENTER">
+            <JFXDrawer fx:id="drawer" alignment="BOTTOM_CENTER" defaultDrawerSize="150.0" direction="BOTTOM" maxHeight="-Infinity" maxWidth="-Infinity" onDragDetected="#onTouchEvent" onMouseClicked="#onTouchReleased" prefHeight="476.0" prefWidth="3040.0" BorderPane.alignment="CENTER">
             </JFXDrawer>
          </bottom>
       </BorderPane>

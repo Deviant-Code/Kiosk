@@ -34,5 +34,4 @@ public class Maps extends WebViewModule implements ModuleInterface {
 
     }
 
-
 }

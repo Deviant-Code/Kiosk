@@ -33,6 +33,4 @@ public class Schedules extends WebViewModule implements ModuleInterface{
     public void onShutdown() {
 
     }
-
-
 }
