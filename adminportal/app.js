@@ -6,6 +6,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var serveIndex = require('serve-index');
+var schedule = require('node-schedule');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -99,6 +100,9 @@ function hidePages(pathsToHide = []) {
 
 // serve everything but hidden pages
 app.use(hidePages(hiddenContent));
+
+//Remove all expired slides at midnight (12:01 am)
+schedule.scheduleJob('1 0 * * *', () => slideshowJson.removeExpiredSlides())
 
 // Post request for logging into portal
 app.post('/login', (req, res) => {
@@ -208,6 +212,10 @@ app.post('/updateSlideThumbnail', function (req, res) {
   slideshowJson.addThumbnail(req.body.path, req.body.thumbnail);
 });
 
+//Update Slide settings in json
+app.post('/updateSlideSettings', function (req, res) {
+  slideshowJson.updateSlideSettings(req.body.path, req.body.transitionTime, req.body.expirationDate);
+});
 
 //Update Slideshow module's settings json
 app.post('/updateSlideshowParams', function (req, res) {
