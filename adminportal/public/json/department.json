@@ -4,22 +4,17 @@
   "images": [
     {
       "seqnum": 0,
-      "location": "Uploads/Department/deptImage1582298682901.png"
+      "location": "Uploads/Department/deptImage1582442774469.png"
+    },
+    {
+      "seqnum": 1,
+      "location": "Uploads/Department/deptImage1582442777337.png"
     }
   ],
   "floors": [
     {
-      "name": "1",
-      "rooms": [
-        {
-          "name": "412",
-          "faculty": "Clauson"
-        },
-        {
-          "name": "420",
-          "faculty": "Hearne"
-        }
-      ]
+      "name": "4",
+      "rooms": []
     }
   ]
 }

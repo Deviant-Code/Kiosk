@@ -106,7 +106,7 @@ module.exports = {
     },
 
     //Add New Room to Json
-    addRoom: function addRoom(floorName, roomName, faculty) {
+    addRoom: function addRoom(floorName, roomName, faculty, attribute, startHour, endHour) {
         var object = this.getJson();
 
         if(floorName != ""){
@@ -116,6 +116,10 @@ module.exports = {
                     object.floors[i]['rooms'].push({
                         name: roomName,
                         faculty: faculty,
+                        attribute: attribute,
+                        startHour: startHour,
+                        endHour: endHour
+
                     });
 
                     let data = JSON.stringify(object, null, 2);

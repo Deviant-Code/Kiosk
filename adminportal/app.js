@@ -283,6 +283,9 @@ app.post('/updateRooms', function (req, res) {
   departmentJson.addRoom(req.body.floorName,
                          req.body.newRoomName,
                          req.body.newFaculty,
+                         req.body.newAttribute,
+                         req.body.newHourStart,
+                         req.body.newHourEnd,
                          );
   res.redirect('back');
 });

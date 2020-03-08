@@ -113,9 +113,11 @@ function loadDepartmentContent() {
           var button = document.createElement('button');
           button.innerHTML = "x";
           var floorName = res.floors[i].name;
-          var roomName = res.floors[i].rooms[j].name;
+          var roomName_ = res.floors[i].rooms[j].name;
 
-          button.onclick = function(){deleteRoom(floorName, roomName, roomDiv.id)};
+          button.onclick = function(){
+              deleteRoom(floorName, roomName_, roomDiv.id);
+          };
           button.type = "submit"
           roomDiv.appendChild(button);
 
@@ -124,7 +126,10 @@ function loadDepartmentContent() {
           roomDiv.appendChild(roomName);
 
           var roomP = document.createElement("p");
-          roomP.innerHTML = res.floors[i].rooms[j].faculty;
+          roomP.innerHTML = res.floors[i].rooms[j].faculty + "<br>"+
+          res.floors[i].rooms[j].attribute + "<br> Hours: " +
+          res.floors[i].rooms[j].startHour + " - " + res.floors[i].rooms[j].endHour;
+
           roomDiv.appendChild(roomP);
         }
       }
@@ -148,6 +153,7 @@ function deleteRoom(floorName, roomName, divId) {
       alert('Request failed.  Returned status of ' + xhttp.status);
     }
   };
+  
   xhttp.send(encodeURI('floorName=' + floorName + '&roomName='+ roomName));
   location.reload();
 }

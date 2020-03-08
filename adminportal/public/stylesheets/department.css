@@ -135,38 +135,59 @@
   margin: 2% 2%;
   background-color: #30a1ff;
   border-radius: 5px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
   color: white;
 }
 
 /* Kiosk CSS */
 
 #departmentSearchKiosk{
-  float: right;
-  width: 15%;
-  height: 10%;
+    position: fixed;
+    right:0;
+    width: 20%;
+    height: 100%;
+    padding: 10px;
 }
 #departmentManagerKiosk{
   float: left;
   text-align: center;
   width: 72.5%;
 }
-
-.floor-display{
-  width: 92.5%;
+.content-display{
+  width: 40%;
   text-align: left;
   padding: 10px;
   margin: 2% 2%;
-  background-color: #F9F9FA;
+  border-radius: 5px;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4);
+}
+.content-search{
+  width: 40%;
+  text-align: left;
+  background-color: white;
+  padding: 10px;
+  border-left: 2px solid #dddddd;
+}
+
+.searchInput{
+  border: none;
+  background-color: #dddddd;
+  border-radius: 4px;
+  padding: 7px;
+  width: 95%;
+}
+
+.floor-display{
+  width: 100%;
+  text-align: left;
+  padding: 10px;
   border-radius: 10px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
   color: black;
 }
 
 .floor-image{
   left: 0;
-  width: 60%;
-  height: 35%;
+  width: 100%;
+  height: auto%;
 }
 .room-display-kiosk{
   width: 20%;
@@ -175,6 +196,5 @@
   text-align: left;
   background-color: #30a1ff;
   border-radius: 5px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
   color: white;
 }
