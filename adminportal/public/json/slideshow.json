@@ -1,8 +1,25 @@
 {
   "moduleEnabled": true,
-  "transitionSpeed": 3,
+  "transitionSpeed": 10,
   "willTransition": true,
   "autoPlayVideo": true,
   "default": true,
-  "images": []
+  "slides": [
+    {
+      "seqnum": 0,
+      "location": "Uploads/slideImage1582932327355.png",
+      "lastModified": 1582932327356,
+      "thumbnail": "",
+      "expiration": "",
+      "transitionTime": 10
+    },
+    {
+      "seqnum": 1,
+      "location": "Uploads/Videos/slideImage1582932271939.mp4",
+      "lastModified": 1582932272345,
+      "thumbnail": "Uploads/slideImage1582932271939.jpeg",
+      "expiration": "",
+      "transitionTime": 10
+    }
+  ]
 }

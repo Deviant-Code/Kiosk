@@ -194,9 +194,11 @@ module.exports = {
         for (var i = 0; i < object['floors'].length; i++) {
             if (object.floors[i].name == floorName){
                 var floor = object.floors[i];
-
+                console.log("test")
                 for(var j =0; j < floor.rooms.length; j++){
-                    if(floor.rooms[j].name = roomName){
+                    console.log(floor.rooms[j].name)
+                    console.log(roomName)
+                    if(floor.rooms[j].name == roomName){
                         floor.rooms.splice(j, 1);
                         break;
                     }

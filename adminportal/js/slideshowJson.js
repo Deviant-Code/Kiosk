@@ -1,6 +1,29 @@
 const fs = require('fs');
 
 module.exports = {
+    //Find the target path and update its settings
+    updateSlideSettings: function reorderSlidesJson(path, transitionTime, expiration) {
+        var object = this.getJson();
+
+
+        for (var i = 0; i < object.slides.length; i++) {
+            if (object.slides[i].location == path) {
+                object.slides[i].expiration = expiration;
+                object.slides[i].transitionTime = parseInt(transitionTime);
+                console.log(path);
+            }   
+        }
+
+        let data = JSON.stringify(object, null, 2);
+
+        fs.writeFileSync("public/json/slideshow.json", data, (err) => {
+            if (err) {
+                console.error(err);
+                return;
+            };
+        });
+    },
+
     //Find the target and moving path within our json array and swap them
     //Update the seqnum values for all slides
     reorderSlides: function reorderSlidesJson(movingPath, targetPath) {
@@ -12,26 +35,26 @@ module.exports = {
         var targetIndex;
         var movingIndex, movingElement;
 
-        for (var i = 0; i < object.images.length; i++) {
-            if (object.images[i].location == movingPath) {
+        for (var i = 0; i < object.slides.length; i++) {
+            if (object.slides[i].location == movingPath) {
                 movingIndex = i;
-                movingElement = object.images[i];
+                movingElement = object.slides[i];
             }
-            if (object.images[i].location == targetPath) {
+            if (object.slides[i].location == targetPath) {
                 targetIndex = i;
             }
         }
 
         if (targetIndex != null && movingIndex != null && movingElement != null) {
             //Remove old copy from array
-            object.images.splice(movingIndex, 1);
+            object.slides.splice(movingIndex, 1);
             //Insert copy into array
-            object.images.splice(targetIndex, 0, movingElement);
+            object.slides.splice(targetIndex, 0, movingElement);
         }
 
         //Update the seqnum of next slides if there is one or more after the removed
-        for (var i = 0; i < object.images.length; i++) {
-            object.images[i].seqnum = i;
+        for (var i = 0; i < object.slides.length; i++) {
+            object.slides[i].seqnum = i;
         }
 
         let data = JSON.stringify(object, null, 2);
@@ -50,22 +73,61 @@ module.exports = {
 
         path = path.replace('public/', '');
 
-        for (var i = 0; i < object.images.length; i++) {
-            if (object.images[i].location == path) {
+        for (var i = 0; i < object.slides.length; i++) {
+            if (object.slides[i].location == path) {
 
-                if (object.images[i].thumbnail != "") {
-                    fs.unlink('public/' + object.images[i].thumbnail, (err) => {
+                if (object.slides[i].thumbnail != "") {
+                    fs.unlink('public/' + object.slides[i].thumbnail, (err) => {
                         if (err)
                             console.log(err);
                     });
                 }
                 //Remove from array
-                object.images.splice(i, 1);
+                object.slides.splice(i, 1);
 
                 //Update the seqnum of next slides if there is one or more after the removed
-                for (var j = i; j < object.images.length; j++) {
-                    if (object.images[j])
-                        object.images[j].seqnum = object.images[j].seqnum - 1;
+                for (var j = i; j < object.slides.length; j++) {
+                    if (object.slides[j])
+                        object.slides[j].seqnum = object.slides[j].seqnum - 1;
+                }
+                break;
+            }
+        }
+
+        let data = JSON.stringify(object, null, 2);
+
+        fs.writeFileSync("public/json/slideshow.json", data, (err) => {
+            if (err) {
+                console.error(err);
+                return;
+            };
+        });
+    },
+
+    //Parse and remove any expired slides
+    removeExpiredSlides: function removeExpiredSlides() {
+        var object = this.getJson();
+
+        for (var i = 0; i < object.slides.length; i++) {
+            if (Date.parse(object.slides[i].expiration) <= Date.now()) {
+                if (object.slides[i].thumbnail != "") {
+                    fs.unlink('public/' + object.slides[i].thumbnail, (err) => {
+                        if (err)
+                            console.log(err);
+                    });
+                }
+
+                fs.unlink('public/' + object.slides[i].location, (err) => {
+                    if (err)
+                        console.log(err);
+                });
+                //Remove from array
+                object.slides.splice(i, 1);
+
+                //Update the seqnum of next slides if there is one or more after the removed
+                for (var j = i; j < object.slides.length; j++) {
+                    if (object.slides[j])
+                        object.slides[j].seqnum = object.slides[j].seqnum - 1;
                 }
                 break;
             }
@@ -98,11 +160,13 @@ module.exports = {
                 path = 'Uploads/Videos/' + path.replace('Uploads/', '')
             }
 
-            object['images'].push({
-                seqnum: object['images'].length,
+            object['slides'].push({
+                seqnum: object['slides'].length,
                 location: path,
                 lastModified: Date.now(),
-                thumbnail: ""
+                thumbnail: "",
+                expiration: "",
+                transitionTime: 10
             });
         });
 
@@ -122,8 +186,8 @@ module.exports = {
 
         path = path.replace('public/', '');
 
-        for (var i = 0; i < object.images.length; i++) {
-            if (object.images[i].location == path) {
+        for (var i = 0; i < object.slides.length; i++) {
+            if (object.slides[i].location == path) {
                 let base64Image = thubmnail64.replace(/^data:image\/jpeg+;base64,/, "");
                 base64Image = base64Image.replace(/ /g, '+');
 
@@ -134,7 +198,7 @@ module.exports = {
                 });
 
                 filePath = filePath.replace('public/', '');
-                object.images[i].thumbnail = filePath;
+                object.slides[i].thumbnail = filePath;
             }
         }
 
@@ -166,7 +230,7 @@ module.exports = {
             //Slideshow default module settings
             let slideshow = {
                 moduleEnabled: true,
-                transitionSpeed: 3,
+                transitionSpeed: 10,
                 willTransition: true,
                 autoPlayVideo: true,
                 default: true,
