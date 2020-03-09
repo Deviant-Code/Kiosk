@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class KioskManager {
     private final static Logger logr = Logger.getLogger(KioskManager.class.getName());
-    private static final Map<String,ModuleInterface> modules = new HashMap<>();
+    private static final Map<String,ModuleInterface> modules = new HashMap<String, ModuleInterface>();
 
     private static KioskManager instance = null;
     private static ModuleInterface activeModule; //shows current module being used
@@ -19,10 +19,6 @@ public class KioskManager {
         initializeModules();
     }
 
-    public static HashMap getModules(){
-        return (HashMap) modules;
-    }
-
     public static KioskManager getInstance(){
         if(instance == null){
             instance = new KioskManager();
@@ -30,7 +26,11 @@ public class KioskManager {
         return instance;
     }
 
-    private static void initializeModules() {
+    public HashMap<String, ModuleInterface> getModules(){
+        return (HashMap<String,ModuleInterface>) modules;
+    }
+
+    private void initializeModules() {
         modules.put("slideshow", new Slideshow());
         modules.put("schedules", new Schedules());
         modules.put("polls", new Polls());

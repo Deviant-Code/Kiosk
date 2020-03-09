@@ -1,5 +1,6 @@
+/* Style Sheet for Kiosk Application -- contains themes and colors and effects for JavaFX Styling*/
+
 * {
-    /*-fx-primary : #2A2E37;*/
     -fx-primary: #4062BB;
     -fx-offPrimary: #1d2d57;
     -fx-secondary : #59c3c3;
@@ -8,9 +9,8 @@
     -fx-blue: #1976D2;
     -fx-red: #FF0000;
     -fx-color-1:#1976D2;
-
-    -fx-primary1:#1F4788;
-    -fx-secondary1:#4b77be;
+    -fx-primary-bu:#1F4788;
+    -fx-secondary-bu:#4b77be;
 }
 
 .root{
@@ -30,7 +30,7 @@
 .navButton{
     -fx-font-size: 30px;
     -fx-text-fill: -fx-primarytext;
-    -fx-background-color: -fx-primary1;
+    -fx-background-color: -fx-primary-bu;
     -fx-opacity:0.8;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -40,7 +40,7 @@
 
 .navButtonActive{
     -fx-text-fill: -fx-primarytext;
-    -fx-background-color: -fx-secondary1;
+    -fx-background-color: -fx-secondary-bu;
     -fx-border-color: #24252a;
     -fx-border-width: 4;
     -fx-border-radius: 3;
@@ -49,7 +49,7 @@
 
 .button:hover, .button:focused{
     -fx-border-color: #24252a;
-    -fx-background-color: -fx-secondary1;
+    -fx-background-color: -fx-secondary-bu;
     -fx-text-fill: -fx-primarytext;
 }
 

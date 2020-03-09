@@ -14,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import manager.KioskManager;
+import modules.ModuleInterface;
 import utilities.GestureHandler;
 import java.io.IOException;
 import java.net.URL;
@@ -69,8 +70,7 @@ public class DynamicController implements Initializable {
 
     //Loads FXML's corresponding to each core module and saves their roots for swapping between scenes
     private void initializeViews(){
-
-        KioskManager.getModules().forEach((k,v)->{
+        KioskManager.getInstance().getModules().forEach((k,v)->{
             try {
                 String rootPath = CORE_MOD_DIR + k + ".fxml";
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(rootPath));
