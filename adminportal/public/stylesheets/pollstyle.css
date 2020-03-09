@@ -6,6 +6,18 @@ body {
   overflow: hidden;
   background-color: #2364AA;
   text-align: center;
+  opacity: 1;
+  transition: 1s opacity;
+}
+
+body.fade-in {
+    opacity: 0;
+    transition: none;
+}
+
+body.fade-out {
+  opacity: 0;
+  transition: 1s opacity;
 }
 
 .poll-response {
