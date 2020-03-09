@@ -12,6 +12,8 @@ import javafx.scene.layout.StackPane;
 import manager.KioskManager;
 import modules.Slideshow;
 import utilities.GestureHandler;
+import javafx.stage.Screen;
+import javafx.geometry.Rectangle2D;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,14 +36,22 @@ public class SlideshowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         gestureHandler = new GestureHandler();
+        setDefaultBounds();
         this.slideshow = (Slideshow) KioskManager.getInstance().getModule("slideshow");
-        imageView.setPreserveRatio(true);
-        imageView.fitHeightProperty().bind(slideshowContainer.heightProperty());
-        imageView.fitWidthProperty().bind(slideshowContainer.widthProperty());
+
         slideshow.init(imageView);
         slideshow.onWake();
     }
 
+    public void setDefaultBounds(){
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        imageView.setPreserveRatio(true);
+        imageView.setFitHeight(bounds.getHeight());
+        imageView.setFitWidth(bounds.getWidth());
+        imageView.fitHeightProperty().bind(slideshowContainer.heightProperty());
+        imageView.fitWidthProperty().bind(slideshowContainer.widthProperty());
+    }
     @FXML
     //Transition slideshow active_image to previous photo
     public void previousPhoto() {

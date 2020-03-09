@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
+
 <StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="2160.0" prefWidth="3840.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DynamicController">
    <fx:define>
       <fx:include fx:id="navMenu" source="kioskNavMenu.fxml" />

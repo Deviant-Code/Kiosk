@@ -64,7 +64,7 @@ public class DynamicController implements Initializable {
         navMenuController.activeWindowProperty().addListener(((observable, oldValue, newValue) -> setView(newValue)));
         initializeViews();
         kioskOverlay.pickOnBoundsProperty().bind(gestureHandler.inMotionProperty().or(drawerVisibleProperty));
-        setView("slideshow");
+       // setView("slideshow");
 
     }
 
@@ -86,8 +86,8 @@ public class DynamicController implements Initializable {
     private void setView(String requestedModule){
         KioskManager.getInstance().transition(requestedModule);
         StackPane requestedRoot = (StackPane) moduleRoots.get(requestedModule);
-        requestedRoot.prefHeightProperty().bind(dynamicPane.heightProperty());
-        requestedRoot.prefWidthProperty().bind(dynamicPane.widthProperty());
+        requestedRoot.prefHeightProperty().bind(scene.heightProperty());
+        requestedRoot.prefWidthProperty().bind(scene.widthProperty());
         dynamicPane.getChildren().setAll(moduleRoots.get(requestedModule));
     }
 
@@ -142,7 +142,7 @@ public class DynamicController implements Initializable {
         drawer.setDefaultDrawerSize(drawer.getPrefHeight());
         navMenu.prefHeightProperty().bind(drawer.heightProperty());
         navMenu.prefWidthProperty().bind(drawer.widthProperty());
-
+        setView("slideshow");
     }
 
 }
