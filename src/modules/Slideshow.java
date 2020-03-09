@@ -2,6 +2,8 @@ package modules;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import manager.KioskManager;
+
 import java.io.*;
 import java.net.URLConnection;
 import java.nio.file.*;
@@ -9,11 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Slideshow implements ModuleInterface{
-
-    private static final short INACTIIVITY_TIMEOUT = 30;
-    private static final long AFTER_TOUCH_IDLE_DURATION = 10000;
 
     private int imageIndex;
     private short secondsPerImage = 5;
@@ -24,6 +25,9 @@ public class Slideshow implements ModuleInterface{
     private ImageView imageView;
     private Timer t;
     private boolean timerEnabled;
+
+    private final static Logger logr = Logger.getLogger(KioskManager.class.getName());
+
 
     //TODO: Move timer to separate event listener class and have it maintain scope of user activity and inactivity
 
@@ -89,9 +93,9 @@ public class Slideshow implements ModuleInterface{
         if(!folder.exists()){
             if(folder.mkdirs()){
                 //log folder created succesfully
-                System.out.print("Folder created");
+                logr.log(Level.WARNING, "Slideshow Folder Not Found --> New Folder instantiated");
             } else {
-                throw new Error("Slideshow directory could not be found or created");
+                logr.log(Level.SEVERE, "Slideshow Folder Not Found --> Could not instantiate new folder");
             }
         }
     }
@@ -162,7 +166,7 @@ public class Slideshow implements ModuleInterface{
             Image image = new Image(getImage());
             imageView.setImage(image);
         } catch(IllegalArgumentException E){
-            System.out.println("ERR" + " : " + getImage());
+            logr.log(Level.WARNING, "Illegal Argument Exception attempting to load image: " + getImage());
             list.remove(imageIndex);
         }
     }

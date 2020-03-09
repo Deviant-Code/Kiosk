@@ -19,15 +19,6 @@ import java.util.logging.Logger;
 public class NavMenuController implements Initializable {
 
     @FXML
-    private JFXButton slideshowBtn;
-    @FXML
-    private JFXButton pollsBtn;
-    @FXML
-    private JFXButton schedulesBtn;
-    @FXML
-    private JFXButton departmentBtn;
-
-    @FXML
     private HBox navMenu;
 
     private final static Logger logr = Logger.getLogger(KioskManager.class.getName());
@@ -37,10 +28,6 @@ public class NavMenuController implements Initializable {
 
     public StringProperty activeWindowProperty(){
         return activeWindow;
-    }
-
-    public final String getActiveWindow(){
-        return activeWindowProperty().get();
     }
 
     @Override

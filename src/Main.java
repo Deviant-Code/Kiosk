@@ -19,11 +19,10 @@ public class Main extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         try {
             this.stage = primaryStage;
             setWindowProperties(primaryStage);
-            KioskManager kioskManager = KioskManager.getInstance();
             FXMLLoader dynamicContainer = new FXMLLoader(getClass().getResource("fxml/dynamicContainer.fxml"));
             Scene scene = new Scene(dynamicContainer.load(),primaryStage.getWidth(), primaryStage.getHeight());
 
