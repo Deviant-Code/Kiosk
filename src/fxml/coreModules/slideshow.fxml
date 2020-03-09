@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:id="slideshowContainer" onMouseClicked="#onTouchReleased" onMouseDragged="#onTouchEvent" onMouseReleased="#onTouchReleased" scaleShape="false" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SlideshowController">
+   <children>
+      <ImageView id="imageView" fx:id="imageView" cache="true" depthTest="DISABLE" focusTraversable="true" onDragDetected="#onTouchEvent" onDragEntered="#onTouchEvent" onKeyPressed="#keyPressed" onMouseClicked="#onTouchReleased" onMouseDragEntered="#onTouchEvent" onMouseDragged="#onTouchEvent" onMouseReleased="#onTouchReleased" pickOnBounds="true" StackPane.alignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </ImageView>
+   </children>
+</StackPane>

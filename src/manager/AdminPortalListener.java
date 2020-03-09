@@ -2,9 +2,6 @@ package manager;
 
 import java.net.URL;
 import com.google.gson.*;
-import java.util.concurrent.TimeUnit.*;
-import java.util.Timer; 
-import java.util.TimerTask; 
 import java.io.*;
 import java.nio.channels.FileChannel;
 

@@ -1,0 +1,62 @@
+/* Style Sheet for Kiosk Application -- contains themes and colors and effects for JavaFX Styling*/
+
+* {
+    -fx-primary: #4062BB;
+    -fx-offPrimary: #1d2d57;
+    -fx-secondary : #59c3c3;
+    -fx-primarytext : #ebebeb;
+    -fx-primaryIcon: #5698ef;
+    -fx-blue: #1976D2;
+    -fx-red: #FF0000;
+    -fx-color-1:#1976D2;
+    -fx-primary-bu:#1F4788;
+    -fx-secondary-bu:#4b77be;
+}
+
+.root{
+    -fx-background-color: -fx-blue;
+}
+
+.glyph-icon
+{
+    -fx-fill: silver;
+}
+
+.hboxmenu{
+    -fx-background-color: black;
+
+}
+
+.navButton{
+    -fx-font-size: 30px;
+    -fx-text-fill: -fx-primarytext;
+    -fx-background-color: -fx-primary-bu;
+    -fx-opacity:0.8;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 6;
+    -fx-background-radius:3;
+}
+
+.navButtonActive{
+    -fx-text-fill: -fx-primarytext;
+    -fx-background-color: -fx-secondary-bu;
+    -fx-border-color: #24252a;
+    -fx-border-width: 4;
+    -fx-border-radius: 3;
+    -fx-background-radius:3;
+}
+
+.button:hover, .button:focused{
+    -fx-border-color: #24252a;
+    -fx-background-color: -fx-secondary-bu;
+    -fx-text-fill: -fx-primarytext;
+}
+
+.text-field
+{
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-size : 14pt;
+    -jfx-focus-color: -fx-secondary;
+    -fx-text-fill: derive(-fx-secondary, 20%);
+}

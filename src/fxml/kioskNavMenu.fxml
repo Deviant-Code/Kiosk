@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="navMenu" alignment="BOTTOM_CENTER" cache="true" cacheHint="SPEED" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="hboxmenu" stylesheets="@../res/kioskStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NavMenuController">
+   <children>
+      <JFXButton fx:id="slideshowBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#openSlideshow" ripplerFill="#081a51" styleClass="navButton" text="Slideshow" HBox.hgrow="ALWAYS">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <graphic>
+            <MaterialDesignIconView accessibleRole="IMAGE_VIEW" glyphName="PLAY_BOX_OUTLINE" size="40" styleClass="glyph-icon" />
+         </graphic>
+         <font>
+            <Font size="27.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="pollsBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#openPolls" ripplerFill="#081a51" styleClass="navButton" text="Polls" HBox.hgrow="ALWAYS">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <graphic>
+            <MaterialDesignIconView accessibleRole="IMAGE_VIEW" glyphName="POLL" size="40" styleClass="glyph-icon" />
+         </graphic>
+         <font>
+            <Font size="27.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="schedulesBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#openSchedules" ripplerFill="#081a51" styleClass="navButton" text="Schedules" HBox.hgrow="ALWAYS">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <graphic>
+            <MaterialDesignIconView accessibleRole="IMAGE_VIEW" glyphName="TIMETABLE" size="40" styleClass="glyph-icon" />
+         </graphic>
+         <font>
+            <Font size="27.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="departmentBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#openDepartment" ripplerFill="#081a51" styleClass="navButton" text="Department" HBox.hgrow="ALWAYS">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <graphic>
+            <MaterialDesignIconView accessibleRole="IMAGE_VIEW" glyphName="SCHOOL" size="40" styleClass="glyph-icon" />
+         </graphic>
+         <font>
+            <Font size="27.0" />
+         </font>
+      </JFXButton>
+   </children>
+   <effect>
+      <InnerShadow blurType="TWO_PASS_BOX" choke="0.3" height="100.0" radius="44.5" width="80.0" />
+   </effect>
+</HBox>

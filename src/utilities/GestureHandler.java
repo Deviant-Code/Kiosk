@@ -14,13 +14,15 @@ import javafx.event.Event;
 import javafx.event.EventType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.SwipeEvent;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 public class GestureHandler {
 
     //Gesture Processing
-    private boolean mouseDragEvent;
-    private final long dragTimeThreshold = 1000; // Max time for a gesture before being consumed in ms
-    private final double distanceThreshold = 20; // Min distance for a gesture
+    private final BooleanProperty inMotion = new SimpleBooleanProperty();
+    private final long dragTimeThreshold = 500; // Max time for a gesture before being consumed in ms
+    private final double distanceThreshold = 200; // Min distance for a gesture
     private final double differenceThreshold = .25; // Percent difference between vert. and horiz. distance to be considered a swipe
     private long startTime = -1l; // Records the time a touch gesture begins
 
@@ -32,24 +34,13 @@ public class GestureHandler {
     private double horizontalMagnitude;
     private double verticalMagnitude;
 
-
-    private static GestureHandler instance = null;
-
-
     public GestureHandler (){
 
     }
 
-    public static GestureHandler getInstance(){
-        if(instance == null){
-            instance = new GestureHandler();
-        }
-        return instance;
-    }
-
     public void startGesture(MouseEvent event){
-        if(event.getEventType().equals(MouseEvent.DRAG_DETECTED)){
-            mouseDragEvent = true;
+        if(event.getEventType().equals(MouseEvent.DRAG_DETECTED) || event.getEventType().equals(MouseEvent.MOUSE_DRAGGED)){
+            setInMotion(true);
             startTime = System.currentTimeMillis();
             startX = event.getSceneX();
             startY = event.getSceneY();
@@ -57,7 +48,7 @@ public class GestureHandler {
     }
 
     private void reset() {
-        mouseDragEvent = false;
+        setInMotion(false);
         startTime = -1l;
         startX = 0;
         startY = 0;
@@ -71,7 +62,7 @@ public class GestureHandler {
 
         long netTime = System.currentTimeMillis() - startTime;
 
-        if(mouseDragEvent && netTime < dragTimeThreshold && netTime != -1l){
+        if(inMotion() && netTime < dragTimeThreshold && netTime != -1l){
             //User has swiped Screen and within the time threshold
             //Calculate gesture coordinates and validate swipe type
             horizontalShift = event.getSceneX() - startX;
@@ -110,7 +101,15 @@ public class GestureHandler {
         return swipeResult;
     }
 
-    public boolean inMotion() {
-        return mouseDragEvent;
+    public final boolean inMotion(){
+        return inMotion.get();
+    }
+
+    public final void setInMotion(Boolean state){
+        inMotion.set(state);
+    }
+
+    public BooleanProperty inMotionProperty(){
+        return inMotion;
     }
 }

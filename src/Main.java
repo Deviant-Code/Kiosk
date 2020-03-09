@@ -1,90 +1,60 @@
-import controllers.*;
+import controllers.DynamicController;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.WindowEvent;
 import javafx.event.EventHandler;
-import javafx.stage.Popup;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import manager.KioskManager;
-import modules.Slideshow;
 
-import java.awt.event.ActionEvent;
 import java.io.*;
 
 public class Main extends Application {
 
-    private static Slideshow slideshow;
     private static Process pr;
+    private Stage stage;
+
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
+        try {
+            this.stage = primaryStage;
+            setWindowProperties(primaryStage);
+            FXMLLoader dynamicContainer = new FXMLLoader(getClass().getResource("fxml/dynamicContainer.fxml"));
+            Scene scene = new Scene(dynamicContainer.load(),primaryStage.getWidth(), primaryStage.getHeight());
 
-        //Set stage parameters
-        primaryStage.setTitle("Project Electra: V0.1.2");
+            //Set Scene and Show Stage
+            DynamicController controller = dynamicContainer.getController();
+            controller.bindScene(scene);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
-        primaryStage.setMinWidth(450);
-        primaryStage.setMinHeight(300);
-        primaryStage.setResizable(false);
+    private void setWindowProperties(Stage primaryStage) {
+        // Set Window Properties
+        primaryStage.setTitle("Western Washington University - CS Department Display");
+
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
+        primaryStage.setX(bounds.getMinX());
+        primaryStage.setY(bounds.getMinY());
         primaryStage.setWidth(bounds.getWidth());
         primaryStage.setHeight(bounds.getHeight());
 
-        KioskManager kioskManager = KioskManager.getInstance();;
-        kioskManager.setStage(primaryStage);
-
-        //Generate FXML Loaders for each module
-        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("fxml/kioskDisplay.fxml"));
-        FXMLLoader slideshowLoader = new FXMLLoader(getClass().getResource("fxml/slideshow.fxml"));
-        FXMLLoader webViewLoader = new FXMLLoader(getClass().getResource("fxml/webview.fxml"));
-        FXMLLoader pollViewLoader = new FXMLLoader(getClass().getResource("fxml/pollView.fxml"));
-        FXMLLoader schedulerLoader = new FXMLLoader(getClass().getResource("fxml/schedule.fxml"));
-
-        //Generate Roots for each loader
-        Parent menuRoot = menuLoader.load();
-        Parent slideshowRoot = slideshowLoader.load();
-        Parent deptRoot = webViewLoader.load();
-        Parent pollViewRoot = pollViewLoader.load();
-        Parent scheduleRoot = schedulerLoader.load();
-
-        //Build Scene and pass in main menu as original root
-        Scene scene = new Scene(menuRoot,bounds.getWidth(), bounds.getHeight());
-
-        //Build Controllers for each view
-        MenuController menuController = menuLoader.getController();
-        SlideshowController ssController = slideshowLoader.getController();
-        WebController webController = webViewLoader.getController();
-        PollController pollController = pollViewLoader.getController();
-        ScheduleController scheduleController = schedulerLoader.getController();
-
-        //set scene, root, and controllers to kiosk manager
-        kioskManager.setRoots(slideshowRoot,pollViewRoot,deptRoot,menuRoot,scheduleRoot);
-        kioskManager.setControllers(menuController, ssController, webController, pollController, scheduleController);
-
-        //Set Scene and Show Stage
-        kioskManager.setScene(scene);
-
-        //Initialize modules
-        kioskManager.videoInit();
-        kioskManager.slideShowInit();
-
-        primaryStage.setScene(scene);
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-        primaryStage.setFullScreenExitHint("Kiosk");
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
-                if(pr != null)
+                if (pr != null)
                     pr.destroy();
             }
-        });       
-        primaryStage.show();
+        });
     }
 
     // //running the kiosk
