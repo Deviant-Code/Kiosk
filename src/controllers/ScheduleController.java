@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
 import manager.KioskManager;
-import modules.Polls;
 import modules.Schedules;
 
 import java.net.URL;

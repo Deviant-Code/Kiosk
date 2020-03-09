@@ -13,6 +13,8 @@ import java.util.TimerTask;
 public class Slideshow implements ModuleInterface{
 
     private static final short INACTIIVITY_TIMEOUT = 30;
+    private static final long AFTER_TOUCH_IDLE_DURATION = 10000;
+
     private int imageIndex;
     private short secondsPerImage = 5;
     private static String slideshowDirectory = "slideshow/"; //local directory used by adminportal listener

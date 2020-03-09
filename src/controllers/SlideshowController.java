@@ -18,9 +18,11 @@ import javafx.geometry.Rectangle2D;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
 
 public class SlideshowController implements Initializable {
 
+    private static final long AFTER_TOUCH_IDLE_DURATION = 10000;
     private Slideshow slideshow;
     private GestureHandler gestureHandler;
 
@@ -32,6 +34,8 @@ public class SlideshowController implements Initializable {
 
     @FXML
     private JFXDrawer drawer;
+
+    private Timer t;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,6 +59,7 @@ public class SlideshowController implements Initializable {
     @FXML
     //Transition slideshow active_image to previous photo
     public void previousPhoto() {
+        monitorIdle();
         slideshow.previousImage();
         slideshow.setImage();
     }
@@ -62,8 +67,31 @@ public class SlideshowController implements Initializable {
     @FXML
     //Transition slideshow active_image to next photo
     public void nextPhoto() {
+        monitorIdle();
         slideshow.nextImage();
         slideshow.setImage();
+    }
+
+    private void monitorIdle() {
+
+        slideshow.cancelTimer();
+
+        if(t != null){
+            t.cancel();
+            t.purge();
+        }
+
+        t = new Timer(true);
+        t.schedule(
+                new java.util.TimerTask(){
+                    @Override
+                    public void run() {
+                        //Close Menu after menu duration exceeded
+                        slideshow.startTimer();
+                    }
+                },
+                AFTER_TOUCH_IDLE_DURATION
+        );
     }
 
     @FXML
@@ -84,6 +112,7 @@ public class SlideshowController implements Initializable {
 
     @FXML
     public void onTouchEvent(MouseEvent event) throws IOException {
+        monitorIdle();
         if(!gestureHandler.inMotion()){
             gestureHandler.startGesture(event);
         }
@@ -91,6 +120,7 @@ public class SlideshowController implements Initializable {
 
     @FXML
     public void onTouchReleased(MouseEvent event) throws IOException {
+        monitorIdle();
         if(gestureHandler.inMotion()){
             if(gestureHandler.validate(event)){
                 //Gesture has just completed

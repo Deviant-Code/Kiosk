@@ -17,15 +17,16 @@ import manager.KioskManager;
 import utilities.GestureHandler;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 public class DynamicController implements Initializable {
+
+    //Max time the menu will stay open before hiding
+    private static final long MAX_MENU_DURATION = 10000;
 
     @FXML
     private BorderPane kioskOverlay;
@@ -64,8 +65,6 @@ public class DynamicController implements Initializable {
         navMenuController.activeWindowProperty().addListener(((observable, oldValue, newValue) -> setView(newValue)));
         initializeViews();
         kioskOverlay.pickOnBoundsProperty().bind(gestureHandler.inMotionProperty().or(drawerVisibleProperty));
-       // setView("slideshow");
-
     }
 
     //Loads FXML's corresponding to each core module and saves their roots for swapping between scenes
@@ -89,6 +88,7 @@ public class DynamicController implements Initializable {
         requestedRoot.prefHeightProperty().bind(scene.heightProperty());
         requestedRoot.prefWidthProperty().bind(scene.widthProperty());
         dynamicPane.getChildren().setAll(moduleRoots.get(requestedModule));
+        closeDrawer();
     }
 
     @FXML
@@ -110,6 +110,11 @@ public class DynamicController implements Initializable {
                     closeDrawer();
                 }
             }
+        } else {
+            //If user clicks on screen outside of navmenu while drawer is open, close drawer...
+            if(drawer.isOpened()){
+                drawer.close();
+            }
         }
     }
 
@@ -117,6 +122,18 @@ public class DynamicController implements Initializable {
         if(drawer.isClosed()){
             drawer.open();
             drawerVisibleProperty.set(true);
+
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask(){
+                        @Override
+                        public void run() {
+                            //Close Menu after menu duration exceeded
+                            closeDrawer();
+                        }
+                    },
+                    MAX_MENU_DURATION
+            );
+
         }
     }
 

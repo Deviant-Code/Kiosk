@@ -1,30 +1,18 @@
 package manager;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import modules.*;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class KioskManager {
-
-    private static KioskManager instance = null;
-
     private final static Logger logr = Logger.getLogger(KioskManager.class.getName());
-
-    private static ModuleInterface activeModule; //shows current module being used
     private static final Map<String,ModuleInterface> modules = new HashMap<>();
 
-    // Root for each module to change between scenes
-    private Parent pollRoot;
-    private Parent deptRoot;
-    private Parent scheduleRoot;
-    private Parent slideshowRoot;
+    private static KioskManager instance = null;
+    private static ModuleInterface activeModule; //shows current module being used
 
     private KioskManager(){
         //Private Constructor
@@ -47,8 +35,8 @@ public class KioskManager {
         modules.put("schedules", new Schedules());
         modules.put("polls", new Polls());
         modules.put("department", new Department());
-        modules.put("maps", new Maps());
-        modules.put("video", new Video());
+        //modules.put("maps", new Maps());
+        //modules.put("video", new Video());
         activeModule = modules.get("slideshow");
     }
 

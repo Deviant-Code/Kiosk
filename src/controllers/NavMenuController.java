@@ -79,6 +79,7 @@ public class NavMenuController implements Initializable {
         if(!activeWindow.get().equals("slideshow")){
             activeWindow.set("slideshow");
         }
+
     }
 
     @FXML
