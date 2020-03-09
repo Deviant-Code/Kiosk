@@ -1,16 +1,12 @@
 package controllers;
 
 import com.jfoenix.controls.JFXDrawer;
-import javafx.beans.binding.Bindings;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.SwipeEvent;
 import javafx.scene.layout.AnchorPane;
@@ -66,20 +62,10 @@ public class DynamicController implements Initializable {
         this.gestureHandler = new GestureHandler();
         drawer.setSidePane(navMenu);
         navMenuController.activeWindowProperty().addListener(((observable, oldValue, newValue) -> setView(newValue)));
-
         initializeViews();
-        bindViewsToScene();
-
         kioskOverlay.pickOnBoundsProperty().bind(gestureHandler.inMotionProperty().or(drawerVisibleProperty));
         setView("slideshow");
 
-    }
-
-    private void bindViewsToScene() {
-        moduleRoots.forEach((k,v)-> {
-          //  v.prefWidth(scene.getWidth());
-          //  v.prefHeight(scene.getHeight());
-        });
     }
 
     //Loads FXML's corresponding to each core module and saves their roots for swapping between scenes
@@ -125,16 +111,12 @@ public class DynamicController implements Initializable {
                 }
             }
         }
-        if(!drawer.isOpened() && !drawer.isOpening()){
-        //    kioskOverlay.setPickOnBounds(false);
-        }
     }
 
     private void openDrawer(){
         if(drawer.isClosed()){
             drawer.open();
             drawerVisibleProperty.set(true);
-   //         kioskOverlay.setPickOnBounds(true);
         }
     }
 
@@ -142,7 +124,6 @@ public class DynamicController implements Initializable {
         if(drawer.isOpened()){
             drawer.close();
             drawerVisibleProperty.set(false);
-        //    kioskOverlay.setPickOnBounds(false);
         }
     }
 
@@ -151,13 +132,17 @@ public class DynamicController implements Initializable {
     }
 
     public void bindScene(Scene scene) {
+        this.scene = scene;
         root.prefWidthProperty().bind(scene.widthProperty());
         root.prefHeightProperty().bind(scene.heightProperty());
-        dynamicPane.prefWidth(root.getWidth());
-        dynamicPane.prefHeight(root.getHeight());
-        drawer.prefWidthProperty().bind(dynamicPane.widthProperty().divide((2/3)));
-        drawer.prefHeightProperty().bind(dynamicPane.heightProperty().divide(6));
+        dynamicPane.prefWidth(scene.getWidth());
+        dynamicPane.prefHeight(scene.getHeight());
+        drawer.prefWidthProperty().bind(scene.widthProperty().divide((2/3)));
+        drawer.prefHeightProperty().bind(scene.heightProperty().divide(6));
+        drawer.setDefaultDrawerSize(drawer.getPrefHeight());
         navMenu.prefHeightProperty().bind(drawer.heightProperty());
         navMenu.prefWidthProperty().bind(drawer.widthProperty());
+
     }
+
 }

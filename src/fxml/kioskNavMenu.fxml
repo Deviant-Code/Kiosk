@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="navMenu" alignment="BOTTOM_CENTER" cache="true" cacheHint="SPEED" styleClass="hboxmenu" stylesheets="@../res/kioskStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NavMenuController">
+<HBox fx:id="navMenu" alignment="BOTTOM_CENTER" cache="true" cacheHint="SPEED" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="hboxmenu" stylesheets="@../res/kioskStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NavMenuController">
    <children>
-      <JFXButton fx:id="slideshowBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="25.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openSlideshow" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" styleClass="navButton" text="Slideshow" HBox.hgrow="ALWAYS">
+      <JFXButton fx:id="slideshowBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#openSlideshow" ripplerFill="#081a51" styleClass="navButton" text="Slideshow" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
          </HBox.margin>
@@ -20,7 +20,7 @@
             <Font size="27.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="pollsBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="25.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openPolls" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" styleClass="navButton" text="Polls" HBox.hgrow="ALWAYS">
+      <JFXButton fx:id="pollsBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#openPolls" ripplerFill="#081a51" styleClass="navButton" text="Polls" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
          </HBox.margin>
@@ -31,7 +31,7 @@
             <Font size="27.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="schedulesBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="25.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openSchedules" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" styleClass="navButton" text="Schedules" HBox.hgrow="ALWAYS">
+      <JFXButton fx:id="schedulesBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#openSchedules" ripplerFill="#081a51" styleClass="navButton" text="Schedules" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
          </HBox.margin>
@@ -42,7 +42,7 @@
             <Font size="27.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="departmentBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="25.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#openDepartment" prefHeight="360.0" prefWidth="640.0" ripplerFill="#081a51" styleClass="navButton" text="Department" HBox.hgrow="ALWAYS">
+      <JFXButton fx:id="departmentBtn" cache="true" cacheHint="SPEED" contentDisplay="BOTTOM" graphicTextGap="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#openDepartment" ripplerFill="#081a51" styleClass="navButton" text="Department" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets />
          </HBox.margin>

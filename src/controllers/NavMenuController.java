@@ -71,8 +71,6 @@ public class NavMenuController implements Initializable {
         for (Node btn: buttons) {
             ((Button) btn).prefWidthProperty().bind(navMenu.widthProperty().divide(btnCount));
             ((Button) btn).prefHeightProperty().bind(navMenu.heightProperty());
-            ((Button) btn).maxHeightProperty().bind(((Button)btn).prefHeightProperty());
-            ((Button) btn).maxWidthProperty().bind(((Button)btn).prefWidthProperty());
         }
     }
 

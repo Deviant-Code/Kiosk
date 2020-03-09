@@ -18,7 +18,7 @@
       </AnchorPane>
       <BorderPane fx:id="kioskOverlay" cache="true" cacheHint="SPEED" maxHeight="-Infinity" maxWidth="-Infinity" onDragDetected="#onTouchEvent" onDragEntered="#onTouchEvent" onMouseClicked="#onTouchReleased" onMouseDragEntered="#onTouchEvent" onMouseDragged="#onTouchEvent" pickOnBounds="false" prefHeight="2160.0" prefWidth="3840.0">
          <bottom>
-            <JFXDrawer fx:id="drawer" alignment="BOTTOM_CENTER" defaultDrawerSize="150.0" direction="BOTTOM" maxHeight="-Infinity" maxWidth="-Infinity" onDragDetected="#onTouchEvent" onMouseClicked="#onTouchReleased" onMouseDragEntered="#onTouchEvent" onMouseDragged="#onTouchEvent" prefHeight="476.0" prefWidth="3040.0" BorderPane.alignment="CENTER">
+            <JFXDrawer fx:id="drawer" alignment="BOTTOM_CENTER" direction="BOTTOM" maxHeight="-Infinity" maxWidth="-Infinity" onDragDetected="#onTouchEvent" onMouseClicked="#onTouchReleased" onMouseDragEntered="#onTouchEvent" onMouseDragged="#onTouchEvent" prefHeight="476.0" prefWidth="3040.0" BorderPane.alignment="CENTER">
             </JFXDrawer>
          </bottom>
       </BorderPane>
