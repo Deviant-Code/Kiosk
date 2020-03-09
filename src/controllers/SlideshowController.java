@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 public class SlideshowController implements Initializable {
 
     private Slideshow slideshow;
-    private GestureHandler gestureHandler = GestureHandler.getInstance();
+    private GestureHandler gestureHandler;
 
     @FXML
     private StackPane slideshowContainer;
@@ -33,6 +33,7 @@ public class SlideshowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        gestureHandler = new GestureHandler();
         this.slideshow = (Slideshow) KioskManager.getInstance().getModule("slideshow");
         imageView.setPreserveRatio(true);
         imageView.fitHeightProperty().bind(slideshowContainer.heightProperty());
@@ -73,7 +74,9 @@ public class SlideshowController implements Initializable {
 
     @FXML
     public void onTouchEvent(MouseEvent event) throws IOException {
-        gestureHandler.startGesture(event);
+        if(!gestureHandler.inMotion()){
+            gestureHandler.startGesture(event);
+        }
     }
 
     @FXML

@@ -34,12 +34,12 @@ public class WebController implements Initializable {
 
     private final String urlweb = "http://localhost:3000/pages/kioskDepartment.html";
 
-    private GestureHandler gestureHandler = GestureHandler.getInstance();
+    private GestureHandler gestureHandler;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        this.gestureHandler = new GestureHandler();
         this.web = webView.getEngine();
         web.load(urlweb);
     }

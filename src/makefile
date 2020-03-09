@@ -21,7 +21,7 @@ SOURCES := $(foreach dir, $(dirs),$(shell find $(SOURCEDIR) -name '*.j'))
 all: Main
 
 run: 
-	java $(JFLAGS) Main 
+	java $(JFLAGS) -Djdk.gtk.version=2 Main 
 
 Main: 
 	find -name "*.java" > sources.txt

@@ -14,13 +14,14 @@ public class PollController implements Initializable {
 
     private final String URL = "http://127.0.0.1:3000/pages/kioskPoll.html";
 
-    private GestureHandler gestureHandler = GestureHandler.getInstance();
+    private GestureHandler gestureHandler;
 
     @FXML
     private StackPane webViewContainer;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        gestureHandler = new GestureHandler();
         Polls poll = (Polls) KioskManager.getInstance().getModule("polls");
         BrowserView browserView = BrowserView.newInstance(poll.getBrowser());
         webViewContainer.getChildren().addAll(browserView);

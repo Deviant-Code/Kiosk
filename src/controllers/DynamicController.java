@@ -1,6 +1,7 @@
 package controllers;
 
 import com.jfoenix.controls.JFXDrawer;
+import javafx.beans.binding.Bindings;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 public class DynamicController implements Initializable {
 
@@ -45,6 +48,7 @@ public class DynamicController implements Initializable {
 
     private Scene scene;
 
+    private final BooleanProperty drawerVisibleProperty = new SimpleBooleanProperty();
 
 
     @FXML
@@ -59,13 +63,14 @@ public class DynamicController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        this.gestureHandler = GestureHandler.getInstance();
+        this.gestureHandler = new GestureHandler();
         drawer.setSidePane(navMenu);
         navMenuController.activeWindowProperty().addListener(((observable, oldValue, newValue) -> setView(newValue)));
 
         initializeViews();
         bindViewsToScene();
+
+        kioskOverlay.pickOnBoundsProperty().bind(gestureHandler.inMotionProperty().or(drawerVisibleProperty));
         setView("slideshow");
 
     }
@@ -102,9 +107,8 @@ public class DynamicController implements Initializable {
 
     @FXML
     public void onTouchEvent(MouseEvent event) throws IOException {
-        gestureHandler.startGesture(event);
-        if(gestureHandler.inMotion()){
-            kioskOverlay.setPickOnBounds(true);
+        if(!gestureHandler.inMotion()){
+            gestureHandler.startGesture(event);
         }
     }
 
@@ -122,23 +126,23 @@ public class DynamicController implements Initializable {
             }
         }
         if(!drawer.isOpened() && !drawer.isOpening()){
-            kioskOverlay.setPickOnBounds(false);
+        //    kioskOverlay.setPickOnBounds(false);
         }
     }
 
     private void openDrawer(){
         if(drawer.isClosed()){
             drawer.open();
-            kioskOverlay.setPickOnBounds(true);
-
-
+            drawerVisibleProperty.set(true);
+   //         kioskOverlay.setPickOnBounds(true);
         }
     }
 
     private void closeDrawer() {
         if(drawer.isOpened()){
             drawer.close();
-            kioskOverlay.setPickOnBounds(false);
+            drawerVisibleProperty.set(false);
+        //    kioskOverlay.setPickOnBounds(false);
         }
     }
 
