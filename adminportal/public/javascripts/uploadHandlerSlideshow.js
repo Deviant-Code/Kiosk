@@ -1,18 +1,19 @@
-let dropArea = document.getElementById("drop-area")
+let dropArea = document.getElementById("drop-area");
 
 // Prevent default drag behaviors
-;
 ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
   dropArea.addEventListener(eventName, preventDefaults, false)
   document.body.addEventListener(eventName, preventDefaults, false)
-})
+});
 
 // Highlight drop area when item is dragged over it
-;
 ['dragenter', 'dragover'].forEach(eventName => {
   dropArea.addEventListener(eventName, highlight, false)
-})
+});
 
+['dragleave', 'drop'].forEach(eventName => {
+  dropArea.addEventListener(eventName, unhighlight, false)
+});
 
 
 // Handle dropped files
@@ -28,36 +29,17 @@ function highlight(e) {
 }
 
 function unhighlight(e) {
-  dropArea.classList.remove('active')
+  dropArea.classList.remove('highlight')
 }
 
 function handleDrop(e) {
   var dt = e.dataTransfer
   var files = dt.files
 
-  handleFiles(files)
+  document.getElementById("fileElem").files = files;
+  document.getElementById("upload-form").submit();
 }
 
-function handleFiles(files) {
-  files = [...files]
-  files.forEach(previewFile)
-}
-
-function previewFile(file) {
-  let reader = new FileReader()
-  reader.readAsDataURL(file)
-  reader.onloadend = function () {
-    let img = document.createElement('img')
-
-    if(isVideo(file.name)){
-      //Set video to default thumbnail
-      img.src = null
-    }else{
-      img.src = reader.result
-    }
-    document.getElementById('gallery').appendChild(img)
-  }
-}
 
 function isVideo(filename) {
   var ext = (filename + '').split('.').pop();

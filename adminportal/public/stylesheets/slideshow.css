@@ -10,7 +10,8 @@
 }
 
 #drop-area.highlight {
-  background-color: #F9F9FA;
+  background-color: rgb(249, 249, 250);
+  border: 2px dashed #30a1ff;
 }
 
 p {

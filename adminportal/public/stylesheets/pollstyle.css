@@ -6,6 +6,18 @@ body {
   overflow: hidden;
   background-color: #2364AA;
   text-align: center;
+  opacity: 1;
+  transition: 1s opacity;
+}
+
+body.fade-in {
+    opacity: 0;
+    transition: none;
+}
+
+body.fade-out {
+  opacity: 0;
+  transition: 1s opacity;
 }
 
 .poll-response {
@@ -20,32 +32,45 @@ body {
 }
 #CurrentResponse1{
   position: fixed;
-  left: 16%;
+  left: 0px;
+  width: 50%;
 }
 #CurrentResponse2{
   position: fixed;
-  right: 11%;
+  right: 0px;
+  width: 50%;
 }
 .responseBar{
-  width: 15%;
+  width: 10vw;
   text-align: center;
   border-radius: 5%;
 }
 #response1Bar{
-  position: absolute;
+  position: relative;
   bottom: 0px;
-  left:15%;
   margin: 0 auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #response2Bar{
-  position: absolute;
+  position: relative;
   bottom: 0px;
-  right: 15%;
   margin: 0 auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.barWrapper{
+
+#leftBarWrapper{
+  position: fixed;
+  left: 0px;
+  width: 50%;
+  bottom: 0px;
+}
+
+
+#rightBarWrapper{
+  position: fixed;
+  right: 0px;
+  width: 50%;
+  bottom: 0px;
 }
 
 .poll-input {
