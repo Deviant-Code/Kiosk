@@ -86,7 +86,7 @@ public class Main extends Application {
     public static void main(String[] args){
         Runtime rt = Runtime.getRuntime();
         try{
-            pr = rt.exec("java -cp \".;dependencies/gson/gson-2.8.6.jar\" manager/AdminPortalListener.java");
+            pr = rt.exec("java -cp \".:dependencies/gson/gson-2.8.6.jar\" manager/AdminPortalListener.java");
             launch(args);
             pr.destroy();
         }
