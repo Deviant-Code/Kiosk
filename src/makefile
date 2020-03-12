@@ -1,11 +1,11 @@
-# Last Updated 11-4-19
+# Last Updated 3-11-20
 
 # Dependencies Path
 PATH_TO_FX_LINUX = ".:dependencies/java8-dependencies/*"
-PATH_TO_FX_WIN = "dependencies/javafx-sdk-13.0.2-WIN/lib"
+PATH_TO_FX_WIN = ".;dependencies/java8-dependencies/*"
 PATH_TO_GSON = "dependencies/gson/gson-2.8.6.jar"
 
-JC = javac
+JC = javac -source 1.8 -target 1.8
 MODULES = ALL-MODULE-PATH
 JFLAGS = -cp $(PATH_TO_FX_LINUX)
 

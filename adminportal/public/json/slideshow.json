@@ -15,9 +15,17 @@
     },
     {
       "seqnum": 1,
-      "location": "Uploads/Videos/slideImage1582932271939.mp4",
-      "lastModified": 1582932272345,
-      "thumbnail": "Uploads/slideImage1582932271939.jpeg",
+      "location": "Uploads/slideImage1583985902190.jpg",
+      "lastModified": 1583985902204,
+      "thumbnail": "",
+      "expiration": "",
+      "transitionTime": 10
+    },
+    {
+      "seqnum": 2,
+      "location": "Uploads/Videos/slideImage1583986403965.mp4",
+      "lastModified": 1583986404250,
+      "thumbnail": "Uploads/slideImage1583986403965.jpeg",
       "expiration": "",
       "transitionTime": 10
     }
