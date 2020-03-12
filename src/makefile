@@ -7,7 +7,7 @@ PATH_TO_GSON = "dependencies/gson/gson-2.8.6.jar"
 
 JC = javac -source 1.8 -target 1.8
 MODULES = ALL-MODULE-PATH
-JFLAGS = -cp $(PATH_TO_FX_LINUX)
+JFLAGS = -cp $(PATH_TO_FX_WIN)
 
 # Source Pathss
 MODULES_PATH = modules

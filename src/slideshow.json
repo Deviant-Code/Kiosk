@@ -1,15 +1,33 @@
 {
   "moduleEnabled": true,
-  "transitionSpeed": 3,
+  "transitionSpeed": 10,
   "willTransition": true,
   "autoPlayVideo": true,
   "default": true,
-  "images": [
+  "slides": [
     {
       "seqnum": 0,
-      "location": "Uploads/slideImage1582307335407.jpg",
-      "lastModified": 1582307335412,
-      "thumbnail": ""
+      "location": "Uploads/slideImage1582932327355.png",
+      "lastModified": 1582932327356,
+      "thumbnail": "",
+      "expiration": "",
+      "transitionTime": 10
+    },
+    {
+      "seqnum": 1,
+      "location": "Uploads/slideImage1583985902190.jpg",
+      "lastModified": 1583985902204,
+      "thumbnail": "",
+      "expiration": "",
+      "transitionTime": 10
+    },
+    {
+      "seqnum": 2,
+      "location": "Uploads/Videos/slideImage1583986403965.mp4",
+      "lastModified": 1583986404250,
+      "thumbnail": "Uploads/slideImage1583986403965.jpeg",
+      "expiration": "",
+      "transitionTime": 10
     }
   ]
 }

@@ -16,7 +16,7 @@ public class AdminPortalListener{
                 Listener();
             }
         }
-        catch(InterruptedException e){
+        catch(Exception e){
             e.printStackTrace();
         }
     }
@@ -42,13 +42,10 @@ public class AdminPortalListener{
     //right now, goes through all images, and deletes them if they are not in the JSON
     //file included.
     private static void deleteImages(String JSONName){
-
-        
-        
         try{
             File folder = new File("slideshow");
             Gson gson = new Gson();
-            Slideshow slideshow = gson.fromJson(new FileReader("slideshow.json"), Slideshow.class);
+            SlideshowJSON slideshow = gson.fromJson(new FileReader("slideshow.json"), SlideshowJSON.class);
 
             if(!folder.exists()){
                 folder = new File("src/" + "slideshow");
@@ -60,11 +57,14 @@ public class AdminPortalListener{
                 if(file.isFile()){
                     Boolean imageIn = false;
 
-                    for(int i = 0; i < slideshow.images.length; i++){
+                    for(int i = 0; i < slideshow.slides.length; i++){
                         //get image name
-                        String pictureName = slideshow.images[i].location.substring(8,slideshow.images[i].location.length());
+                        String pictureName = slideshow.slides[i].location.substring(8,slideshow.slides[i].location.length());
+                        String thumbnailName = "";
+                        if(!slideshow.slides[i].thumbnail.equals("")) 
+                            thumbnailName = slideshow.slides[i].thumbnail.substring(8,slideshow.slides[i].thumbnail.length());
                         System.out.println("pictureName: " + pictureName);
-                        if(pictureName.equals(file.getName())){
+                        if(pictureName.equals(file.getName()) || thumbnailName.equals(file.getName()) ){
                             imageIn = true;
                             break;
                         }
@@ -80,8 +80,9 @@ public class AdminPortalListener{
                 }
             }
         }
-        catch(FileNotFoundException E){
-            System.out.println("file: not found!");
+        catch(Exception e){
+            
+            System.out.println(e.toString());
             System.exit(1);
         }
     
@@ -92,13 +93,14 @@ public class AdminPortalListener{
 
     //this class will be used to eventually loop through and download all
     //needed JSON
-    private static void downloadAllJSON(){
+    private static void downloadAllJSON()  throws IOException{
 
         try{
             downloadJSON("slideshow.json");
             //download more...
         }
         catch(IOException e){
+            
             //e.printStackTrace();
             //System.exit(1);
             System.out.println("The Website is unreachable right now.");
@@ -169,19 +171,19 @@ public class AdminPortalListener{
         Gson gson = new Gson();
         
         try{
-            Slideshow slideshow = gson.fromJson(new FileReader("slideshow.json"), Slideshow.class);
+            SlideshowJSON slideshow = gson.fromJson(new FileReader("slideshow.json"), SlideshowJSON.class);
             
 
             //loop through, get every image. if not in folder, download it.
             //System.out.println(slideshow.images.length);
-            for(int i = 0; i < slideshow.images.length; i++){
+            for(int i = 0; i < slideshow.slides.length; i++){
                 //make sure it does not exist first.
-                String pictureName = slideshow.images[i].location.substring(8,slideshow.images[i].location.length());
+                String pictureName = slideshow.slides[i].location.substring(8,slideshow.slides[i].location.length());
                 File tempFile = new File("slideshow/" + pictureName);
 
                 if(!tempFile.exists()){
                     try{
-                        URL link = new URL("http://localhost:3000/" + slideshow.images[i].location);
+                        URL link = new URL("http://localhost:3000/" + slideshow.slides[i].location);
 
                         InputStream in = new BufferedInputStream(link.openStream());
                         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -198,6 +200,26 @@ public class AdminPortalListener{
 
                         fos.write(response);
                         fos.close();
+
+                        //If video grab thumbnail
+                        if(!slideshow.slides[i].thumbnail.equals("")){
+                            link = new URL("http://localhost:3000/" + slideshow.slides[i].thumbnail);
+                            in = new BufferedInputStream(link.openStream());
+                            out = new ByteArrayOutputStream();
+                            buf = new byte[1024];
+                            n = 0;
+                            while (-1!=(n=in.read(buf))){
+                                out.write(buf, 0, n);
+                            }
+                            out.close();
+                            in.close();
+                            response = out.toByteArray();
+
+                            fos = new FileOutputStream("slideshow/" + slideshow.slides[i].thumbnail.substring(8,slideshow.slides[i].thumbnail.length()));
+
+                            fos.write(response);
+                            fos.close();
+                        } 
                     }
                     catch(IOException e){
                         System.out.println("file read error!" + e);
@@ -221,19 +243,22 @@ public class AdminPortalListener{
 
     }
 
-    public class Slideshow{
+    public class SlideshowJSON{
         Boolean moduleEnabled;
         int transitionSpeed;
         Boolean willTransition;
         Boolean autoPlayVideo;
-        SImage[] images;
+        Boolean defaultModule;
+        SImageJSON[] slides;
     }
 
-    public class SImage{
+    public class SImageJSON{
         int seqNum;
         String location;
         long lastModified;
         String thumbnail;
+        String expiration;
+        int transitionTime;
     }
 
 
