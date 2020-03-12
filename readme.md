@@ -5,7 +5,8 @@ Discovery Kiosk is a software system and framework with an end goal of providing
 
 ## Compiling Kiosk Application
 To build and run the source code use "make all" and "make run" (inside src folder)
-If on windows, be sure to change the makefile to use the windows JavaFX sdk instead of Linux
+If on windows, be sure to change the makefile to use the windows dependency path instead of Linux
+(Discovery Kiosk REQUIRES Java 8 for compilation. Later versions remove JavaFX library support)
 
 ## Running the Admin Portal Web App
 To run the Node server use command "npm start" inside the 'adminportal' folder. This runs the app on  port 3000.
